@@ -1,4 +1,4 @@
-	Copyright (C) 2016  Kevin Souza
+	Copyright (C) 2016  Kevin Souza <szellemi at outlook dot com>
 	Copyright (C) 2016  Lucas Tossi
 
     This program is free software: you can redistribute it and/or modify
