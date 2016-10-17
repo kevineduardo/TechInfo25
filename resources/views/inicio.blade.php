@@ -1,0 +1,128 @@
+@extends('layouts.site')
+
+@section('title', $settings['site_name'])
+
+@section('styles')
+  @parent
+  <link type="text/css" rel="stylesheet" href="{{ URL::asset('widget/css/rcarousel.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/rhinoslider-1.05.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('fancybox/source/jquery.fancybox.css?v=2.1.5') }}" type="text/css" media="screen" />
+@endsection
+
+@section('javascript')
+  @parent
+  <script type="text/javascript" src="{{ URL::asset('js/rhinoslider-1.05.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/mousewheel.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/easing.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('widget/lib/jquery.ui.core.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('widget/lib/jquery.ui.widget.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('widget/lib/jquery.ui.rcarousel.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('fancybox/source/jquery.fancybox.pack.js') }}?v=2.1.5"></script>
+    <script type="text/javascript">
+      jQuery(function($) {
+        $( "#carousel ").rcarousel({
+          margin: 10
+        });
+
+        $( "#ui-carousel-next" )
+          .add( "#ui-carousel-prev" )
+          .hover(
+            function() {
+              $( this ).css( "opacity", 0.7 );
+            },
+            function() {
+              $( this ).css( "opacity", 1.0 );
+            }
+          );
+      });
+
+      $(document).ready(function(){
+        $('#slider').rhinoslider({
+          randomOrder: false,
+          controlsPlayPause: false,
+          autoPlay: true,
+          showCaptions: 'always',
+          showBullets: 'always',
+          effect: 'slide'
+        });
+      });
+
+    $(document).ready(function() {
+        $(".fancybox").fancybox();
+      });
+    </script>
+@endsection
+
+@section('content')
+<div id="noticiasprincipais" class="table-responsive col-md-8">
+    <table class="table">
+      <thead>
+      <tr>
+      <th>Notícias Principais</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr><th>
+      <ul id="slider">
+        <li><img src="img/slider/01.jpg" alt="" /></li>
+        <li><img src="img/slider/02.jpg" alt="" /></li>
+        <li><img src="img/slider/03.jpg" alt="" /></li>
+        <li><img src="img/slider/04.jpg" alt="" /></li>
+        <li><img src="img/slider/05.jpg" alt="" /></li>
+      </ul>
+      </th></tr>
+      </tbody>
+      </table>
+  </div>
+
+  <div id="agenda" class="table-responsive col-md-4">
+      <table class="table">
+      <thead>
+      <tr>
+      <th>Agenda do Técnico</th>
+      </tr>
+      </thead>
+      <tbody>
+      @if(count($calendario) == 0)
+      {{-- Aqui tem q tbm usar o trans --}}
+      <tr><th><p class="text-center">Sem nada na agenda...</p></th></tr>
+      @else
+      @each('partials.calendar', $calendario, 'calendario')
+      @endif
+      {{--
+      <tr><th><h4>11/04/2016<br/><small>Apresentação do layout do site.</small></h4></th></tr>
+      <tr><th><h4>20/06/2016<br/><small>Algo importante.</small></h4></th></tr>
+      <tr><th><h4>12/08/2016<br/><small>Algo mais importante ainda.</small></h4></th></tr>
+      --}}
+    </tbody>
+      </table>
+  </div>
+
+  <div class="semscroll table-responsive col-md-12">
+    <table class="table">
+    <thead>
+    <tr>
+    <th>Galeria de Fotos</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr><th>
+      <div id="galeria">
+      <div id="carousel">
+        <?php
+        // TEM Q ARRUMAR PRA FUNFAR COM A API DO LARAVEL  
+          $allFiles = scandir("./static/galeria");
+          $files = array_diff($allFiles, array('.', '..'));
+          foreach($files as $file) {
+            echo '<a class="fancybox" rel="group" href="static/galeria/'. $file .'"><img class="imggl" src="static/galeria/'. $file .'" /></a>';
+          }
+        ?>
+      </div>
+      <a href="#" id="ui-carousel-next"><span>next</span></a>
+      <a href="#" id="ui-carousel-prev"><span>prev</span></a>
+    </div>
+    </th></tr>
+  </tbody>
+    </table>
+</div>
+@endsection

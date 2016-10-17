@@ -29,7 +29,7 @@ class CreateNewsTable extends Migration
             $table->foreign('editor_id')
                     ->references('id')->on('users')
                     ->onDelete('set null');
-            $table->string('tags');
+            $table->string('tags')->nullable();
             $table->timestamps();
         });
     }

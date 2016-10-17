@@ -1,0 +1,85 @@
+body {
+  background-color: #3366cc;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+img {
+	width: 95%;
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-bottom: 10px;
+}
+
+.btn-primary {
+  color: #336699;
+  background-color: white;
+  border-color: white;
+}
+
+.btn-primary:hover {
+  color: white;
+  background-color: #336699;
+  border-color: #336699;
+}
+
+.login-help {
+  margin: 20px 0;
+  font-size: 11px;
+  color: white;
+  text-align: center;
+  text-shadow: 0 1px #2a85a1;
+}
+.login-help a {
+  color: #cce7fa;
+  text-decoration: none;
+}
+.login-help a:hover {
+  text-decoration: underline;
+}
+
+.login {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.login .login-heading,
+.login .checkbox {
+  margin-bottom: 10px;
+}
+.login .checkbox {
+  font-weight: normal;
+}
+.login .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid;
+}
+.login .form-control:focus {
+  z-index: 2;
+}
+.login input[type="email"], .login input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.login input[name="keybeta"] {
+	margin-bottom: 10px;
+	border-radius: 5px 5px;
+}
+
+.login input[name="email"] {
+	border-radius: 0px 0px;
+}
+
+.login input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

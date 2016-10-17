@@ -1,5 +1,5 @@
 <?php
-
+// Copyright (C) 2016  Kevin Souza
 use Illuminate\Database\Seeder;
 
 class TeachersTableSeeder extends Seeder
