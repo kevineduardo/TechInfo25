@@ -38,9 +38,9 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::get('/', 'PortalController@index');
 	Route::resource('/notas', 'PortalGradesController');
 	Route::resource('/trabalhos', 'PortalHomeworksController');
-	Route::resource('/notícias', 'PortalNewsController');
-	Route::resource('/fotos', 'PortalPicturesController');
-	Route::resource('/usuários', 'PortalPicturesController');
+	Route::resource('/notícias', 'NewsController');
+	Route::resource('/fotos', 'PicturesController');
+	Route::resource('/usuários', 'PortalUsersController');
 	Route::resource('/configurações', 'PortalSettingsController@inicio');
 });
 

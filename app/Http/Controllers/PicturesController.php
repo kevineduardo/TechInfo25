@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class PortalNewsController extends Controller
+class PicturesController extends Controller
 {
     /**
      * Display a listing of the resource.

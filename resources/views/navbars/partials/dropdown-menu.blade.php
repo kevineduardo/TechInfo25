@@ -5,7 +5,7 @@
 </li>
 @else
 <li>
-<a href="{{ $pages['custom_url'] }}">
+<a href="{{ URL::asset($pages['custom_url']) }}">
 <span class="glyphicon {{ $pages['navbar_icon'] }}"></span> {{ $pages['title']}}</a>
 </li>
 @endif

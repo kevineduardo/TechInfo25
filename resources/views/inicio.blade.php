@@ -109,14 +109,9 @@
     <tr><th>
       <div id="galeria">
       <div id="carousel">
-        <?php
-        // TEM Q ARRUMAR PRA FUNFAR COM A API DO LARAVEL  
-          $allFiles = scandir("./static/galeria");
-          $files = array_diff($allFiles, array('.', '..'));
-          foreach($files as $file) {
-            echo '<a class="fancybox" rel="group" href="static/galeria/'. $file .'"><img class="imggl" src="static/galeria/'. $file .'" /></a>';
-          }
-        ?>
+      @if(isset($fotos))
+        @each('partials.fancybox_picture', $fotos, 'fotos')
+      @endif
       </div>
       <a href="#" id="ui-carousel-next"><span>next</span></a>
       <a href="#" id="ui-carousel-prev"><span>prev</span></a>
