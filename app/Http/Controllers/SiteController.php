@@ -39,7 +39,7 @@ class SiteController extends Controller
     }
 
     public function foto($id = 0) {
-    	$foto = Picture::with('authors')->find($id);
+    	$foto = Picture::with('authors')->where('type', 0)->find($id);
 
     	if(!$foto) {
     		return redirect()->route('fotos');

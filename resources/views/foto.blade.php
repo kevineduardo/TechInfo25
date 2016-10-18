@@ -28,7 +28,7 @@
     <table class="table">
       <thead>
       <tr>
-      <th>{{ $title }}</th>
+      <th><span class="vermelho">{{ $title }}</span></th>
       </tr>
       </thead>
       <tbody class="normal">
@@ -51,7 +51,7 @@
       <table class="table">
       <thead>
       <tr>
-      <th>Facebook</th>
+      <th><span class="vermelho">Facebook</span></th>
       </tr>
       </thead>
       <tbody>

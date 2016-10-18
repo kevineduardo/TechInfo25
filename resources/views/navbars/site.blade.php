@@ -9,7 +9,7 @@
           </button>
         </div>
 
-        <div class="navbar-collapse collapse" id="menuprincipal" aria-expanded="false" style="height: 1px;">
+        <div class="navbar-collapse collapse" id="menuprincipal" role="navigation" aria-expanded="false" style="height: 1px;">
           <ul class="nav navbar-nav">
             @if(isset($categories))
             @each('navbars.partials.dropdown', $categories, 'category')

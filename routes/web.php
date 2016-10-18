@@ -17,8 +17,8 @@ Route::get('/inicio', 'SiteController@inicio')->name('inicio');
 Route::get('/', function () {
     return redirect()->route('inicio');
 });
-Route::get('/páginas/{id}', 'SiteController@pagina')->name('pagina');
-Route::get('/páginas', function() {
+Route::get('/página/{id}', 'SiteController@pagina')->name('pagina');
+Route::get('/página', function() {
 	return redirect()->route('inicio');
 });
 Route::get('/paginas/{id}', 'SiteController@pagina');

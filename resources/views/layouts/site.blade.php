@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ App::getLocale() }}" lang="{{ App::getLocale() }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,13 +39,47 @@
 <body>
     @include('navbars.site')
     <div id="header" class="row container-fluid">
-    <a href="{{ route('inicio') }}"><img id="logo" class="col-md-3" src="{{ URL::asset('img/logo.png') }}"/></a>
+    <a href="{{ route('inicio') }}"><img id="logo" class="col-md-3" alt="logo" src="{{ URL::asset('img/logo.png') }}"/></a>
     </div>
+    <section>
     <div id="conteudo" class="row container-fluid">
     @yield('content')
     </div>
-    <div id="footer" class="text-center">
+    </section>
+    <footer id="footer" class="text-center">
     <h5>{!! $settings['footer'] !!} <br/> Copyright (C) 2016  Kevin Souza & Lucas Tossi - GNU License</h5>
-    </div>
+<p>
+    <a href="http://validator.w3.org/check?uri=referer">
+    <img style="border:0;width:88px;height:31px"
+        src="https://www.w3.org/Icons/wai194-v.svg"
+        alt="@lang('messages.alt.acb')" />
+    </a>
+    <a href="http://jigsaw.w3.org/css-validator/check/referer">
+    <img style="border:0;width:88px;height:31px"
+        src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+        alt="@lang('messages.alt.css')" />
+    </a>
+    <a href="http://validator.w3.org/check?uri=referer">
+    <img style="border:0;width:88px;height:31px"
+        src="https://www.w3.org/Icons/valid-mathml20-blue-v.svg"
+        alt="@lang('messages.alt.mathml')" />
+    </a>
+    <a href="http://validator.w3.org/check?uri=referer">
+    <img style="border:0;width:88px;height:31px"
+        src="https://www.w3.org/Icons/valid-svg11-blue-v.svg"
+        alt="@lang('messages.alt.svg')" />
+    </a>
+    <a href="http://validator.w3.org/check?uri=referer">
+    <img style="border:0;width:88px;height:31px"
+        src="https://www.w3.org/Icons/valid-html401-blue-v.svg"
+        alt="@lang('messages.alt.html')" />
+    </a>
+    <a href="http://validator.w3.org/check?uri=referer">
+    <img style="border:0;width:88px;height:31px"
+        src="https://www.w3.org/html/logo/badge/html5-badge-h-css3-semantics.png"
+        alt="HTML5 Powered with CSS3 / Styling, and Semantics" />
+    </a>
+</p>
+    </footer>
 </body>
 </html>

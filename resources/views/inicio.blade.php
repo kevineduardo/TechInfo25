@@ -58,17 +58,17 @@
     <table class="table">
       <thead>
       <tr>
-      <th>Notícias Principais</th>
+      <th><span class="vermelho">Notícias Principais</span></th>
       </tr>
       </thead>
       <tbody>
       <tr><th>
       <ul id="slider">
-        <li><img src="img/slider/01.jpg" alt="" /></li>
-        <li><img src="img/slider/02.jpg" alt="" /></li>
-        <li><img src="img/slider/03.jpg" alt="" /></li>
-        <li><img src="img/slider/04.jpg" alt="" /></li>
-        <li><img src="img/slider/05.jpg" alt="" /></li>
+        <li><img src="img/slider/01.jpg" alt="@lang('messages.alt.img')" /></li>
+        <li><img src="img/slider/02.jpg" alt="@lang('messages.alt.img')" /></li>
+        <li><img src="img/slider/03.jpg" alt="@lang('messages.alt.img')" /></li>
+        <li><img src="img/slider/04.jpg" alt="@lang('messages.alt.img')" /></li>
+        <li><img src="img/slider/05.jpg" alt="@lang('messages.alt.img')" /></li>
       </ul>
       </th></tr>
       </tbody>
@@ -79,7 +79,7 @@
       <table class="table">
       <thead>
       <tr>
-      <th>Agenda do Técnico</th>
+      <th><span class="vermelho">Agenda do Técnico</span></th>
       </tr>
       </thead>
       <tbody>
@@ -102,7 +102,7 @@
     <table class="table">
     <thead>
     <tr>
-    <th>Galeria de Fotos</th>
+    <th><span class="vermelho">Galeria de Fotos</span></th>
     </tr>
     </thead>
     <tbody>

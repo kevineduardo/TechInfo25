@@ -104,5 +104,14 @@ return [
         'users' => 'Usuários',
         'config' => 'Configurações',
     ],
+    // Alts for the alt="" attribute
+    'alt' => [
+        'img' => 'Imagem',
+        'css' => 'CSS válido!',
+        'acb' => 'Site com acessibilidade!',
+        'mathml' => 'MathML válido!',
+        'svg' => 'SVG 1.1 válido!',
+        'html' => 'HTML 4.01 válido!',
+    ],
 
 ];

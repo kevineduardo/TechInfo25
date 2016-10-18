@@ -1,1 +1,1 @@
-<tr><th><h4>{{ $calendario->date->format('d/m/Y') }}<br/><small>{{ $calendario->name}}</small></h4></th></tr>
+<tr><th><span class="vermelho">{{ $calendario->date->format('d/m/Y') }}</span><br/><small>{{ $calendario->name}}</small></th></tr>
