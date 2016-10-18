@@ -8,8 +8,9 @@
 @section('portal')
 <div class="container">
     <div class="row">
+        <div class="row">
         <div class="col-md-3">
-            <div class="profile-sidebar">
+            <div class="profile-sidebar" style="margin-bottom: 10px;">
                 <div class="profile-userpic">
                     @if(Auth::user()->avatar())
                     <img src="{{ Auth::user()->avatar()->ext_path }}" class="img-responsive" alt="">
@@ -80,6 +81,7 @@
                     @yield('content')
                 </div>
             </div>
+        </div>
         </div>
     </div>
 </div>

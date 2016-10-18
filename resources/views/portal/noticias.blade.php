@@ -58,7 +58,7 @@
 @endif
 <div id="controles" style="margin-bottom: 5px;">
 @if($professor)
-{!! Form::open(array('route' => 'notícias.search', 'class'=>'form form-inline col-md-7')) !!}
+{!! Form::open(array('route' => 'notícias.search', 'class'=>'form form-inline col-md-5')) !!}
 @else
 {!! Form::open(array('route' => 'notícias.search', 'class'=>'form form-inline col-md-10')) !!}
 @endif
@@ -75,7 +75,7 @@
  {!! Form::close() !!}
  @if($professor)
  <button type="button" onclick="window.location='{{ route('notícias.alunos')}}';" style="margin-top: 5px;" class="btn btn-primary col-md-3">@lang('messages.buttons.palunos')</button>
- <button type="button" style="margin-top: 5px;" class="btn btn-primary col-md-2" data-toggle="modal" data-target="#novanoticia">@lang('messages.buttons.novanoticia')</button>
+ <button type="button" style="margin-top: 5px;" class="btn btn-primary col-md-2 col-md-offset-1" data-toggle="modal" data-target="#novanoticia">@lang('messages.buttons.novanoticia')</button>
  @else
  <button type="button" style="margin-top: 5px;" class="btn btn-primary col-md-2" data-toggle="modal" data-target="#novanoticia">@lang('messages.buttons.novanoticia')</button>
  @endif
@@ -85,14 +85,14 @@
             <thead>
 			  <tr>
 			  	@if($professor)
-			    <th>@lang('messages.cm.title')</th>
-			    <th>@lang('messages.cm.subtitle')</th>
-			    <th>@lang('messages.cm.author')</th>
-			    <th>@lang('messages.cm.created_at')</th>
+			    <th><span class="vermelho">@lang('messages.cm.title')</span></th>
+			    <th><span class="vermelho">@lang('messages.cm.subtitle')</span></th>
+			    <th><span class="vermelho">@lang('messages.cm.author')</span></th>
+			    <th><span class="vermelho">@lang('messages.cm.created_at')</span></th>
 			    @else
-			    <th>@lang('messages.cm.title')</th>
-			    <th>@lang('messages.cm.subtitle')</th>
-			    <th>@lang('messages.cm.approved')</th>
+			    <th><span class="vermelho">@lang('messages.cm.title')</span></th>
+			    <th><span class="vermelho">@lang('messages.cm.subtitle')</span></th>
+			    <th><span class="vermelho">@lang('messages.cm.approved')</span></th>
 			    @endif
 			  </tr>
 			</thead>
