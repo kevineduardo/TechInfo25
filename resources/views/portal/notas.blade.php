@@ -1,7 +1,5 @@
 @extends('layouts.portal')
 
-@section('title', 'Portal')
-
 @section('content')
-Logado! Yay!
+<h2>teste</h2>
 @endsection

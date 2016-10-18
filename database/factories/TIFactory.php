@@ -1,12 +1,11 @@
 <?php
 // Copyright (C) 2016  Kevin Souza
 $factory->define(App\Teacher::class, function (Faker\Generator $faker) {
-    static $user_id;
     static $type;
 
     return [
-        'user_id' => $user_id ?: $user_id = 1,
-        'type' => $type ?: $type = 1,
+        'user_id' => 1,
+        'type' => $type ?: $type = 0,
         'bio' => str_random(100),
         'academic_bg' => str_random(10),
     ];
@@ -63,5 +62,23 @@ $factory->define(App\Calendar::class, function (Faker\Generator $faker) {
         'time' => $faker->time(),
         'role' => 1,
         'author_id' => 1,
+    ];
+});
+
+$factory->define(App\News::class, function (Faker\Generator $faker) {
+    static $author_id;
+    static $editor_id;
+    static $edited;
+
+    return [
+        'title' => $faker->unique()->numerify('News ###'),
+        'subtitle' => str_random(10),
+        'text' => str_random(500),
+        'published' => true,
+        'author_id' => $author_id ?: $author_id = 1,
+        'edited' => $edited ?: $edited = false,
+        'editor_id' => $editor_id ?: $editor_id = null,
+        'published_at' => $faker->date($format = 'Y-m-d', $max = 'now'),
+        'tags' => null,
     ];
 });

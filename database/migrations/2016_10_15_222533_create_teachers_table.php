@@ -19,7 +19,7 @@ class CreateTeachersTable extends Migration
             $table->foreign('user_id')
                     ->references('id')->on('users')
                     ->onDelete('cascade');
-            $table->integer('type'); // 1 - professor normal 2-coordenador
+            $table->integer('type'); //0 - aluno 1 - professor normal 2-coordenador
             $table->longText('bio')->nullable();
             $table->text('academic_bg')->nullable();
             $table->timestamps();

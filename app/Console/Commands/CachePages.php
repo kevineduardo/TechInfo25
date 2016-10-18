@@ -9,6 +9,8 @@ use Illuminate\View\View;
 use App\Page;
 use App\Calendar;
 use App\Picture;
+use App\Setting;
+use App\News;
 
 class CachePages extends Command
 {
@@ -58,7 +60,12 @@ class CachePages extends Command
                 $this->colocarEmCache('páginas:' . $key->id, view('pagina', $pagina)->render() , 'páginas');
             }
         }
+        $configs = Setting::all();
+        $this->colocarEmCache('settings', $configs, 'settings');
         $this->info('Paginas cacheadas. Tudo numa boa.');
+        $noticias = News::all();
+        $this->colocarEmCache('notícias', $noticias, 'notícias');
+        $this->info('Noticias cacheadas tambem. Why not?');
     }
     private function colocarEmCache($key, $content, $tag)
     {

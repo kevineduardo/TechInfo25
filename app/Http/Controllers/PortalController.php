@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
-use App\Teacher;
 
 class PortalController extends Controller
 {
@@ -25,8 +23,6 @@ class PortalController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $professor = Teacher::where('user_id', $user->id)->first();
-        return view('portal.inicio', ['professor' => $professor,]);
+        return view('portal.inicio');
     }
 }

@@ -112,6 +112,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'title' => 'Título',
+        'subtitle' => 'Sub-título',
+        'text' => 'Texto',
+    ],
 
 ];

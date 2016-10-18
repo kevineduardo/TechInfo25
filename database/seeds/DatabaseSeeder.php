@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PicturesTableSeeder::class);
         $this->call(CalendarSeeder::class);
         $this->call(DefaultDataSeeder::class);
+        $this->call(NewsSeeder::class);
     }
 }

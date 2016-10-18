@@ -35,13 +35,24 @@ Route::get('/foto', function() {
 // Rotas para o Portal
 Route::group(['prefix' => 'portal'], function () {
 	Route::get('início', 'PortalController@index')->name('portal_inicio');
-	Route::get('/', 'PortalController@index');
+	Route::get('/', function() {
+	return redirect()->route('portal_inicio');
+});
 	Route::resource('/notas', 'PortalGradesController');
 	Route::resource('/trabalhos', 'PortalHomeworksController');
-	Route::resource('/notícias', 'NewsController');
-	Route::resource('/fotos', 'PicturesController');
+	Route::resource('/notícias', 'PortalNewsController');
+	Route::resource('/fotos', 'PortalPicturesController');
 	Route::resource('/usuários', 'PortalUsersController');
 	Route::resource('/configurações', 'PortalSettingsController@inicio');
+
+	// Rotas de Buscas
+	Route::post('/notícias/buscar', 'SearchController@newsSearch')->name('notícias.search');
+	Route::get('/notícias/buscar', 'SearchController@newsSearch')->name('notícias.search');
+
+	// Rotas Especiais
+	Route::get('/notícias/alunos', 'PortalNewsController@alunos')->name('notícias.alunos');
+	Route::post('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search');
+	Route::get('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search');
 });
 
 // Rotas para o site

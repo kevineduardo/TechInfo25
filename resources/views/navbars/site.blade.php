@@ -23,7 +23,7 @@
             @endif
             </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="login"><span class="glyphicon glyphicon-pencil"></span> Portal do Aluno</a></li>
+            <li><a href="{{ route('login') }}"><span class="glyphicon glyphicon-pencil"></span> Portal do Aluno</a></li>
           </ul>
     </div>
     </div>

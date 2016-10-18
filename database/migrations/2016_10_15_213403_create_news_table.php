@@ -30,6 +30,7 @@ class CreateNewsTable extends Migration
                     ->references('id')->on('users')
                     ->onDelete('set null');
             $table->string('tags')->nullable();
+            $table->dateTime('published_at')->nullable();
             $table->timestamps();
         });
     }

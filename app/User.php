@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Teacher;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -28,7 +30,14 @@ class User extends Authenticatable
     ];
 
     public function teacher() {
-        return $this->hasOne('App\Teacher');
+        // Gambiarra has been made :( i failed
+        $user = $this;
+        $professor = Teacher::where('user_id', $user->id)->first();
+        if(!$professor) {
+            return false;
+        }
+
+        return $professor;
     }
 
     public function pictures() {

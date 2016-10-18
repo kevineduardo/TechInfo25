@@ -15,7 +15,7 @@ class PortalGradesController extends Controller
      */
     public function index()
     {
-        //
+        return view('portal.notas');
     }
 
     /**

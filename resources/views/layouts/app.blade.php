@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $settings['site_name'] }}</title>
+    <title>{{ $settings['site_name'] . ' - Portal' }}</title>
 
     <!-- Styles -->
     {{-- <link href="{{ URL::asset('/css/app.css') }}" rel="stylesheet"> --}}
@@ -26,11 +26,13 @@
     </style>
 
     <!-- Scripts -->
+    @section('javascripts')
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+    @show
 </head>
 <body>
     <div id="app">
@@ -90,7 +92,7 @@
             </div>
         </nav>
 
-        @yield('content')
+        @yield('portal')
     </div>
 
     <!-- Scripts -->
