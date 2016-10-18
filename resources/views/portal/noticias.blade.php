@@ -42,7 +42,7 @@
 @if (count($errors) > 0)
 <div class="alert alert-dismissible alert-danger">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <strong>Falha ao postar!</strong>
+  <strong>@lang('messages.form.errors.post')</strong>
   <ul>
   @foreach ($errors->all() as $error)
   	<li>{{ $error }}</li>
@@ -60,18 +60,18 @@
     {!! Form::text('title', null,
                            array('required',
                                 'class'=>'form-control col-xs-4',
-                                'placeholder'=>'Buscar notícia...')) !!}
+                                'placeholder'=>trans('messages.phs.buscar'))) !!}
     <div class="input-group-btn">
-     {!! Form::submit('Buscar',
+     {!! Form::submit(trans('messages.buttons.buscar'),
                                 array('class'=>'btn btn-default')) !!}
     </div>
     </div>
  {!! Form::close() !!}
  @if($professor)
- <button type="button" onclick="window.location='{{ route('notícias.alunos')}}';" style="margin-top: 5px;" class="btn btn-primary col-md-3">Postadas por Alunos</button>
- <button type="button" style="margin-top: 5px;" class="btn btn-primary col-md-2" data-toggle="modal" data-target="#novanoticia">Nova notícia</button>
+ <button type="button" onclick="window.location='{{ route('notícias.alunos')}}';" style="margin-top: 5px;" class="btn btn-primary col-md-3">@lang('messages.buttons.palunos')</button>
+ <button type="button" style="margin-top: 5px;" class="btn btn-primary col-md-2" data-toggle="modal" data-target="#novanoticia">@lang('messages.buttons.novanoticia')</button>
  @else
- <button type="button" style="margin-top: 5px;" class="btn btn-primary col-md-2" data-toggle="modal" data-target="#novanoticia">Nova notícia</button>
+ <button type="button" style="margin-top: 5px;" class="btn btn-primary col-md-2" data-toggle="modal" data-target="#novanoticia">@lang('messages.buttons.novanoticia')</button>
  @endif
 </div>
 <div id="noticias">
@@ -79,14 +79,14 @@
             <thead>
 			  <tr>
 			  	@if($professor)
-			    <th>Título</th>
-			    <th>Sub-título</th>
-			    <th>Autor</th>
-			    <th>Data de Criação</th>
+			    <th>@lang('messages.cm.title')</th>
+			    <th>@lang('messages.cm.subtitle')</th>
+			    <th>@lang('messages.cm.author')</th>
+			    <th>@lang('messages.cm.created_at')</th>
 			    @else
-			    <th>Título</th>
-			    <th>Sub-título</th>
-			    <th>Aprovada</th>
+			    <th>@lang('messages.cm.title')</th>
+			    <th>@lang('messages.cm.subtitle')</th>
+			    <th>@lang('messages.cm.approved')</th>
 			    @endif
 			  </tr>
 			</thead>
@@ -102,9 +102,9 @@
 			    <td>{{ str_limit($not->title, 10) }}</td>
 			    <td>{{ str_limit($not->subtitle, 10) }}</td>
 			    @if($not->published)
-			    <td>Sim</td>
+			    <td>@lang('messages.b.yes')</td>
 			    @else
-			    <td>Não</td>
+			    <td>@lang('messages.b.no')</td>
 			    @endif
 			    @endif
 			  </tr>
@@ -113,15 +113,15 @@
 			<tr class="text-center">
 				@if($professor)
 				@if(str_contains(Route::currentRouteName(), 'search'))
-			    <td colspan="4">Sua busca retornou nenhum resultado.</td>
+			    <td colspan="4">@lang('messages.n.nr')</td>
 			    @else
-			    <td colspan="4">Não existe nenhuma notícia.</td>
+			    <td colspan="4">@lang('messages.n.ne')</td>
 			    @endif
 			    @else
 			    @if(str_contains(Route::currentRouteName(), 'search'))
-			    <td colspan="4">Sua busca retornou nenhum resultado.</td>
+			    <td colspan="4">@lang('messages.n.nr')</td>
 			    @else
-			    <td colspan="4">Você não possui nenhuma notícia.</td>
+			    <td colspan="4">@lang('messages.n.np')</td>
 			    @endif
 			    @endif
 			</tr>
@@ -136,40 +136,40 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Nova notícia</h4>
+          <h4 class="modal-title">@lang('messages.titles.newnews')</h4>
         </div>
         <div class="modal-body">
         <form class="form-horizontal" method="post">
         {{ csrf_field() }}
         <fieldset>
             <div class="form-group">
-                <label for="title">Título da Notícia</label>
+                <label for="title">@lang('messages.form.news.title')</label>
                 <input autocomplete="off" class="form-control" id=
                 "title" name="title" placeholder="Boas novas!"
                 required="" type="text" value="">
             </div>
             <div class="form-group">
-                <label for="subtitle">Descrição</label>
+                <label for="subtitle">@lang('messages.form.news.subtitle')</label>
                 <input autocomplete="off" class="form-control" id=
                 "subtitle" name="subtitle" placeholder=
                 "Temos novidades..." required="" type="text" value="">
             </div>
             <div class="form-group">
-                <label for="text">Texto da Notícia</label> 
+                <label for="text">@lang('messages.form.news.text')</label> 
                 <textarea id="text" name="text"></textarea>
             </div>
             <div class="form-group">
                 <div class="radio">
                     <label><input checked id="published" name="published" type=
-                    "radio" value="true"> Publicar imediatamente</label>
+                    "radio" value="true"> @lang('messages.form.publish.true')</label>
                 </div>
                 <div class="radio">
                     <label><input id="published" name="published" type="radio" value=
-                    "false"> Salvar como rascunho</label>
+                    "false"> @lang('messages.form.publish.false')</label>
                 </div>
             </div>
             <div class="form-group">
-                <button class="btn btn-success" type="submit">Salvar</button>
+                <button class="btn btn-success" type="submit">@lang('messages.form.save')</button>
             </div>
         </fieldset>
     	</form>

@@ -19,9 +19,9 @@
                     </div>
                     <div class="profile-usertitle-job">
                     @if($professor)
-                        Professor
+                        @lang('messages.teacher')
                     @else
-                        Aluno
+                        @lang('messages.student')
                     @endif
                     </div>
                 </div>
@@ -30,38 +30,38 @@
                         <li @if(Route::currentRouteName() == 'portal_inicio') class="active" @endif>
                             <a href="{{ route('portal_inicio') }}">
                             <i class="glyphicon glyphicon-home"></i>
-                            Visão Geral </a>
+                            @lang('messages.menu.overview') </a>
                         </li>
                         <li @if(str_contains(Route::currentRouteName(), 'notas')) class="active" @endif>
                             <a href="{{ route('notas.index') }}">
                             <i class="glyphicon glyphicon-user"></i>
-                            Notas </a>
+                            @lang('messages.menu.grades') </a>
                         </li>
                         <li @if(str_contains(Route::currentRouteName(), 'trabalhos')) class="active" @endif>
                             <a href="{{ route('trabalhos.index') }}">
                             <i class="glyphicon glyphicon-ok"></i>
-                            Trabalhos </a>
+                            @lang('messages.menu.homeworks') </a>
                         </li>
                         <li @if(str_contains(Route::currentRouteName(), 'notícias')) class="active" @endif>
                             <a href="{{ route('notícias.index') }}">
                             <i class="glyphicon glyphicon-list-alt"></i>
-                            Notícias </a>
+                            @lang('messages.menu.news') </a>
                         </li>
                         <li @if(str_contains(Route::currentRouteName(), 'fotos')) class="active" @endif>
                             <a href="{{ route('fotos.index') }}">
                             <i class="glyphicon glyphicon-camera"></i>
-                            Fotos </a>
+                            @lang('messages.menu.pictures') </a>
                         </li>
                         @if($professor)
                         <li class="@if(str_contains(Route::currentRouteName(), 'usuários')) active @endif teacher-only">
                             <a href="{{ route('usuários.index') }}">
                             <i class="glyphicon glyphicon-th-list"></i>
-                            Usuários </a>
+                            @lang('messages.menu.users') </a>
                         </li>
                         <li class="@if(str_contains(Route::currentRouteName(), 'configurações')) active @endif teacher-only">
                             <a href="{{ route('configurações.index') }}">
                             <i class="glyphicon glyphicon-cog"></i>
-                            Configurações </a>
+                            @lang('messages.menu.config') </a>
                         </li>
                         @endif
                     </ul>
