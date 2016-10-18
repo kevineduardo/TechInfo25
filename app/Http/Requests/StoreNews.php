@@ -27,9 +27,9 @@ class StoreNews extends FormRequest
     public function rules()
     {
         return [
-        'title' => 'required|max:255',
-        'subtitle' => 'required|max:255',
-        'text' => 'required',
+        'title' => 'bail|required|max:255',
+        'subtitle' => 'bail|required|max:255',
+        'text' => 'bail|required',
         ];
     }
 }
