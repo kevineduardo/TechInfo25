@@ -55,6 +55,11 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::get('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search');
 });
 
+// OAuth
+Route::get('auth/facebook', 'OAuthController@redirectToProvider')->name('facebook');
+Route::get('auth/facebook/callback', 'OAuthController@handleProviderCallback');
+Route::post('auth/facebook/callback', 'OAuthController@handleProviderCallback');
+
 // Rotas para o site
 ////$url = route('profile', ['id' => 1]);
 //Route::get('/inicio', '');

@@ -34,8 +34,13 @@
       <tbody class="normal">
       <tr><th>
             <div class="boxfoto">
+            @if(empty($ext_path))
             <a class="fancybox" rel="group" href="{{ URL::asset($path) }}">
             <img class="imggl2" src="{{ URL::asset($path) }}" />
+            @else
+            <a class="fancybox" rel="group" href="{{ $ext_path }}">
+            <img class="imggl2" src="{{ $ext_path }}" />
+            @endif
             </a>
             </div>
       </th></tr>

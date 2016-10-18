@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\Teacher;
+use App\Picture;
 
 class User extends Authenticatable
 {
@@ -17,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'oauth', 'oauth_id', 'oauth_provider',
     ];
 
     /**
@@ -38,6 +39,13 @@ class User extends Authenticatable
         }
 
         return $professor;
+    }
+
+    // Get user profile's picture
+    public function avatar() {
+        $user = $this;
+        $foto = Picture::where('author_id', $user->id)->where('type', 1)->first();
+        return $foto;
     }
 
     public function pictures() {

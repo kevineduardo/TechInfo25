@@ -17,7 +17,9 @@ class CreatePicturesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('description');
-            $table->string('path');
+            $table->string('path')->nullable();
+            $table->string('ext_path')->nullable();
+            $table->integer('type')->default(0); // 0 - foto publica, 1- foto de usuário
             $table->integer('author_id')->nullable()->unsigned();
             $table->foreign('author_id')
                     ->references('id')->on('users')

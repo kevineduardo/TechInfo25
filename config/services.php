@@ -34,5 +34,11 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    // Socialite
+    'facebook' => [
+        'client_id'     => '1823682094526376',
+        'client_secret' => 'd2e07e70bb6d39ebbf4d28d5326ce557',
+        'redirect'      => env('APP_URL', 'http://localhost') . '/auth/facebook/callback',
+    ],
 
 ];

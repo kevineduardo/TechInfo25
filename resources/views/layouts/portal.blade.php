@@ -11,7 +11,11 @@
         <div class="col-md-3">
             <div class="profile-sidebar">
                 <div class="profile-userpic">
+                    @if(Auth::user()->avatar())
+                    <img src="{{ Auth::user()->avatar()->ext_path }}" class="img-responsive" alt="">
+                    @else
                     <img src="{{ URL::asset('storage/teste.jpg') }}" class="img-responsive" alt="">
+                    @endif
                 </div>
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name">

@@ -31,6 +31,9 @@ return [
         'forgotp' => 'Esqueceu sua senha?',
         'resetp' => 'Resetar Senha',
         'sendresetp' => 'Enviar Link de Recuperação',
+        'social' => [
+            'fb' => 'Entrar com o Facebook',
+        ],
     ],
     'n' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
