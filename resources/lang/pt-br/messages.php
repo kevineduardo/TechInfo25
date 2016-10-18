@@ -86,6 +86,12 @@ return [
         'errors' => [
             'post' => 'Falha ao postar!',
         ],
+        'success' => [
+            'post' => [
+                'title' => 'Postado com sucesso!',
+                'msg' => 'Sua notícia foi enviada.',
+            ],
+        ],
     ],
     // Menu
     'menu' => [

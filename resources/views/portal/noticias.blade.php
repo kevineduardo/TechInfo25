@@ -50,6 +50,12 @@
   </ul>
 </div>
 @endif
+@if(isset($success))
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>@lang('messages.form.success.post.title')</strong> @lang('messages.form.success.post.msg')
+</div>
+@endif
 <div id="controles" style="margin-bottom: 5px;">
 @if($professor)
 {!! Form::open(array('route' => 'notícias.search', 'class'=>'form form-inline col-md-7')) !!}

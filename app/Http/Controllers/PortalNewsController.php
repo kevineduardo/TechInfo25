@@ -67,6 +67,7 @@ class PortalNewsController extends Controller
                 $noticia->published = true;
             } else {
                 $noticia->published = false;
+                //$noticia->published_at = null;
             }
         }
         $noticia->author_id = $user->id;
@@ -84,6 +85,15 @@ class PortalNewsController extends Controller
                 abort(503);
             }
         }
+        $user = Auth::user();
+        $professor = Teacher::where('user_id', $user->id)->first();
+        if(!$professor) {
+            $noticias = News::where('author_id', $user->id)->paginate(15);
+            return view('portal.noticias', ['noticias' => $noticias, 'success' => true,]);
+        }
+        // se for professor executa esse outro aqui e.e
+        $noticias = News::paginate(15);
+        return view('portal.noticias', ['noticias' => $noticias, 'success' => true,]);
     }
 
     /**
