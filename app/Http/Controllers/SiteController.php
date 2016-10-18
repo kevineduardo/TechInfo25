@@ -19,7 +19,7 @@ class SiteController extends Controller
             return $inicio;
         }
 
-        $fotos = Picture::all();
+        $fotos = Picture::where('type', 0)->get();
     	$calendario = Calendar::take(4)->get();
     	return view('inicio', ['calendario' => $calendario, 'fotos' => $fotos,]);
     }
