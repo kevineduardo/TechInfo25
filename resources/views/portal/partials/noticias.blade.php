@@ -1,9 +1,11 @@
 @if(count($news) != 2)
 <div class="row" style="display: flex;">
                   <div class="col-sm-12 col-md-8" style="margin-bottom: 10px; border-right: 1px solid #ddd; flex: 2;">
+                  <div class="nttexto">
                     <h2>{{ $news[0]->title }}</h2>
                     {!! str_limit($news[0]->text, 120) !!}
                     <br><br>
+                  </div>
                     <button class="btn btn-default center-block" onclick="window.location.href='{{ route('notícia', $news[0]->id) }}'">@lang('messages.layout.readmore')</button>
                   </div>
                   <div class="col col-sm-12 col-md-4 text-center" style="flex: 1;">
@@ -11,14 +13,18 @@
                     <a href="#"><img src="//placehold.it/300x120/77CCDD/66BBCC" class="center-block img-responsive"></a>
                     <div class="text-muted"><small>{{ str_limit($news[1]->title, 50) }}</small></div>
                     <p>
+                    <div class="nttexto">
                    {!! str_limit($news[1]->text, 60) !!}
+                    </div>
                     </p>
                   </div>
                   <div class="col-sm-6 col-md-12">
                     <a href="#"><img src="//placehold.it/300x120/77CCDD/66BBCC" class="center-block img-responsive"></a>
                     <div class="text-muted"><small>{{ str_limit($news[2]->title, 50) }}</small></div>
                     <p>
+                    <div class="nttexto">
                     {!! str_limit($news[2]->text, 60) !!}
+                    </div>
                     </p>
                   </div>
                   </div>   

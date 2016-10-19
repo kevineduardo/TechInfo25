@@ -48,6 +48,7 @@ return [
     'n' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
         'ne' => 'Não existe nenhuma notícia.',
+        'na' => 'Não existe nenhuma notícia esperando aprovação.',
         'np' => 'Você não possui nenhuma notícia.',
     ],
     'u' => [
@@ -59,6 +60,7 @@ return [
         'palunos' => 'Postadas por Alunos',
         'novanoticia' => 'Nova notícia',
         'buscar' => 'Buscar',
+		'voltar' => 'Voltar',
         'alunosinvite' => 'Alunos Autorizados',
         'novousuario' => 'Novo usuário',
     ],
@@ -134,5 +136,9 @@ return [
         'svg' => 'SVG 1.1 válido!',
         'html' => 'HTML 4.01 válido!',
     ],
-
+	// Aprovação
+	'aprov' => [
+		'a' => 'Publicar',
+		'd' => 'Descartar',
+	]
 ];

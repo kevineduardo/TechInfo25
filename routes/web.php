@@ -10,6 +10,7 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+use App\Http\Middleware\VerifyTeacher;
 
 Auth::routes();
 Route::get('/início', 'SiteController@inicio')->name('inicio');
@@ -54,10 +55,12 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::post('/usuários/buscar', 'SearchController@newsSearch')->name('usuários.search');
 	Route::get('/usuários/buscar', 'SearchController@newsSearch')->name('usuários.search');
 
-	// Rotas Especiais
-	Route::get('/notícias/alunos', 'PortalNewsController@alunos')->name('notícias.alunos');
-	Route::post('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search');
-	Route::get('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search');
+
+	// Rotas Especiais - teachers only
+	Route::resource('/notícias/alunos', 'PortalStudentNewsController');
+	Route::post('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search')->middleware(VerifyTeacher::class);
+	Route::get('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search')->middleware(VerifyTeacher::class);
+	Route::post('/ajax/studentnews','PortalStudentNewsController@api')->middleware(VerifyTeacher::class);
 
 	Route::get('/usuários/alunos', 'PortalUsersController@alunos')->name('usuários.alunos');
 	Route::post('/usuários/alunos/buscar', 'SearchController@alunosUserSearch')->name('usuários.alunos.search');
@@ -72,7 +75,7 @@ Route::post('auth/facebook/callback', 'OAuthController@handleProviderCallback');
 // Rotas para o site
 ////$url = route('profile', ['id' => 1]);
 //Route::get('/inicio', '');
-//Route::get('/noticias', '');
+//Route::get('/notícias', '');
 //Route::get('/fotos', '');
 //Route::get('/contato', '');
 //Route::get('/horarios', '');
