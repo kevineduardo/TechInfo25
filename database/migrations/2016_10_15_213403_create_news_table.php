@@ -23,7 +23,7 @@ class CreateNewsTable extends Migration
             $table->integer('author_id')->unsigned()->nullable();
             $table->foreign('author_id')
                   ->references('id')->on('users')
-                  ->onDelete('set null');
+                  ->onDelete('cascade');
             $table->boolean('edited')->default(false);
             $table->integer('editor_id')->unsigned()->nullable();
             $table->foreign('editor_id')

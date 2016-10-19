@@ -19,7 +19,7 @@
       </tbody>
       </table>
   </div>
-{{-- Tem que criar uma condição aqui, caso não tenha página no facebook --}}
+{{-- Nah, faz um validator na hora de editar a facebook_page_url, n pode ter menos q 5 chars --}}
   <div id="facebook" class="table-responsive col-md-4">
       <table class="table">
       <thead>

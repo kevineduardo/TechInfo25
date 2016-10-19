@@ -34,6 +34,15 @@ return [
         'social' => [
             'fb' => 'Entrar com o Facebook',
         ],
+        'agenda' => 'Agenda do Técnico',
+        'sagenda' => 'Sem nada na agenda...',
+        'galeria' => 'Galeria de Fotos',
+        'noticiasp' => 'Notícias Principais',
+        'welcome' => 'Seja bem-vindo (a)!',
+        'news' => 'Notícias',
+        'readmore' => 'Leia mais...',
+        'noticia' => 'Notícia',
+        'recents' => 'Recentes',
     ],
     'n' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
