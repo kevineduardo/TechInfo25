@@ -54,6 +54,7 @@ return [
         'palunos' => 'Postadas por Alunos',
         'novanoticia' => 'Nova notícia',
         'buscar' => 'Buscar',
+		'voltar' => 'Voltar',
     ],
     // Placeholders
     'phs' => [
@@ -122,5 +123,12 @@ return [
         'svg' => 'SVG 1.1 válido!',
         'html' => 'HTML 4.01 válido!',
     ],
-
+	// Aprovação
+	'aprov' => [
+		'a' => 'Publicar',
+		'd' => 'Descartar',
+		
+		'idn' => 'Parametro id não definido.',
+		'uer' => 'Erro desconhecido.'
+	]
 ];

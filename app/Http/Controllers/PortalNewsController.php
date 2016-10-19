@@ -34,7 +34,7 @@ class PortalNewsController extends Controller
             return view('portal.noticias', ['noticias' => $noticias,]);
         }
         // se for professor executa esse outro aqui e.e
-        $noticias = News::paginate(15);
+        $noticias = News::Where('published',1)->paginate(15);
         return view('portal.noticias', ['noticias' => $noticias,]);
     }
 
@@ -148,8 +148,22 @@ class PortalNewsController extends Controller
         return view('portal.noticias',['noticias' => $search,]);
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function alunos() {
         // aqui é pra mostrar a lista de noticias esperando por aprovação de um professor
+        $user = Auth::user();
+        $professor = Teacher::where('user_id', $user->id)->first();
+        if(!$professor) {
+			// Alunos comuns serao redirecionados para a pagina de noticias
+            return Redirect::to('portal.noticias');
+        }
+        // se for professor executa esse outro aqui e.e
+        $noticias = News::Where('published',0)->paginate(15);
+        return view('portal.noticia_alunos', ['noticias' => $noticias,]);
     }
 
 

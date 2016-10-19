@@ -56,6 +56,7 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::get('/notícias/alunos', 'PortalNewsController@alunos')->name('notícias.alunos');
 	Route::post('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search');
 	Route::get('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search');
+	Route::post('/notícias/getdata','PortalNoticiasData@main');
 });
 
 // OAuth
@@ -66,7 +67,7 @@ Route::post('auth/facebook/callback', 'OAuthController@handleProviderCallback');
 // Rotas para o site
 ////$url = route('profile', ['id' => 1]);
 //Route::get('/inicio', '');
-//Route::get('/noticias', '');
+//Route::get('/notícias', '');
 //Route::get('/fotos', '');
 //Route::get('/contato', '');
 //Route::get('/horarios', '');
