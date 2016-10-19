@@ -36,9 +36,11 @@ class User extends Authenticatable
         $professor = Teacher::where('user_id', $user->id)->first();
         if(!$professor) {
             return false;
+        } else {
+            return $professor;
         }
 
-        return $professor;
+        return false;
     }
 
     // Get user profile's picture

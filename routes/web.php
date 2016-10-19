@@ -58,6 +58,7 @@ Route::group(['prefix' => 'portal'], function () {
 
 	// Rotas Especiais - teachers only
 	Route::resource('/notícias/alunos', 'PortalStudentNewsController');
+	Route::post('/notícias/alunos/aprovar', 'PortalStudentNewsController@approve')->name('alunos.approve');
 	Route::post('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search')->middleware(VerifyTeacher::class);
 	Route::get('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search')->middleware(VerifyTeacher::class);
 	Route::post('/ajax/studentnews','PortalStudentNewsController@api')->middleware(VerifyTeacher::class);

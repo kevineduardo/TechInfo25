@@ -62,6 +62,7 @@ class PortalNewsController extends Controller
         if(!$professor) {
             $noticia = new StudentNews();
             $noticia->fill($request->all());
+            $noticia->author_id = $user->id;
         } else {
             $noticia = new News();
             $noticia->fill($request->all());

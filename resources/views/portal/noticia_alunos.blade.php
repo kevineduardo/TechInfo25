@@ -157,7 +157,7 @@
                 <textarea readonly id="text" name="text"></textarea>
             </div>
             <div class="form-group">
-				<form method="post" class="form-horizontal">
+				<form method="post" action="{{ route('alunos.approve') }}" class="form-horizontal">
 					{{ csrf_field() }}
 					<input type="hidden" class="notid" name="id" value=""></input>
 					<button class="btn btn-success" type="submit" name="publicar">@lang('messages.aprov.a')</button>

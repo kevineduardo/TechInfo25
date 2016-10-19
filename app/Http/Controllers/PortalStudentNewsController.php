@@ -23,7 +23,7 @@ class PortalStudentNewsController extends Controller
     public function index($s = false)
     {
         // aqui é pra mostrar a lista de noticias esperando por aprovação de um professor
-        $noticias = StudentNews::with('author')->paginate(15);
+        $noticias = StudentNews::paginate(15);
         return view('portal.noticia_alunos', ['noticias' => $noticias, 'success' => $s,]);
     }
 
@@ -79,23 +79,7 @@ class PortalStudentNewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $alunonoticia = StudentNews::find($id);
-        $noticia = new News();
-        $noticia->fill($noticia);
-        try {
-            $noticia->save();
-        } catch (\Illuminate\Database\QueryException $e) {
-            Log::error('Erro ao salvar novo módulo no banco de dados.');
-            if(env('APP_DEBUG', false)) {
-                return response()->json([
-                'message' => 'For some reason the data wasn\'t stored with success.',
-                'debug_info' => $e,
-                ], 422);
-            } else {
-                abort(422);
-            }
-        }
-        return $this->index(true);
+
     }
 
     /**
@@ -122,5 +106,26 @@ class PortalStudentNewsController extends Controller
         return response()->json([
             'msg' => 'error.',
             ]);
+    }
+
+    public function approve(Request $request) {
+        $alunonoticia = StudentNews::find($request->input('id'));
+        $noticia = new News();
+        $noticia->fill($alunonoticia->toArray());
+        $noticia->published = true;
+        try {
+            $noticia->save();
+            $alunonoticia->delete();
+        } catch (\Illuminate\Database\QueryException $e) {
+            if(env('APP_DEBUG', false)) {
+                return response()->json([
+                'message' => 'For some reason the data wasn\'t stored with success.',
+                'debug_info' => $e,
+                ], 422);
+            } else {
+                abort(422);
+            }
+        }
+        return $this->index(true);
     }
 }
