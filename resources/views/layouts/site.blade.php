@@ -47,7 +47,7 @@
     </div>
     </section>
     <footer id="footer" class="text-center">
-    <h5>{!! $settings['footer'] !!} <br/> Copyright (C) 2016  Kevin Souza & Lucas Tossi - GNU License</h5>
+    <h5>{!! $settings['footer'] !!} <br/> Copyright (C) 2016  Kevin Souza & Lucas Tossi - <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL 3.0</a></h5>
 <p>
     <a href="http://validator.w3.org/check?uri=referer">
     <img style="border:0;width:88px;height:31px"
