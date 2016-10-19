@@ -62,8 +62,8 @@
 			@if(count($usuarios) != 0)
 			@foreach ($usuarios as $not)
         	<tr>
-			    <td>{{ str_limit($not->name, 10) }}</td>
-			    <td>{{ str_limit($not->email, 10) }}</td>
+			    <td>{{ str_limit($not->name, 40) }}</td>
+			    <td>{{ str_limit($not->email, 40) }}</td>
 			  </tr>
     		@endforeach
 			@else
