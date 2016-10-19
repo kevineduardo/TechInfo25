@@ -11,6 +11,7 @@ use App\Calendar;
 use App\Picture;
 use App\Setting;
 use App\News;
+use App\Categorie;
 
 class CachePages extends Command
 {
@@ -63,9 +64,15 @@ class CachePages extends Command
         $configs = Setting::all();
         $this->colocarEmCache('settings', $configs, 'settings');
         $this->info('Paginas cacheadas. Tudo numa boa.');
-        $noticias = News::all();
+        $noticias = News::with('author')->where('published', true)->orderBy('published_at', 'desc')->get();
         $this->colocarEmCache('notícias', $noticias, 'notícias');
+        $rnoticias = News::with('author')->where('published', true)->orderBy('published_at', 'desc')->take(10)->get();
+        $this->colocarEmCache('rnotícias', $rnoticias, 'rnotícias');
+
         $this->info('Noticias cacheadas tambem. Why not?');
+        $navbar = Categorie::with('pages')->get();
+        $this->colocarEmCache('navbar', $navbar, 'navbar');
+        $this->info('Navbar cacheada tambem. PQ XIM.');
     }
     private function colocarEmCache($key, $content, $tag)
     {

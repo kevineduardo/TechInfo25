@@ -58,7 +58,7 @@
     <table class="table">
       <thead>
       <tr>
-      <th><span class="vermelho">Notícias Principais</span></th>
+      <th><span class="vermelho">@lang('messages.layout.noticiasp')</span></th>
       </tr>
       </thead>
       <tbody>
@@ -79,21 +79,15 @@
       <table class="table">
       <thead>
       <tr>
-      <th><span class="vermelho">Agenda do Técnico</span></th>
+      <th><span class="vermelho">@lang('messages.layout.agenda')</span></th>
       </tr>
       </thead>
       <tbody>
       @if(count($calendario) == 0)
-      {{-- Aqui tem q tbm usar o trans --}}
-      <tr><th><p class="text-center">Sem nada na agenda...</p></th></tr>
+      <tr><th><p class="text-center">@lang('messages.layout.sagenda')</p></th></tr>
       @else
       @each('partials.calendar', $calendario, 'calendario')
       @endif
-      {{--
-      <tr><th><h4>11/04/2016<br/><small>Apresentação do layout do site.</small></h4></th></tr>
-      <tr><th><h4>20/06/2016<br/><small>Algo importante.</small></h4></th></tr>
-      <tr><th><h4>12/08/2016<br/><small>Algo mais importante ainda.</small></h4></th></tr>
-      --}}
     </tbody>
       </table>
   </div>
@@ -102,7 +96,7 @@
     <table class="table">
     <thead>
     <tr>
-    <th><span class="vermelho">Galeria de Fotos</span></th>
+    <th><span class="vermelho">@lang('messages.layout.galeria')</span></th>
     </tr>
     </thead>
     <tbody>

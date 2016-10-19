@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\News;
 
 class PortalController extends Controller
 {
@@ -23,6 +24,7 @@ class PortalController extends Controller
      */
     public function index()
     {
-        return view('portal.inicio');
+        $news = News::take(3)->orderBy('published_at', 'desc')->get();
+        return view('portal.inicio', ['news' => $news,]);
     }
 }
