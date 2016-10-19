@@ -1,6 +1,6 @@
 @extends('layouts.portal')
 
-@section('title', 'Notícias')
+@section('title', trans('messages.layout.news'))
 
 @section('styles')
 	@parent

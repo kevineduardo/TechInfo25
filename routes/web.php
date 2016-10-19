@@ -52,12 +52,19 @@ Route::group(['prefix' => 'portal'], function () {
 	// Rotas de Buscas
 	Route::post('/notícias/buscar', 'SearchController@newsSearch')->name('notícias.search');
 	Route::get('/notícias/buscar', 'SearchController@newsSearch')->name('notícias.search');
+	Route::post('/usuários/buscar', 'SearchController@newsSearch')->name('usuários.search');
+	Route::get('/usuários/buscar', 'SearchController@newsSearch')->name('usuários.search');
+
 
 	// Rotas Especiais - teachers only
 	Route::resource('/notícias/alunos', 'PortalStudentNewsController');
 	Route::post('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search')->middleware(VerifyTeacher::class);
 	Route::get('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search')->middleware(VerifyTeacher::class);
 	Route::post('/ajax/studentnews','PortalStudentNewsController@api')->middleware(VerifyTeacher::class);
+
+	Route::get('/usuários/alunos', 'PortalUsersController@alunos')->name('usuários.alunos');
+	Route::post('/usuários/alunos/buscar', 'SearchController@alunosUserSearch')->name('usuários.alunos.search');
+	Route::get('/usuários/alunos/buscar', 'SearchController@alunosUserSearch')->name('usuários.alunos.search');
 });
 
 // OAuth

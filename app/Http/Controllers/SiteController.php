@@ -21,8 +21,8 @@ class SiteController extends Controller
         }
 
         $fotos = Picture::where('type', 0)->get();
-    	$calendario = Calendar::take(4)->get();
-    	return view('inicio', ['calendario' => $calendario, 'fotos' => $fotos,]);
+        $calendario = Calendar::take(4)->get();
+        return view('inicio', ['calendario' => $calendario, 'fotos' => $fotos,]);
     }
 
     public function pagina($id) {
@@ -32,20 +32,20 @@ class SiteController extends Controller
             return $pg;
         }
 
-    	$pagina = Page::with('author')->with('editor')->find($id);
-    	if(!$pagina) {
-    		abort(404);
-    	}
-    	return view('pagina', $pagina);
+        $pagina = Page::with('author')->with('editor')->find($id);
+        if(!$pagina) {
+            abort(404);
+        }
+        return view('pagina', $pagina);
     }
 
     public function foto($id = 0) {
-    	$foto = Picture::with('authors')->where('type', 0)->find($id);
+        $foto = Picture::with('authors')->where('type', 0)->find($id);
 
-    	if(!$foto) {
-    		return redirect()->route('inicio');
-    	}
-    	return view('foto', $foto);
+        if(!$foto) {
+            return redirect()->route('inicio');
+        }
+        return view('foto', $foto);
     }
 
     public function noticia($id) {

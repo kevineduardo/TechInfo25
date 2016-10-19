@@ -43,6 +43,7 @@ return [
         'readmore' => 'Leia mais...',
         'noticia' => 'Notícia',
         'recents' => 'Recentes',
+        'users' => 'Usuários',
     ],
     'n' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
@@ -50,16 +51,23 @@ return [
         'na' => 'Não existe nenhuma notícia esperando aprovação.',
         'np' => 'Você não possui nenhuma notícia.',
     ],
+    'u' => [
+        'nr' => 'Sua busca retornou nenhum resultado.',
+        'ne' => 'Não existe nenhum usuário'
+    ],
     // Buttons, dude!
     'buttons' => [
         'palunos' => 'Postadas por Alunos',
         'novanoticia' => 'Nova notícia',
         'buscar' => 'Buscar',
 		'voltar' => 'Voltar',
+        'alunosinvite' => 'Alunos Autorizados',
+        'novousuario' => 'Novo usuário',
     ],
     // Placeholders
     'phs' => [
         'buscar' => 'Buscar notícia...',
+        'buscaru' => 'Buscar usuário...',
     ],
     // Colummns field's name
     'cm' => [
@@ -72,6 +80,9 @@ return [
         'deleted_at' => 'Data de Exclusão',
         'published_at' => 'Data de Publicação',
         'approved' => 'Aprovado',
+        'name' => 'Nome',
+        'email' => 'E-mail',
+        'registered' => 'Registrado',
     ],
     // Basic stuff like yes or no
     'b' => [
@@ -81,6 +92,7 @@ return [
     // Titles
     'titles' => [
         'newnews' => 'Nova notícia',
+        'newuser' => 'Novo usuário',
     ],
     // Form's labels
     'form' => [

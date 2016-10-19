@@ -11,4 +11,6 @@ class NewStudent extends Model
     public function responsibles() {
     	return $this->belongsTo('App\Teacher', 'responsible');
     }
+    // criar um metodo q diz se esse email está registrado ou não, para assim na page de alunos
+    // podermos verificar se o aluno foi registrado ou não
 }

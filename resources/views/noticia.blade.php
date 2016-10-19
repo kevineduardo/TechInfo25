@@ -1,7 +1,7 @@
 @extends('layouts.site')
 
 
-@section('title', $settings['site_name'] . ' - ' . $nt->title)
+@section('title', $settings['site_name'] . ' - ' . str_limit($nt->title, 50))
 
 @section('styles')
   @parent
@@ -34,8 +34,8 @@
   			<tbody>
 			@foreach($nts as $ntz)
 			<tr><th><a class="nounder" href="{{ route('notícia', $ntz->id) }}"><h4>
-			{{ $ntz->title }}
-			<br/><small>{{ $ntz->subtitle }}</small></h4></a></th></tr>
+			{{ str_limit($ntz->title, 50) }}
+			<br/><small>{{ str_limit($ntz->subtitle, 50) }}</small></h4></a></th></tr>
 			@endforeach
   			</tbody>
   			</table>
