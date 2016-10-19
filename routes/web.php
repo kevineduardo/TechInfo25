@@ -10,6 +10,7 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+use App\Http\Middleware\VerifyTeacher;
 
 Auth::routes();
 Route::get('/início', 'SiteController@inicio')->name('inicio');
@@ -52,12 +53,11 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::post('/notícias/buscar', 'SearchController@newsSearch')->name('notícias.search');
 	Route::get('/notícias/buscar', 'SearchController@newsSearch')->name('notícias.search');
 
-	// Rotas Especiais
-	Route::get('/notícias/alunos', 'PortalNewsController@alunos')->name('notícias.alunos');
-	Route::post('/notícias/alunos', 'PortalNewsController@alunosAction')->name('notícias.alunos.action');
-	Route::post('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search');
-	Route::get('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search');
-	Route::post('/notícias/getdata','PortalNoticiasData@main');
+	// Rotas Especiais - teachers only
+	Route::resource('/notícias/alunos', 'PortalStudentNewsController');
+	Route::post('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search')->middleware(VerifyTeacher::class);
+	Route::get('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search')->middleware(VerifyTeacher::class);
+	Route::post('/notícias/getdata','PortalNoticiasData@main')->middleware(VerifyTeacher::class);
 });
 
 // OAuth

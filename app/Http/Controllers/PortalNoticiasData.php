@@ -10,8 +10,7 @@ use Carbon\Carbon;
 
 use App\Http\Requests\StoreNews;
 use App\News;
-use App\Teacher;
-use Auth;
+use App\StudentNews;
 
 class PortalNoticiasData extends Controller
 {
@@ -25,24 +24,18 @@ class PortalNoticiasData extends Controller
      * @param  Request  $r
      * @return Response
      */
-	function main(Request $r) {
-		$ret = array(
-			'err' => 0,
-			'msg' => 'messages.aprov.uer',
-		);
-		if ( !isset($r['id']) ) {
-			$ret['err'] = 1;
-			$ret['msg'] = 'messages.aprov.idn';
-		} else {
-			$ret['err'] = 0;
-			$id = intval( $r['id'] );
-			$not = News::where('id',$id)->first();
-			$ret['not'] = array(
-				'name' => $not['title'],
-				'desc' => $not['subtitle'],
-				'text' => $not['text'],
-			);
+	function main(Request $request) {
+		$noticia = StudentNews::find($request->input('id'));
+		if($noticia) {
+			return response()->json([
+			'name' => $noticia['title'],
+			'desc' => $noticia['subtitle'],
+			'text' => $noticia['text'],
+			]);
 		}
-		return $ret;
+			
+		return response()->json([
+			'msg' => 'error.',
+			]);
 	}
 }

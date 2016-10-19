@@ -10,6 +10,7 @@ use Carbon\Carbon;
 
 use App\Http\Requests\StoreNews;
 use App\News;
+use App\StudentNews;
 use App\Teacher;
 use Auth;
 
@@ -34,7 +35,7 @@ class PortalNewsController extends Controller
             return view('portal.noticias', ['noticias' => $noticias,]);
         }
         // se for professor executa esse outro aqui e.e
-        $noticias = News::Where('published',1)->paginate(15);
+        $noticias = News::paginate(15);
         return view('portal.noticias', ['noticias' => $noticias,]);
     }
 
@@ -56,13 +57,16 @@ class PortalNewsController extends Controller
      */
     public function store(StoreNews $request)
     {
-        $noticia = new News();
-        $noticia->fill($request->all());
         $user = Auth::user();
         $professor = Teacher::where('user_id', $user->id)->first();
         if(!$professor) {
-            $noticia->published = false;
+            $noticia = new StudentNews();
+            $noticia->fill($request->all());
         } else {
+            $noticia = new News();
+            $noticia->fill($request->all());
+            $noticia->author_id = $user->id;
+            $noticia->published_at = Carbon::now();
             if(str_contains($request->input('published'), 'true')) {
                 $noticia->published = true;
             } else {
@@ -70,8 +74,6 @@ class PortalNewsController extends Controller
                 //$noticia->published_at = null;
             }
         }
-        $noticia->author_id = $user->id;
-        $noticia->published_at = Carbon::now();
         try {
             $noticia->save();
         } catch (\Illuminate\Database\QueryException $e) {
@@ -140,63 +142,6 @@ class PortalNewsController extends Controller
     {
         //
     }
-
-    public function search(Request $request) {
-        $request = $request->all();
-        unset($request['_token']);
-        $search = News::filter($request)->paginateFilter();
-        return view('portal.noticias',['noticias' => $search,]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function alunos() 
-	{
-        // aqui é pra mostrar a lista de noticias esperando por aprovação de um professor
-        $user = Auth::user();
-        $professor = Teacher::where('user_id', $user->id)->first();
-        if(!$professor) {
-			// Alunos comuns serao redirecionados para a pagina de noticias
-            return Redirect::to('portal.noticias');
-        }
-        // se for professor executa esse outro aqui e.e
-        $noticias = News::Where('published',0)->paginate(15);
-        return view('portal.noticia_alunos', ['noticias' => $noticias,]);
-    }
-	
-	public function alunosAction(Request $request) 
-	{
-		$user = Auth::user();
-		$professor = Teacher::where('user_id', $user->id)->first();
-        if(!$professor) { abort(403); } // Opa, você nao devia estar aqui kk
-		Log::info( $request );
-		$id = intval($request['id']);
-		if ( $id == 0 ) { abort( 404 ); } // Codigo nao é um int ou é igual a 0
-		if ( !( News::where( "id", $id )->first() ) ) { abort( 404 ); } // Noticia não existe
-		if ( isset( $request['publicar'] ) ) {
-			News::where( "id", $id )->update( array( "published" => 1 ) );
-		} elseif ( isset( $request['deletar'] ) ) {
-			News::where( "id", $id )->delete( );
-		}
-		return redirect('portal/notícias/alunos');
-	}
-	
-	public function newsSearchAlunos() 
-	{
-        // aqui é pra mostrar a lista de noticias esperando por aprovação de um professor
-        $user = Auth::user();
-        $professor = Teacher::where('user_id', $user->id)->first();
-        if(!$professor) {
-			// Alunos comuns serao redirecionados para a pagina de noticias
-            return Redirect::to('portal.noticias');
-        }
-        // se for professor executa esse outro aqui e.e
-        $noticias = News::Where('published',0)->paginate(15);
-        return view('portal.noticia_alunos', ['noticias' => $noticias,]);
-	}
 
 
 }

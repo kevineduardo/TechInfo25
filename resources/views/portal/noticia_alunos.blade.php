@@ -51,11 +51,11 @@
 					data:'id=' + id,
 					success:function(data){
 					//console.log(data);
-					if ( data['err'] == 0 ) {
+					if ( data ) {
 						$(".notid").attr("value",""+id)
-						$("#title").attr("value",data['not']['name'])
-						$("#subtitle").attr("value",data['not']['desc'])
-						tinyMCE.activeEditor.setContent(data['not']['text']);
+						$("#title").attr("value",data['name'])
+						$("#subtitle").attr("value",data['desc'])
+						tinyMCE.activeEditor.setContent(data['text']);
 						$("#ap_noticia").modal('show')
 					}
 				   }
@@ -77,7 +77,7 @@
   </ul>
 </div>
 @endif
-@if(isset($success))
+@if($success)
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <strong>@lang('messages.form.success.post.title')</strong> @lang('messages.form.success.post.msg')
@@ -105,7 +105,6 @@
 			    <th><span class="vermelho">@lang('messages.cm.title')</span></th>
 			    <th><span class="vermelho">@lang('messages.cm.subtitle')</span></th>
 			    <th><span class="vermelho">@lang('messages.cm.author')</span></th>
-			    <th><span class="vermelho">@lang('messages.cm.created_at')</span></th>
 			  </tr>
 			</thead>
 			@if(count($noticias) != 0)
@@ -114,7 +113,6 @@
 			    <td>{{ str_limit($not->title, 10) }}</td>
 			    <td>{{ str_limit($not->subtitle, 10) }}</td>
 			    <td>{{ str_limit($not->author->name, 20) }}</td>
-			    <td>{{ $not->created_at->format('d/m/Y') }}</td>
 			</tr>
     		@endforeach
 			@else

@@ -63,4 +63,8 @@ class User extends Authenticatable
     public function calendar() {
         return $this->hasMany('App\Calendar', 'author_id');
     }
+
+    public function studentNews() {
+        return $this->hasMany('App\StudentNews', 'author_id');
+    }
 }
