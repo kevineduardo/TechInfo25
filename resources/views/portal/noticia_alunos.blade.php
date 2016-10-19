@@ -47,7 +47,7 @@
 						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
 					},
 					type:'POST',
-					url:'/portal/notícias/getdata',
+					url:'/portal/ajax/studentnews',
 					data:'id=' + id,
 					success:function(data){
 					//console.log(data);
@@ -105,6 +105,7 @@
 			    <th><span class="vermelho">@lang('messages.cm.title')</span></th>
 			    <th><span class="vermelho">@lang('messages.cm.subtitle')</span></th>
 			    <th><span class="vermelho">@lang('messages.cm.author')</span></th>
+			    <th><span class="vermelho">@lang('messages.cm.created_at')</span></th>
 			  </tr>
 			</thead>
 			@if(count($noticias) != 0)
@@ -113,6 +114,7 @@
 			    <td>{{ str_limit($not->title, 10) }}</td>
 			    <td>{{ str_limit($not->subtitle, 10) }}</td>
 			    <td>{{ str_limit($not->author->name, 20) }}</td>
+			    <td>{{ $not->created_at->format('d/m/Y') }}</td>
 			</tr>
     		@endforeach
 			@else

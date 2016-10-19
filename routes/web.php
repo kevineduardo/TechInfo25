@@ -57,7 +57,7 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::resource('/notícias/alunos', 'PortalStudentNewsController');
 	Route::post('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search')->middleware(VerifyTeacher::class);
 	Route::get('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search')->middleware(VerifyTeacher::class);
-	Route::post('/notícias/getdata','PortalNoticiasData@main')->middleware(VerifyTeacher::class);
+	Route::post('/ajax/studentnews','PortalStudentNewsController@api')->middleware(VerifyTeacher::class);
 });
 
 // OAuth

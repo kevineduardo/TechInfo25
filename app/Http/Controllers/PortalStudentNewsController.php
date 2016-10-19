@@ -108,4 +108,19 @@ class PortalStudentNewsController extends Controller
     {
         //
     }
+
+    public function api(Request $request) {
+        $noticia = StudentNews::find($request->input('id'));
+        if($noticia) {
+            return response()->json([
+            'name' => $noticia['title'],
+            'desc' => $noticia['subtitle'],
+            'text' => $noticia['text'],
+            ]);
+        }
+            
+        return response()->json([
+            'msg' => 'error.',
+            ]);
+    }
 }
