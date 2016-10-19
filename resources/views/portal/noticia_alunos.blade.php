@@ -84,11 +84,7 @@
 </div>
 @endif
 <div id="controles" style="margin-bottom: 5px;">
-@if($professor)
-{!! Form::open(array('route' => 'notícias.search', 'class'=>'form form-inline col-md-5')) !!}
-@else
-{!! Form::open(array('route' => 'notícias.search', 'class'=>'form form-inline col-md-10')) !!}
-@endif
+{!! Form::open(array('route' => 'notícias.alunos.search', 'class'=>'form form-inline col-md-5')) !!}
 	<div class="input-group input-group-md">
     {!! Form::text('title', null,
                            array('required',
