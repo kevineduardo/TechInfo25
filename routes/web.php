@@ -54,8 +54,9 @@ Route::group(['prefix' => 'portal'], function () {
 
 	// Rotas Especiais
 	Route::get('/notícias/alunos', 'PortalNewsController@alunos')->name('notícias.alunos');
-	Route::post('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search');
-	Route::get('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search');
+	Route::post('/notícias/alunos', 'PortalNewsController@alunosAction')->name('notícias.alunos.action');
+	Route::post('/notícias/alunos/buscar', 'SearchController@newsSearchAlunos')->name('notícias.alunos.search');
+	Route::get('/notícias/alunos/buscar', 'SearchController@newsSearchAlunos')->name('notícias.alunos.search');
 	Route::post('/notícias/getdata','PortalNoticiasData@main');
 });
 

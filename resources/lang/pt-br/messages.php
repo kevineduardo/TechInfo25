@@ -47,6 +47,7 @@ return [
     'n' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
         'ne' => 'Não existe nenhuma notícia.',
+        'na' => 'Não existe nenhuma notícia esperando aprovação.',
         'np' => 'Você não possui nenhuma notícia.',
     ],
     // Buttons, dude!
@@ -127,8 +128,5 @@ return [
 	'aprov' => [
 		'a' => 'Publicar',
 		'd' => 'Descartar',
-		
-		'idn' => 'Parametro id não definido.',
-		'uer' => 'Erro desconhecido.'
 	]
 ];

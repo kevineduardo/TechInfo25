@@ -52,6 +52,7 @@
 					success:function(data){
 					//console.log(data);
 					if ( data['err'] == 0 ) {
+						$(".notid").attr("value",""+id)
 						$("#title").attr("value",data['not']['name'])
 						$("#subtitle").attr("value",data['not']['desc'])
 						tinyMCE.activeEditor.setContent(data['not']['text']);
@@ -125,7 +126,7 @@
 				@if(str_contains(Route::currentRouteName(), 'search'))
 			    <td colspan="4">@lang('messages.n.nr')</td>
 			    @else
-			    <td colspan="4">@lang('messages.n.ne')</td>
+			    <td colspan="4">@lang('messages.n.na')</td>
 			    @endif
 			</tr>
 			@endif
@@ -142,9 +143,7 @@
           <h4 class="modal-title">@lang('messages.titles.newnews')</h4>
         </div>
         <div class="modal-body">
-        <form class="form-horizontal" method="post">
-        {{ csrf_field() }}
-        <fieldset>
+        <fieldset class="form-horizontal">
             <div class="form-group">
                 <label for="title">@lang('messages.form.news.title')</label>
                 <input readonly autocomplete="off" class="form-control" id=
@@ -162,11 +161,14 @@
                 <textarea readonly id="text" name="text"></textarea>
             </div>
             <div class="form-group">
-                <button class="btn btn-success" type="submit">@lang('messages.aprov.a')</button>
-                <button class="btn btn-danger" type="submit">@lang('messages.aprov.d')</button>
+				<form method="post" class="form-horizontal">
+					{{ csrf_field() }}
+					<input type="hidden" class="notid" name="id" value=""></input>
+					<button class="btn btn-success" type="submit" name="publicar">@lang('messages.aprov.a')</button>
+					<button class="btn btn-danger" type="submit" name="deletar">@lang('messages.aprov.d')</button>
+				</form>
             </div>
         </fieldset>
-    	</form>
         </div>
       </div>
     </div>

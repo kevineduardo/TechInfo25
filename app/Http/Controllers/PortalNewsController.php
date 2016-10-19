@@ -153,7 +153,8 @@ class PortalNewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function alunos() {
+    public function alunos() 
+	{
         // aqui é pra mostrar a lista de noticias esperando por aprovação de um professor
         $user = Auth::user();
         $professor = Teacher::where('user_id', $user->id)->first();
@@ -165,6 +166,37 @@ class PortalNewsController extends Controller
         $noticias = News::Where('published',0)->paginate(15);
         return view('portal.noticia_alunos', ['noticias' => $noticias,]);
     }
+	
+	public function alunosAction(Request $request) 
+	{
+		$user = Auth::user();
+		$professor = Teacher::where('user_id', $user->id)->first();
+        if(!$professor) { abort(403); } // Opa, você nao devia estar aqui kk
+		Log::info( $request );
+		$id = intval($request['id']);
+		if ( $id == 0 ) { abort( 404 ); } // Codigo nao é um int ou é igual a 0
+		if ( !( News::where( "id", $id )->first() ) ) { abort( 404 ); } // Noticia não existe
+		if ( isset( $request['publicar'] ) ) {
+			News::where( "id", $id )->update( array( "published" => 1 ) );
+		} elseif ( isset( $request['deletar'] ) ) {
+			News::where( "id", $id )->delete( );
+		}
+		return redirect('portal/notícias/alunos');
+	}
+	
+	public function newsSearchAlunos() 
+	{
+        // aqui é pra mostrar a lista de noticias esperando por aprovação de um professor
+        $user = Auth::user();
+        $professor = Teacher::where('user_id', $user->id)->first();
+        if(!$professor) {
+			// Alunos comuns serao redirecionados para a pagina de noticias
+            return Redirect::to('portal.noticias');
+        }
+        // se for professor executa esse outro aqui e.e
+        $noticias = News::Where('published',0)->paginate(15);
+        return view('portal.noticia_alunos', ['noticias' => $noticias,]);
+	}
 
 
 }
