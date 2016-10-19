@@ -28,20 +28,22 @@ class PortalNoticiasData extends Controller
 	function main(Request $r) {
 		$ret = array(
 			'err' => 0,
-			'msg' => 'messages.aprov.uer',
 		);
 		if ( !isset($r['id']) ) {
 			$ret['err'] = 1;
-			$ret['msg'] = 'messages.aprov.idn';
 		} else {
 			$ret['err'] = 0;
 			$id = intval( $r['id'] );
 			$not = News::where('id',$id)->first();
-			$ret['not'] = array(
-				'name' => $not['title'],
-				'desc' => $not['subtitle'],
-				'text' => $not['text'],
-			);
+			if ( !$not ) {
+				$ret['err'] = 1;
+			} else {
+				$ret['not'] = array(
+					'name' => $not['title'],
+					'desc' => $not['subtitle'],
+					'text' => $not['text'],
+				);
+			}
 		}
 		return $ret;
 	}
