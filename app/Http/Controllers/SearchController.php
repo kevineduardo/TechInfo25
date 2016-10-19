@@ -16,4 +16,7 @@ class SearchController extends Controller
         $search = News::filter($request)->paginateFilter();
         return view('portal.noticias',['noticias' => $search,]);
     }
+    public function alunosUserSearch(Request $request) {
+    	
+    }
 }

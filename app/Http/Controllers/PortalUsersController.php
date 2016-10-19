@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\User;
 
 class PortalUsersController extends Controller
 {
@@ -20,7 +21,8 @@ class PortalUsersController extends Controller
      */
     public function index()
     {
-        //
+        $usuarios = User::paginate(15);
+        return view('portal.usuarios', ['usuarios' => $usuarios,]);
     }
 
     /**
@@ -87,5 +89,9 @@ class PortalUsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function alunos() {
+
     }
 }
