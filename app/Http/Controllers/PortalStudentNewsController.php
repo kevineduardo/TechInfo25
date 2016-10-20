@@ -69,6 +69,7 @@ class PortalStudentNewsController extends Controller
                         abort(422);
                     }
                 }
+                return $this->index(true);
             } else {
                 $alunonoticia->delete();
                 return $this->index(false, true);

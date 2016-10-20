@@ -76,17 +76,21 @@
   </ul>
 </div>
 @endif
+@if(isset($success))
 @if($success)
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <strong>@lang('messages.form.success.approved.title')</strong> @lang('messages.form.success.approved.msg')
 </div>
 @endif
+@endif
+@if(isset($deleted))
 @if($deleted)
 <div class="alert alert-dismissible alert-info">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <strong>@lang('messages.form.success.delete.title')</strong> @lang('messages.form.success.delete.msg')
 </div>
+@endif
 @endif
 <div id="controles" style="margin-bottom: 5px;">
 {!! Form::open(array('route' => 'notícias.alunos.search', 'class'=>'form form-inline col-md-5')) !!}
