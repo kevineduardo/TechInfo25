@@ -34,6 +34,8 @@ Route::get('/notícia', function() {
 	return redirect()->route('inicio');
 });
 
+Route::get('/docentes', 'DocentesController@index');
+
 //Route::get('/portal', 'HomeController@index');
 
 // Rotas para o Portal

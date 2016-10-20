@@ -45,6 +45,7 @@ return [
         'noticia' => 'Notícia',
         'recents' => 'Recentes',
         'users' => 'Usuários',
+		'docente' => 'Docentes',
     ],
     'n' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
