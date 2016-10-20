@@ -1,13 +1,13 @@
 @extends('layouts.site')
 
-@section('title', $settings['site_name'] . ' - ' . $title)
+@section('title', $settings['site_name'] . ' - ' . trans("messages.layout.docente"))
 
 @section('content')
 <div id="principal" class="table-responsive col-md-8">
     <table class="table">
       <thead>
       <tr>
-      <th><span class="vermelho">{{ $title }}</span></th>
+      <th><span class="vermelho">@lang('messages.layout.docente')</span></th>
       </tr>
       </thead>
       <tbody class="normal">

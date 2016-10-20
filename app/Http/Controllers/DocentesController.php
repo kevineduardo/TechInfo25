@@ -18,7 +18,6 @@ class DocentesController extends Controller
     protected function index() 
     {
     	return view('docentes',[ 
-    		'title' => trans("messages.layout.docente"),
     		'docentes' => Teacher::with('user')->paginate(2)
     	]);
     }
