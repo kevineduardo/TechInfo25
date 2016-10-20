@@ -1,6 +1,6 @@
 @extends('layouts.portal')
 
-@section('title', 'Notícias')
+@section('title', trans('messages.layout.studentnews'))
 
 @section('styles')
 	@parent
@@ -27,7 +27,7 @@
 	    theme: 'modern',
 	    content_css: '{{ URL::asset('css/bootstrap.min.css') }}',
 	    height: 300,
-		readonly: true,
+		readonly: false,
 	    language: 'pt_BR',
 	    plugins: [
 	    "advlist autolink lists link image charmap print preview anchor",
@@ -46,15 +46,14 @@
 					headers: {
 						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
 					},
-					type:'POST',
-					url:'/portal/ajax/studentnews',
-					data:'id=' + id,
+					type:'GET',
+					url:'/portal/notícias/alunos/' + id,
 					success:function(data){
-					//console.log(data);
+					{{-- console.log(data); --}}
 					if ( data ) {
-						$(".notid").attr("value",""+id)
-						$("#title").attr("value",data['name'])
-						$("#subtitle").attr("value",data['desc'])
+						$(".notid").attr("value", id)
+						$("#title").attr("value", data['title'])
+						$("#subtitle").attr("value", data['subtitle'])
 						tinyMCE.activeEditor.setContent(data['text']);
 						$("#ap_noticia").modal('show')
 					}
@@ -80,7 +79,13 @@
 @if($success)
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <strong>@lang('messages.form.success.post.title')</strong> @lang('messages.form.success.post.msg')
+  <strong>@lang('messages.form.success.approved.title')</strong> @lang('messages.form.success.approved.msg')
+</div>
+@endif
+@if($deleted)
+<div class="alert alert-dismissible alert-info">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>@lang('messages.form.success.delete.title')</strong> @lang('messages.form.success.delete.msg')
 </div>
 @endif
 <div id="controles" style="margin-bottom: 5px;">
@@ -139,30 +144,29 @@
           <h4 class="modal-title">@lang('messages.titles.newnews')</h4>
         </div>
         <div class="modal-body">
+        <form method="post" action="{{ route('alunos.store') }}" class="form-horizontal">
+					{{ csrf_field() }}
         <fieldset class="form-horizontal">
             <div class="form-group">
                 <label for="title">@lang('messages.form.news.title')</label>
-                <input readonly autocomplete="off" class="form-control" id=
+                <input autocomplete="off" class="form-control" id=
                 "title" name="title" placeholder="Boas novas!"
                 required="" type="text" value="">
             </div>
             <div class="form-group">
                 <label for="subtitle">@lang('messages.form.news.subtitle')</label>
-                <input readonly autocomplete="off" class="form-control" id=
+                <input autocomplete="off" class="form-control" id=
                 "subtitle" name="subtitle" placeholder=
                 "Temos novidades..." required="" type="text" value="">
             </div>
             <div class="form-group">
                 <label for="text">@lang('messages.form.news.text')</label> 
-                <textarea readonly id="text" name="text"></textarea>
+                <textarea id="text" name="text"></textarea>
             </div>
             <div class="form-group">
-				<form method="post" action="{{ route('alunos.approve') }}" class="form-horizontal">
-					{{ csrf_field() }}
 					<input type="hidden" class="notid" name="id" value=""></input>
-					<button class="btn btn-success" type="submit" name="publicar">@lang('messages.aprov.a')</button>
-					<button class="btn btn-danger" type="submit" name="deletar">@lang('messages.aprov.d')</button>
-				</form>
+					<button class="btn btn-success" type="submit" name="publicar" value="true">@lang('messages.buttons.palunos_salvar')</button>
+					<button class="btn btn-danger" type="submit" name="deletar" value="true">@lang('messages.buttons.palunos_descartar')</button>
             </div>
         </fieldset>
         </div>
