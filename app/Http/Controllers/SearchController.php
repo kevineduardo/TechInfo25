@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\News;
+use App\StudentNews;
 
 class SearchController extends Controller
 {
@@ -13,7 +14,7 @@ class SearchController extends Controller
     	if ( str_contains(\Request::route()->getName(), 'alunos') ) {
 			$request = $request->all();
 			unset($request['_token']);
-			$search = News::where("published",0)->filter($request)->paginateFilter();
+			$search = StudentNews::filter($request)->paginateFilter();
 			return view('portal.noticia_alunos',['noticias' => $search,]);
 		} else {
 			$request = $request->all();
