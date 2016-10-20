@@ -139,8 +139,9 @@ class PortalNewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateNews $request, $id)
+    public function update(UpdateNews $request)
     {
+        $id = $request->input('id');
         $noticia = News::find($id);
         if($noticia) {
 	        if($request->input('salvar')) {

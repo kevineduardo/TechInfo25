@@ -51,7 +51,7 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::get('/notícias', 'PortalNewsController@index')->name('notícias.index');
 	Route::post('/notícias', 'PortalNewsController@store')->name('notícias.store');
 	Route::get('/notícias/{id}', 'PortalNewsController@show')->name('notícias.show');
-	Route::put('/notícias/{id}', 'PortalNewsController@update')->name('notícias.update');
+	Route::put('/notícias', 'PortalNewsController@update')->name('notícias.update');
 	Route::delete('/notícias/{id}', 'PortalNewsController@destroy')->name('notícias.destroy');
 
 	// Rotas de Buscas

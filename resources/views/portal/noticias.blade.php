@@ -38,9 +38,6 @@
 	     </script>
 	     <script>
 			function getNotData(id) {
-				var action = "{{ route('notícias.index') }}";
-				$("#editando").attr("action", action + '/' + id);
-				console.log($("#editando").attr("action", action + '/' + id));
 				$.ajax(
 				{
 					headers: {
@@ -50,7 +47,7 @@
 					url:'/portal/notícias/' + id,
 					success:function(data){
 					if ( data ) {
-						console.log(data);
+						$(".notid").attr("value", id);
 						$("#etitle").attr("value", data['title']);
 						$("#esubtitle").attr("value", data['subtitle']);
 						tinyMCE.activeEditor.setContent(data['text']);
@@ -240,6 +237,7 @@
         <form id="editando" method="post" class="form-horizontal" action="{{ route('notícias.index') }}">
         {{ method_field('PUT') }}
         {{ csrf_field() }}
+        <input type="hidden" class="notid" name="id" value=""></input>
         <fieldset>
             <div class="form-group">
                 <label for="title">@lang('messages.form.news.title')</label>

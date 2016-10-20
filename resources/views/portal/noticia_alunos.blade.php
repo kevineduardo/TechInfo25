@@ -51,11 +51,11 @@
 					success:function(data){
 					{{-- console.log(data); --}}
 					if ( data ) {
-						$(".notid").attr("value", id)
-						$("#title").attr("value", data['title'])
-						$("#subtitle").attr("value", data['subtitle'])
+						$(".notid").attr("value", id);
+						$("#title").attr("value", data['title']);
+						$("#subtitle").attr("value", data['subtitle']);
 						tinyMCE.activeEditor.setContent(data['text']);
-						$("#ap_noticia").modal('show')
+						$("#ap_noticia").modal('show');
 					}
 				   }
 				}
