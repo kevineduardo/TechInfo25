@@ -47,7 +47,7 @@
 						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
 					},
 					type:'GET',
-					url:'/portal/notícias/alunos/' + id,
+					url:'/portal/notícias-alunos/' + id,
 					success:function(data){
 					{{-- console.log(data); --}}
 					if ( data ) {
@@ -148,7 +148,7 @@
           <h4 class="modal-title">@lang('messages.titles.newnews')</h4>
         </div>
         <div class="modal-body">
-        <form method="post" action="{{ route('alunos.store') }}" class="form-horizontal">
+        <form method="post" action="{{ route('notícias-alunos.store') }}" class="form-horizontal">
 					{{ csrf_field() }}
         <fieldset class="form-horizontal">
             <div class="form-group">

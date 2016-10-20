@@ -96,7 +96,7 @@ class PortalStudentNewsController extends Controller
                 'msg' => 'error.',
                 ]);
         }
-        return redirect()->route('alunos.index');
+        return redirect()->route('notícias-alunos.index');
     }
 
     /**

@@ -117,7 +117,7 @@
     </div>
  {!! Form::close() !!}
  @if($professor)
- <button type="button" onclick="window.location='{{ route('alunos.index')}}';" style="margin-top: 5px;" class="btn btn-primary col-md-3">@lang('messages.buttons.palunos')</button>
+ <button type="button" onclick="window.location='{{ route('notícias-alunos.index')}}';" style="margin-top: 5px;" class="btn btn-primary col-md-3">@lang('messages.buttons.palunos')</button>
  <button type="button" style="margin-top: 5px;" class="btn btn-primary col-md-2 col-md-offset-1" data-toggle="modal" data-target="#novanoticia">@lang('messages.buttons.novanoticia')</button>
  @else
  <button type="button" style="margin-top: 5px;" class="btn btn-primary col-md-2" data-toggle="modal" data-target="#novanoticia">@lang('messages.buttons.novanoticia')</button>
