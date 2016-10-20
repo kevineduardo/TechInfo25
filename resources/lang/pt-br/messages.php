@@ -66,6 +66,8 @@ return [
         'novousuario' => 'Novo usuário',
         'palunos_salvar' => 'Salvar & Publicar',
         'palunos_descartar' => 'Descartar',
+        'salvarnot' => 'Salvar',
+        'deletarnot' => 'Deletar',
     ],
     // Placeholders
     'phs' => [
@@ -96,6 +98,7 @@ return [
     'titles' => [
         'newnews' => 'Nova notícia',
         'newuser' => 'Novo usuário',
+        'editnews' => 'Editar notícia',
     ],
     // Form's labels
     'form' => [
@@ -107,6 +110,10 @@ return [
         'publish' => [
             'true' => 'Publicar imediatamente',
             'false' => 'Salvar como rascunho',
+        ],
+        'epublish' => [
+            'true' => 'Publicado',
+            'false' => 'Rascunho',
         ],
         'save' => 'Salvar',
         'errors' => [
@@ -124,6 +131,10 @@ return [
             'approved' => [
                 'title' => 'Aprovado com sucesso!',
                 'msg' => 'A notícia foi aprovada.',
+            ],
+            'edited' => [
+                'title' => 'Editada com sucesso!',
+                'msg' => 'A notícia foi editada.',
             ],
         ],
     ],

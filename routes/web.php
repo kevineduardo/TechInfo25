@@ -40,14 +40,19 @@ Route::get('/notícia', function() {
 Route::group(['prefix' => 'portal'], function () {
 	Route::get('início', 'PortalController@index')->name('portal_inicio');
 	Route::get('/', function() {
-	return redirect()->route('portal_inicio');
-});
+		return redirect()->route('portal_inicio');
+	});
 	Route::resource('/notas', 'PortalGradesController');
 	Route::resource('/trabalhos', 'PortalHomeworksController');
-	Route::resource('/notícias', 'PortalNewsController');
 	Route::resource('/fotos', 'PortalPicturesController');
 	Route::resource('/usuários', 'PortalUsersController');
 	Route::resource('/configurações', 'PortalSettingsController@inicio');
+	//Route::resource('/notícias', 'PortalNewsController');
+	Route::get('/notícias', 'PortalNewsController@index')->name('notícias.index');
+	Route::post('/notícias', 'PortalNewsController@store')->name('notícias.store');
+	Route::get('/notícias/{id}', 'PortalNewsController@show')->name('notícias.show');
+	Route::put('/notícias/{id}', 'PortalNewsController@update')->name('notícias.update');
+	Route::delete('/notícias/{id}', 'PortalNewsController@destroy')->name('notícias.destroy');
 
 	// Rotas de Buscas
 	Route::post('/notícias/buscar', 'SearchController@newsSearch')->name('notícias.search');

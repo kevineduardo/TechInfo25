@@ -47,7 +47,7 @@
                     </button>
 
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ $settings['site_name'] }}
+                        @lang('messages.portal')
                     </a>
                 </div>
 

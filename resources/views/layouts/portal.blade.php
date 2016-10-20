@@ -47,7 +47,7 @@
                             <i class="glyphicon glyphicon-ok"></i>
                             @lang('messages.menu.homeworks') </a>
                         </li>
-                        <li @if(str_contains(Route::currentRouteName(), 'notícias')) class="active" @endif>
+                        <li @if(str_contains(Route::currentRouteName(), 'notícias') || str_contains(Route::currentRouteName(), 'alunos')) class="active" @endif>
                             <a href="{{ route('notícias.index') }}">
                             <i class="glyphicon glyphicon-list-alt"></i>
                             @lang('messages.menu.news') </a>
