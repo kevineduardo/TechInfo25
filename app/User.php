@@ -36,9 +36,11 @@ class User extends Authenticatable
         $professor = Teacher::where('user_id', $user->id)->first();
         if(!$professor) {
             return false;
+        } else {
+            return $professor;
         }
 
-        return $professor;
+        return false;
     }
 
     // Get user profile's picture
@@ -62,5 +64,9 @@ class User extends Authenticatable
 
     public function calendar() {
         return $this->hasMany('App\Calendar', 'author_id');
+    }
+
+    public function studentNews() {
+        return $this->hasMany('App\StudentNews', 'author_id');
     }
 }

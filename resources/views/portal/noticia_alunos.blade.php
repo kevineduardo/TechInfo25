@@ -1,6 +1,6 @@
 @extends('layouts.portal')
 
-@section('title', trans('messages.layout.news'))
+@section('title', trans('messages.layout.studentnews'))
 
 @section('styles')
 	@parent
@@ -17,6 +17,8 @@
 
 @section('javascripts')
 	@parent
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="{{ URL::asset('js/jquery.js') }}"></script>
 	<script src="{{ URL::asset('tinymce/tinymce.min.js') }}"></script>
 	  <script>
@@ -25,6 +27,7 @@
 	    theme: 'modern',
 	    content_css: '{{ URL::asset('css/bootstrap.min.css') }}',
 	    height: 300,
+		readonly: false,
 	    language: 'pt_BR',
 	    plugins: [
 	    "advlist autolink lists link image charmap print preview anchor",
@@ -36,6 +39,29 @@
 	     });
 	    
 	     </script>
+		<script>
+			function getNotData(id) {
+				$.ajax(
+				{
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+					},
+					type:'GET',
+					url:'/portal/notícias/alunos/' + id,
+					success:function(data){
+					{{-- console.log(data); --}}
+					if ( data ) {
+						$(".notid").attr("value", id)
+						$("#title").attr("value", data['title'])
+						$("#subtitle").attr("value", data['subtitle'])
+						tinyMCE.activeEditor.setContent(data['text']);
+						$("#ap_noticia").modal('show')
+					}
+				   }
+				}
+				);
+			}
+		</script>
 @endsection
 
 @section('content')
@@ -50,18 +76,20 @@
   </ul>
 </div>
 @endif
-@if(isset($success))
+@if($success)
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <strong>@lang('messages.form.success.post.title')</strong> @lang('messages.form.success.post.msg')
+  <strong>@lang('messages.form.success.approved.title')</strong> @lang('messages.form.success.approved.msg')
+</div>
+@endif
+@if($deleted)
+<div class="alert alert-dismissible alert-info">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>@lang('messages.form.success.delete.title')</strong> @lang('messages.form.success.delete.msg')
 </div>
 @endif
 <div id="controles" style="margin-bottom: 5px;">
-@if($professor)
-{!! Form::open(array('route' => 'notícias.search', 'class'=>'form form-inline col-md-5')) !!}
-@else
-{!! Form::open(array('route' => 'notícias.search', 'class'=>'form form-inline col-md-10')) !!}
-@endif
+{!! Form::open(array('route' => 'notícias.alunos.search', 'class'=>'form form-inline col-md-5')) !!}
 	<div class="input-group input-group-md">
     {!! Form::text('title', null,
                            array('required',
@@ -73,62 +101,33 @@
     </div>
     </div>
  {!! Form::close() !!}
- @if($professor)
- <button type="button" onclick="window.location='{{ route('alunos.index')}}';" style="margin-top: 5px;" class="btn btn-primary col-md-3">@lang('messages.buttons.palunos')</button>
- <button type="button" style="margin-top: 5px;" class="btn btn-primary col-md-2 col-md-offset-1" data-toggle="modal" data-target="#novanoticia">@lang('messages.buttons.novanoticia')</button>
- @else
- <button type="button" style="margin-top: 5px;" class="btn btn-primary col-md-2" data-toggle="modal" data-target="#novanoticia">@lang('messages.buttons.novanoticia')</button>
- @endif
+	 
 </div>
 <div id="noticias">
             <table class="table table-hover">
             <thead>
 			  <tr>
-			  	@if($professor)
 			    <th><span class="vermelho">@lang('messages.cm.title')</span></th>
 			    <th><span class="vermelho">@lang('messages.cm.subtitle')</span></th>
 			    <th><span class="vermelho">@lang('messages.cm.author')</span></th>
 			    <th><span class="vermelho">@lang('messages.cm.created_at')</span></th>
-			    @else
-			    <th><span class="vermelho">@lang('messages.cm.title')</span></th>
-			    <th><span class="vermelho">@lang('messages.cm.subtitle')</span></th>
-			    <th><span class="vermelho">@lang('messages.cm.approved')</span></th>
-			    @endif
 			  </tr>
 			</thead>
 			@if(count($noticias) != 0)
 			@foreach ($noticias as $not)
-        	<tr>
-        		@if($professor)
+        	<tr style="cursor: pointer;" onclick="getNotData({!! $not['id']; !!})">
 			    <td>{{ str_limit($not->title, 10) }}</td>
 			    <td>{{ str_limit($not->subtitle, 10) }}</td>
 			    <td>{{ str_limit($not->author->name, 20) }}</td>
 			    <td>{{ $not->created_at->format('d/m/Y') }}</td>
-			    @else
-			    <td>{{ str_limit($not->title, 10) }}</td>
-			    <td>{{ str_limit($not->subtitle, 10) }}</td>
-			    @if($not->published)
-			    <td>@lang('messages.b.yes')</td>
-			    @else
-			    <td>@lang('messages.b.no')</td>
-			    @endif
-			    @endif
-			  </tr>
+			</tr>
     		@endforeach
 			@else
 			<tr class="text-center">
-				@if($professor)
 				@if(str_contains(Route::currentRouteName(), 'search'))
 			    <td colspan="4">@lang('messages.n.nr')</td>
 			    @else
-			    <td colspan="4">@lang('messages.n.ne')</td>
-			    @endif
-			    @else
-			    @if(str_contains(Route::currentRouteName(), 'search'))
-			    <td colspan="4">@lang('messages.n.nr')</td>
-			    @else
-			    <td colspan="4">@lang('messages.n.np')</td>
-			    @endif
+			    <td colspan="4">@lang('messages.n.na')</td>
 			    @endif
 			</tr>
 			@endif
@@ -137,7 +136,7 @@
 			{{ $noticias->links() }}
 			</div>
 </div>
-  <div class="modal fade" id="novanoticia" role="dialog">
+  <div class="modal fade" id="ap_noticia" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -145,9 +144,9 @@
           <h4 class="modal-title">@lang('messages.titles.newnews')</h4>
         </div>
         <div class="modal-body">
-        <form class="form-horizontal" method="post">
-        {{ csrf_field() }}
-        <fieldset>
+        <form method="post" action="{{ route('alunos.store') }}" class="form-horizontal">
+					{{ csrf_field() }}
+        <fieldset class="form-horizontal">
             <div class="form-group">
                 <label for="title">@lang('messages.form.news.title')</label>
                 <input autocomplete="off" class="form-control" id=
@@ -165,20 +164,11 @@
                 <textarea id="text" name="text"></textarea>
             </div>
             <div class="form-group">
-                <div class="radio">
-                    <label><input checked id="published" name="published" type=
-                    "radio" value="true"> @lang('messages.form.publish.true')</label>
-                </div>
-                <div class="radio">
-                    <label><input id="published" name="published" type="radio" value=
-                    "false"> @lang('messages.form.publish.false')</label>
-                </div>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-success" type="submit">@lang('messages.form.save')</button>
+					<input type="hidden" class="notid" name="id" value=""></input>
+					<button class="btn btn-success" type="submit" name="publicar" value="true">@lang('messages.buttons.palunos_salvar')</button>
+					<button class="btn btn-danger" type="submit" name="deletar" value="true">@lang('messages.buttons.palunos_descartar')</button>
             </div>
         </fieldset>
-    	</form>
         </div>
       </div>
     </div>

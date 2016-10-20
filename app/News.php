@@ -4,6 +4,7 @@ namespace App;
 
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class News extends Model
 {

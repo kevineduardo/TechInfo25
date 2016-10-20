@@ -40,6 +40,7 @@ return [
         'noticiasp' => 'Notícias Principais',
         'welcome' => 'Seja bem-vindo (a)!',
         'news' => 'Notícias',
+        'studentnews' => 'Notícias de Alunos',
         'readmore' => 'Leia mais...',
         'noticia' => 'Notícia',
         'recents' => 'Recentes',
@@ -48,6 +49,7 @@ return [
     'n' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
         'ne' => 'Não existe nenhuma notícia.',
+        'na' => 'Não existe nenhuma notícia esperando aprovação.',
         'np' => 'Você não possui nenhuma notícia.',
     ],
     'u' => [
@@ -59,8 +61,11 @@ return [
         'palunos' => 'Postadas por Alunos',
         'novanoticia' => 'Nova notícia',
         'buscar' => 'Buscar',
+		'voltar' => 'Voltar',
         'alunosinvite' => 'Alunos Autorizados',
         'novousuario' => 'Novo usuário',
+        'palunos_salvar' => 'Salvar & Publicar',
+        'palunos_descartar' => 'Descartar',
     ],
     // Placeholders
     'phs' => [
@@ -112,6 +117,14 @@ return [
                 'title' => 'Postado com sucesso!',
                 'msg' => 'Sua notícia foi enviada.',
             ],
+            'delete' => [
+                'title' => 'Descartado com sucesso!',
+                'msg' => 'A notícia foi descartada.',
+            ],
+            'approved' => [
+                'title' => 'Aprovado com sucesso!',
+                'msg' => 'A notícia foi aprovada.',
+            ],
         ],
     ],
     // Menu
@@ -134,5 +147,4 @@ return [
         'svg' => 'SVG 1.1 válido!',
         'html' => 'HTML 4.01 válido!',
     ],
-
 ];

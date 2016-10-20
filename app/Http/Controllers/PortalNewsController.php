@@ -10,6 +10,7 @@ use Carbon\Carbon;
 
 use App\Http\Requests\StoreNews;
 use App\News;
+use App\StudentNews;
 use App\Teacher;
 use Auth;
 
@@ -56,13 +57,17 @@ class PortalNewsController extends Controller
      */
     public function store(StoreNews $request)
     {
-        $noticia = new News();
-        $noticia->fill($request->all());
         $user = Auth::user();
         $professor = Teacher::where('user_id', $user->id)->first();
         if(!$professor) {
-            $noticia->published = false;
+            $noticia = new StudentNews();
+            $noticia->fill($request->all());
+            $noticia->author_id = $user->id;
         } else {
+            $noticia = new News();
+            $noticia->fill($request->all());
+            $noticia->author_id = $user->id;
+            $noticia->published_at = Carbon::now();
             if(str_contains($request->input('published'), 'true')) {
                 $noticia->published = true;
             } else {
@@ -70,8 +75,6 @@ class PortalNewsController extends Controller
                 //$noticia->published_at = null;
             }
         }
-        $noticia->author_id = $user->id;
-        $noticia->published_at = Carbon::now();
         try {
             $noticia->save();
         } catch (\Illuminate\Database\QueryException $e) {
@@ -139,17 +142,6 @@ class PortalNewsController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function search(Request $request) {
-        $request = $request->all();
-        unset($request['_token']);
-        $search = News::filter($request)->paginateFilter();
-        return view('portal.noticias',['noticias' => $search,]);
-    }
-
-    public function alunos() {
-        // aqui é pra mostrar a lista de noticias esperando por aprovação de um professor
     }
 
 
