@@ -6,12 +6,16 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\User;
+use App\Student;
+use App\Teacher;
+use Auth;
 
 class PortalUsersController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('verifyteacher:2');
     }
 
     /**
@@ -21,6 +25,8 @@ class PortalUsersController extends Controller
      */
     public function index()
     {
+        // essa página só pode ser acessada por professores
+        $teacher = Teacher::where('user_id', Auth::user()->id)->first();
         $usuarios = User::paginate(15);
         return view('portal.usuarios', ['usuarios' => $usuarios,]);
     }
@@ -89,9 +95,5 @@ class PortalUsersController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function alunos() {
-
     }
 }

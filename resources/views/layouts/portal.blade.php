@@ -57,12 +57,14 @@
                             <i class="glyphicon glyphicon-camera"></i>
                             @lang('messages.menu.pictures') </a>
                         </li>
-                        @if($professor)
-                        <li class="@if(str_contains(Route::currentRouteName(), 'usuários')) active @endif teacher-only">
-                            <a href="{{ route('usuários.index') }}">
-                            <i class="glyphicon glyphicon-th-list"></i>
-                            @lang('messages.menu.users') </a>
-                        </li>
+                        @if(Auth::user()->teacher())
+                        @if(Auth::user()->teacher->type > 1)
+                            <li class="@if(str_contains(Route::currentRouteName(), 'usuários')) active @endif teacher-only">
+                                <a href="{{ route('usuários.index') }}">
+                                <i class="glyphicon glyphicon-th-list"></i>
+                                @lang('messages.menu.users') </a>
+                            </li>
+                        @endif
                         <li class="@if(str_contains(Route::currentRouteName(), 'configurações')) active @endif teacher-only">
                             <a href="{{ route('configurações.index') }}">
                             <i class="glyphicon glyphicon-cog"></i>

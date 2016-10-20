@@ -48,7 +48,7 @@
     </div>
     </div>
  {!! Form::close() !!}
- <button type="button" onclick="window.location='{{ route('usuários.alunos')}}';" style="margin-top: 5px;" class="btn btn-primary col-md-3">@lang('messages.buttons.alunosinvite')</button>
+ <button type="button" onclick="window.location='{{-- route('usuários.alunos') --}}';" style="margin-top: 5px;" class="btn btn-primary col-md-3">@lang('messages.buttons.alunosinvite')</button>
  <button type="button" style="margin-top: 5px;" class="btn btn-primary col-md-2 col-md-offset-1" data-toggle="modal" data-target="#novousuario">@lang('messages.buttons.novousuario')</button>
 </div>
 <div id="usuarios">
