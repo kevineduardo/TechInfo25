@@ -12,6 +12,6 @@ class StudentNews extends Model
     protected $dates = ['created_at', 'updated_at'];
 
     public function author() {
-    	return $this->hasOne('App\User', 'id');
+    	return $this->belongsTo('App\User', 'author_id');
     }
 }
