@@ -64,7 +64,7 @@ Route::group(['prefix' => 'portal'], function () {
 	// Rotas Especiais - teachers only
 	//Route::resource('/notícias-alunos', 'PortalStudentNewsController');
 	Route::get('/notícias-alunos', 'PortalStudentNewsController@index')->name('notícias-alunos.index');
-	Route::post('/notícias-alunos', 'PortalStudentNewsController@store')->name('notícias-alunos.store');
+	//Route::post('/notícias-alunos', 'PortalStudentNewsController@store')->name('notícias-alunos.store');
 	Route::get('/notícias-alunos/{id}', 'PortalStudentNewsController@show')->name('notícias-alunos.show');
 	Route::put('/notícias-alunos', 'PortalStudentNewsController@update')->name('notícias-alunos.update');
 	Route::delete('/notícias-alunos/{id}', 'PortalStudentNewsController@destroy')->name('notícias.destroy');

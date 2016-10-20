@@ -148,8 +148,9 @@
           <h4 class="modal-title">@lang('messages.titles.newnews')</h4>
         </div>
         <div class="modal-body">
-        <form method="post" action="{{ route('notícias-alunos.store') }}" class="form-horizontal">
-					{{ csrf_field() }}
+        <form method="post" action="{{ route('notícias-alunos.update') }}" class="form-horizontal">
+        {{ method_field('PUT') }}
+		{{ csrf_field() }}
         <fieldset class="form-horizontal">
             <div class="form-group">
                 <label for="title">@lang('messages.form.news.title')</label>

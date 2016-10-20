@@ -48,34 +48,7 @@ class PortalStudentNewsController extends Controller
      */
     public function store(Request $request)
     {
-        $alunonoticia = StudentNews::find($request->input('id'));
-        if($alunonoticia) {
-            if($request->input('publicar')) {
-                $alunonoticia->fill($request->all());
-                $noticia = new News();
-                $noticia->fill($alunonoticia->toArray());
-                $noticia->published = true;
-                $noticia->published_at = Carbon::now();
-                try {
-                    $noticia->save();
-                    $alunonoticia->delete();
-                } catch (\Illuminate\Database\QueryException $e) {
-                    if(env('APP_DEBUG', false)) {
-                        return response()->json([
-                        'message' => 'For some reason the data wasn\'t stored with success.',
-                        'debug_info' => $e,
-                        ], 422);
-                    } else {
-                        abort(422);
-                    }
-                }
-                return $this->index(true);
-            } else {
-                $alunonoticia->delete();
-                return $this->index(false, true);
-            }
-        }
-        return $this->index();
+        
     }
 
     /**
@@ -117,9 +90,36 @@ class PortalStudentNewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-
+        $alunonoticia = StudentNews::find($request->input('id'));
+        if($alunonoticia) {
+            if($request->input('publicar')) {
+                $alunonoticia->fill($request->all());
+                $noticia = new News();
+                $noticia->fill($alunonoticia->toArray());
+                $noticia->published = true;
+                $noticia->published_at = Carbon::now();
+                try {
+                    $noticia->save();
+                    $alunonoticia->delete();
+                } catch (\Illuminate\Database\QueryException $e) {
+                    if(env('APP_DEBUG', false)) {
+                        return response()->json([
+                        'message' => 'For some reason the data wasn\'t stored with success.',
+                        'debug_info' => $e,
+                        ], 422);
+                    } else {
+                        abort(422);
+                    }
+                }
+                return $this->index(true);
+            } else {
+                $alunonoticia->delete();
+                return $this->index(false, true);
+            }
+        }
+        return $this->index();
     }
 
     /**
