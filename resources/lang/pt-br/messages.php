@@ -68,6 +68,8 @@ return [
         'palunos_descartar' => 'Descartar',
         'salvarnot' => 'Salvar',
         'deletarnot' => 'Deletar',
+        'salvaruser' => 'Salvar',
+        'deletaruser' => 'Deletar',
     ],
     // Placeholders
     'phs' => [

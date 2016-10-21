@@ -16,6 +16,36 @@
 	</style>
 @endsection
 
+@section('javascripts')
+<script>
+      function getUserData(id) {
+        $.ajax(
+        {
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+          },
+          type:'GET',
+          url:'/portal/usuários/' + id,
+          success:function(data){
+          if ( data ) {
+            console.log(data);
+            $(".userid").attr("value", id);
+            $("#usernome").attr("value", data['name']);
+            $("#useremail").attr("value", data['email']);
+            $("#useroauth").attr("value", data['oauth_provider']);
+            if(data['teacher'] == true) {
+              $("#teacher").prop("checked", true);
+            } else {
+              $("#notteacher").prop("checked", true);
+            }
+            $("#editarusuario").modal('show');
+          }
+           }
+        }
+        );
+      }
+    </script>
+@endsection
 
 @section('content')
 @if (count($errors) > 0)
@@ -48,8 +78,7 @@
     </div>
     </div>
  {!! Form::close() !!}
- <button type="button" onclick="window.location='{{-- route('usuários.alunos') --}}';" style="margin-top: 5px;" class="btn btn-primary col-md-3">@lang('messages.buttons.alunosinvite')</button>
- <button type="button" style="margin-top: 5px;" class="btn btn-primary col-md-2 col-md-offset-1" data-toggle="modal" data-target="#novousuario">@lang('messages.buttons.novousuario')</button>
+ <button type="button" onclick="window.location='{{-- route('usuários-alunos.index') --}}';" style="margin-top: 5px;" class="btn btn-primary col-md-3">@lang('messages.buttons.alunosinvite')</button>
 </div>
 <div id="usuarios">
             <table class="table table-hover">
@@ -60,10 +89,10 @@
 			  </tr>
 			</thead>
 			@if(count($usuarios) != 0)
-			@foreach ($usuarios as $not)
-        	<tr>
-			    <td>{{ str_limit($not->name, 40) }}</td>
-			    <td>{{ str_limit($not->email, 40) }}</td>
+			@foreach ($usuarios as $user)
+        	<tr style="cursor: pointer;" onclick="getUserData({{ $user['id'] }})">
+			    <td>{{ str_limit($user->name, 40) }}</td>
+			    <td>{{ str_limit($user->email, 40) }}</td>
 			  </tr>
     		@endforeach
 			@else
@@ -80,15 +109,25 @@
 			{{ $usuarios->links() }}
 			</div>
 </div>
-  <div class="modal fade" id="novousuario" role="dialog">
-    <div class="modal-dialog modal-lg">
+  {{-- form de editar user --}}
+  <div class="modal fade" id="editarusuario" role="dialog">
+    <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">@lang('messages.titles.newuser')</h4>
         </div>
         <div class="modal-body">
-        Fazer aqui o form
+        {!! Form::open(array('route' => 'usuários.update', 'class'=>'form form-horizontal')) !!}
+            {!! Form::text('name', null,
+                                   array('required',
+                                        'class'=>'form-control',
+                                        'placeholder'=>trans('messages.layout.firstname'))) !!}
+             {!! Form::submit(trans('messages.buttons.salvaruser'),
+                                        array('class'=>'btn btn-success')) !!}
+          {!! Form::submit(trans('messages.buttons.deletaruser'),
+                                        array('class'=>'btn btn-danger')) !!}
+         {!! Form::close() !!}
         </div>
       </div>
     </div>

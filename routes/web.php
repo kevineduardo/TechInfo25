@@ -45,7 +45,10 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::resource('/notas', 'PortalGradesController');
 	Route::resource('/trabalhos', 'PortalHomeworksController');
 	Route::resource('/fotos', 'PortalPicturesController');
-	Route::resource('/usuários', 'PortalUsersController');
+	//Route::resource('/usuários', 'PortalUsersController');
+	Route::get('/usuários/{id}', 'PortalUsersController@show')->name('usuários.show');
+	Route::get('/usuários', 'PortalUsersController@index')->name('usuários.index');
+	Route::put('/usuários', 'PortalUsersController@update')->name('usuários.update');
 	Route::resource('/configurações', 'PortalSettingsController@inicio');
 	//Route::resource('/notícias', 'PortalNewsController');
 	Route::get('/notícias', 'PortalNewsController@index')->name('notícias.index');
