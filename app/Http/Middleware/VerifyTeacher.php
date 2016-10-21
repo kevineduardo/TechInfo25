@@ -17,14 +17,14 @@ class VerifyTeacher
      */
     public function handle($request, Closure $next, $type = 1)
     {
+        $type = (int) $type;
         $user = Auth::user();
-        if(!$user->teacher()) {
-            redirect()->route('portal_inicio');
+        if(!$user->has('teacher')) {
+            return redirect()->route('portal_inicio');
         }
-        if($user->teacher()->type != $type) {
-            redirect()->route('portal_inicio');
+        if($user->teacher->type < $type) {
+            return redirect()->route('portal_inicio');
         }
-        
         return $next($request);
     }
 }

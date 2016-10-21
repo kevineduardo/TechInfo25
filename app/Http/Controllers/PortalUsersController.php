@@ -58,9 +58,20 @@ class PortalUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        if($request->ajax()) {
+            $user = User::with('teacher')->find($id);
+            if($user) {
+                unset($user['oauth_id']);
+                return response()->json($user->toArray());
+            }
+                
+            return response()->json([
+                'msg' => 'error.',
+                ]);
+        }
+        return redirect()->route('usuários.index');
     }
 
     /**
