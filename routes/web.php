@@ -35,7 +35,7 @@ Route::get('/notícia', function() {
 });
 
 Route::get('/docentes', 'TeachersController@index')->name('docentes');
-Route::get('/docentes/{id}', 'TeachersController@bio');
+Route::get('/docentes/{id}', 'TeachersController@show');
 
 //Route::get('/portal', 'HomeController@index');
 

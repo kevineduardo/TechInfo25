@@ -15,14 +15,14 @@ class TeachersController extends Controller
 	/*
 	 * @returns View
 	 */
-    protected function index()
+    public function index()
     {
     	return view('docentes',[ 
     	   'professores' => Teacher::where('type', 1)->with('user')->get(),
            'coordenadores' => Teacher::where('type', 2)->with('user')->get(),
     	]);
     }
-    protected function bio( $id ) {
+    public function show( $id ) {
     	$teacher = Teacher::with('user')->where('user_id',$id)->first();
     	if ( !$teacher ) { return [ 'ok' => 0 ]; }
     	return [
