@@ -10,7 +10,7 @@ use App\Teacher;
 use App\User;
 use App\Http\Requests;
 
-class TecahersController extends Controller
+class TeachersController extends Controller
 {
     /**
      * Display a listing of the resource.
