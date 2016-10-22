@@ -118,7 +118,15 @@ class PortalUsersController extends Controller
                         $professor->delete();
                     }
                 } catch (\Illuminate\Database\QueryException $e) {
-                    return $e;
+                    Log::error('Erro ao editar usuário no banco de dados.');
+                    if(env('APP_DEBUG', false)) {
+                        return response()->json([
+                        'message' => 'For some reason the data wasn\'t stored with success.',
+                        'debug_info' => $e,
+                        ], 422);
+                    } else {
+                        abort(422);
+                    }
                 }
                 return $this->index(true);
             }

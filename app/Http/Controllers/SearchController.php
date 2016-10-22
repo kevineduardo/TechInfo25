@@ -23,7 +23,4 @@ class SearchController extends Controller
 			return view('portal.noticias',['noticias' => $search,]);
 		}
     }
-    public function alunosUserSearch(Request $request) {
-    	
-    }
 }
