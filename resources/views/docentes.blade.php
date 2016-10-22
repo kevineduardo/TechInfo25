@@ -55,9 +55,11 @@
               <div style="width: calc(100% - 220px); height: 200px; overflow: hidden; display: inline-block; float:right;">
                 <div height="50px" style="padding-top: 5px;"><span style="font-size: 20px;" class="vermelho">{{ $coord->user->name }}</span> </div>
                 <div style="height: 125px; display: table; width: 100%">
+                  {{--
                   <p class="nttexto" style="color:#333; display: table-cell; vertical-align: middle;">
                     {{ ( strlen( $coord->bio ) > ( 150 ) ) ? ( substr( $coord->bio, 0, 150 ) . '...' ) : ( $coord->bio ) }}
                   </p>
+                  --}}
                 </div>
                 <div height="50px">
                   <span style="float:right; color: #333;">
@@ -80,9 +82,6 @@
               <div style="width: calc(100% - 220px); height: 200px; overflow: hidden; display: inline-block; float:right;">
                 <div height="50px" style="padding-top: 5px;"><span style="font-size: 20px;" class="vermelho">{{ $teacher->user->name }}</span> </div>
                 <div style="height: 125px; display: table; width: 100%">
-                  <p class="nttexto" style="color:#333; display: table-cell; vertical-align: middle;">
-                    {{ ( strlen( $teacher->bio ) > ( 150 ) ) ? ( substr( $teacher->bio, 0, 150 ) . '...' ) : ( $teacher->bio ) }}
-                  </p>
                 </div>
                 <div height="50px">
                   <span style="float:right; color: #333;">

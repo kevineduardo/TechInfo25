@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Lang;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
 
 use App\Teacher;
@@ -55,18 +56,24 @@ class TeachersController extends Controller
     public function show($id)
     {
         $teacher = Teacher::with('user')->where('user_id',$id)->first();
-        if ( !$teacher ) { return [ 'ok' => 0 ]; }
-        return Response::json([
-            'ok' => 1,
-            'docente' => [
-                'name'         => $teacher->user->name,
-                'bio'          => nl2br($teacher->bio),
-                'academic_bg'  => nl2br($teacher->academic_bg),
-                'tipo'         => ( $teacher->type == 1 ) ? 'professor(a)' : 'coordenador(a)',
-                'tipo_id'      => $teacher->type,
-                'img'          => 'http://placehold.it/200x200',
-            ]
-        ]);
+        $data = [ 'ok' => 0 ];
+        if ( !$teacher ) { return Response::json( $data ); }
+
+        $data['ok'] = 1;
+        $docente = [
+
+            'name' => $teacher->user->name,
+            'bio' => $teacher->bio,
+            'academic_bg' => $teacher->academic_bg,
+            'tipo' => ( $teacher->type == 1 ) ? 'professor(a)' : 'coordenador(a)',
+            'tipo' => $teacher->type,
+            'img' => 'http://placehold.it/200x200',
+
+        ];
+
+        $data = array_add( $data, 'docente', $docente );
+
+        return response()->json( $data );
     }
 
     /**
