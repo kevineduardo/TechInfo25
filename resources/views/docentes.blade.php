@@ -2,6 +2,12 @@
 
 @section('title', $settings['site_name'] . ' - ' . trans("messages.layout.docente"))
 
+@section('javascript')
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <script src="{{ URL::asset('js/jquery.js') }}"></script>
+  <script src="{{ URL::asset('tinymce/tinymce.min.js') }}"></script>
+@endsection
+
 @section('content')
 <div id="principal" class="table-responsive col-md-8">
     <table class="table">
@@ -12,18 +18,42 @@
       </thead>
       <tbody class="normal">
       <tr><th>
-      <div class="nttexto" style="width:100%;">
-      <ul class="list-group">
-      @foreach( $docentes as $teacher )
-        <li class="list-group-item" style="
-        margin-top:20px;">
-        <span>{{$teacher['user']->name}}</span>
-        </li>
-      @endforeach
-      </ul>
-      <div style="text-align: center;" width="100%">
-        {{ $docentes->links() }}
-      </div>
+      <div style="width:100%;">
+      @if(isset($docente))
+        <div style="width: 200px; height: 200px; background: url('http://placehold.it/200x200'); background-repeat: no-repeat; display: inline-block;"></div>
+        <div style="display: inline-block; width: calc( 100% - 200px )">
+        {{-- json_encode( $docente ) --}}
+        <div height="50px" style="padding-top: 5px;"><span style="font-size: 20px;" class="vermelho">{{ $docente->user->name }}</span> </div>
+        </div>
+      @else
+        <ul class="list-group">
+        @foreach( $docentes as $teacher )
+          <li class="list-group-item" style="margin-top: 20px; height:auto; overflow:hidden;
+          -webkit-box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);
+          -moz-box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);
+          box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);">
+              <div style="background: url('http://placehold.it/200x200'); background-position: center; background-repeat: no-repeat; height: 200px; width: 200px; float:left;">
+              </div>
+              <div style="width: calc(100% - 220px); height: 200px; overflow: hidden; display: inline-block; float:right;">
+                <div height="50px" style="padding-top: 5px;"><span style="font-size: 20px;" class="vermelho">{{ $teacher->user->name }}</span> </div>
+                <div style="height: 125px; display: table; width: 100%">
+                  <p class="nttexto" style="color:#333; display: table-cell; vertical-align: middle;">
+                    {{ ( strlen( $teacher->bio ) > ( 150 ) ) ? ( substr( $teacher->bio, 0, 150 ) . '...' ) : ( $teacher->bio ) }}
+                  </p>
+                </div>
+                <div height="50px">
+                  <span style="float:right; color: #333;">
+                    <button class="btn btn-default" onclick="window.location='/docentes/{{$teacher->user->id}}';">Ver mais</button>
+                  </span>
+                </div>
+              </div>
+          </li>
+        @endforeach
+        </ul>
+        <div style="text-align: center;" width="100%">
+          {{ $docentes->links() }}
+        </div>
+      @endif
       </div>
       </th></tr>
       </tbody>

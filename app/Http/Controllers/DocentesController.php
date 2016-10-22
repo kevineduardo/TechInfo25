@@ -15,10 +15,17 @@ class DocentesController extends Controller
 	/*
 	 * @returns View
 	 */
-    protected function index() 
+    protected function index()
     {
     	return view('docentes',[ 
-    		'docentes' => Teacher::with('user')->paginate(2)
+    		'docentes' => Teacher::with('user')->paginate(10)
+    	]);
+    }
+    protected function bio( $id ) {
+    	$teacher = Teacher::with('user')->where('user_id',$id)->first();
+    	if ( !$teacher ) { return redirect()->route('docentes'); }
+    	return view('docentes',[
+    		'docente' => $teacher
     	]);
     }
 }
