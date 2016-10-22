@@ -19,9 +19,10 @@ class VerifyTeacher
     {
         $type = (int) $type;
         $user = Auth::user();
-        if(!$user->has('teacher')) {
+        if(!$user->teacher) {
             return redirect()->route('portal_inicio');
         }
+
         if($user->teacher->type < $type) {
             return redirect()->route('portal_inicio');
         }
