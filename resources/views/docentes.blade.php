@@ -1,6 +1,6 @@
 @extends('layouts.site')
 
-@section('title', $settings['site_name'] . ' - ' . trans("messages.layout.docente"))
+@section('title', $settings['site_name'] . ' - ' . trans("messages.layout.teachers"))
 
 @section('javascript')
   <script src="{{ URL::asset('js/jquery.js') }}"></script>
@@ -18,6 +18,7 @@
             console.log(data);
           if ( data.ok ) {
             var p = data.docente;
+            $("#Dimg").attr('src',p.img); // PlaceHolder
             $("#Dtipo").html(p.tipo);
             $("#Dbio").html(p.bio);
             $("#Dnome").html(p.name);
@@ -35,14 +36,41 @@
     <table class="table">
       <thead>
       <tr>
-      <th><span class="vermelho">@lang('messages.layout.docente')</span></th>
+      <th><span class="vermelho">@lang('messages.layout.teachers')</span></th>
       </tr>
       </thead>
       <tbody class="normal">
       <tr><th>
       <div style="width:100%;">
         <ul class="list-group">
-        @foreach( $docentes as $teacher )
+        <h2>@lang('messages.layout.coordinator')</h2>
+        <hr>
+        @foreach( $coordenadores as $coord )
+          <li class="list-group-item" style="margin-top: 20px; height:auto; overflow:hidden;
+          -webkit-box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);
+          -moz-box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);
+          box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);">
+              <div style="background: url('http://placehold.it/200x200'); background-position: center; background-repeat: no-repeat; height: 200px; width: 200px; float:left;">
+              </div>
+              <div style="width: calc(100% - 220px); height: 200px; overflow: hidden; display: inline-block; float:right;">
+                <div height="50px" style="padding-top: 5px;"><span style="font-size: 20px;" class="vermelho">{{ $coord->user->name }}</span> </div>
+                <div style="height: 125px; display: table; width: 100%">
+                  <p class="nttexto" style="color:#333; display: table-cell; vertical-align: middle;">
+                    {{ ( strlen( $coord->bio ) > ( 150 ) ) ? ( substr( $coord->bio, 0, 150 ) . '...' ) : ( $coord->bio ) }}
+                  </p>
+                </div>
+                <div height="50px">
+                  <span style="float:right; color: #333;">
+                    <button class="btn btn-default" onclick="getInfo({{ $coord->user_id }});">Ver mais</button>
+                  </span>
+                </div>
+              </div>
+          </li>
+        @endforeach
+        <br/>
+        <h2>@lang('messages.layout.teacher')</h2>
+        <hr>
+        @foreach( $professores as $teacher )
           <li class="list-group-item" style="margin-top: 20px; height:auto; overflow:hidden;
           -webkit-box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);
           -moz-box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);
@@ -65,9 +93,6 @@
           </li>
         @endforeach
         </ul>
-        <div style="text-align: center;" width="100%">
-          {{ $docentes->links() }}
-        </div>
       </div>
       </th></tr>
       </tbody>
@@ -94,18 +119,22 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">@lang('messages.titles.docentes')<span id="Dtipo">professor(a)</span></h4>
+          <h4 class="modal-title">@lang('messages.titles.teachers')</h4>
         </div>
         <div class="modal-body" style="overflow: hidden;">
           <div class="col-md" style="display: inline-block; float: left;">
             <img id="Dimg" src="http://placehold.it/200x200" width="200px" height="200px"/>
           </div>
-          <div class="col-md" style="display: inline-block; float: right; width: calc( 100% - 210px ); padding-right: 5px;">
-            <h4 class="vermelho">Nome: 
-              <span style="color:#333" id="Dnome"></span>
-            </h4>
-            <h5 class="vermelho">Formação: <span style="color:#333" id="Dformacao"></span></h5>
-            <p id="Dbio" class="nttexto"></p>
+          <div class="col-md" style="display: inline-block; float: right; width: calc( 100% - 220px ); padding-right: 10px;">
+            <h3 style="margin-bottom:10px; margin-top: 10px;"><span style="color:#333" id="Dnome"></span></h3>
+
+            <h4 class="vermelho">Biografia</h4>
+            <hr style="margin-top: -10px; margin-bottom: 10px;">
+            <p id="Dbio" class="nttexto" style="margin-bottom: 10px;"></p>
+
+            <h4 class="vermelho">Formação</h4>
+            <hr style="margin-top: -10px; margin-bottom: 10px;">
+            <p style="color:#333" id="Dformacao" style="margin-bottom: 10px;"></p>
           </div>
         </div>
       </div>

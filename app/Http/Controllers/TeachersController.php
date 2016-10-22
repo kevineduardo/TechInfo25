@@ -10,7 +10,7 @@ use App\Teacher;
 use App\User;
 use App\Http\Requests;
 
-class DocentesController extends Controller
+class TeachersController extends Controller
 {
 	/*
 	 * @returns View
@@ -18,7 +18,8 @@ class DocentesController extends Controller
     protected function index()
     {
     	return view('docentes',[ 
-    		'docentes' => Teacher::with('user')->paginate(10)
+    	   'professores' => Teacher::where('type', 1)->with('user')->get(),
+           'coordenadores' => Teacher::where('type', 2)->with('user')->get(),
     	]);
     }
     protected function bio( $id ) {
@@ -28,10 +29,11 @@ class DocentesController extends Controller
             'ok' => 1,
     		'docente' => [
                 'name'         => $teacher->user->name,
-                'bio'          => $teacher->bio,
-                'academic_bg'  => $teacher->academic_bg,
+                'bio'          => nl2br($teacher->bio),
+                'academic_bg'  => nl2br($teacher->academic_bg),
                 'tipo'         => ( $teacher->type == 1 ) ? 'professor(a)' : 'coordenador(a)',
                 'tipo_id'      => $teacher->type,
+                'img'          => 'http://placehold.it/200x200',
             ]
     	];
     }

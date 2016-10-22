@@ -34,8 +34,8 @@ Route::get('/notícia', function() {
 	return redirect()->route('inicio');
 });
 
-Route::get('/docentes', 'DocentesController@index')->name('docentes');
-Route::get('/docentes/{id}', 'DocentesController@bio');
+Route::get('/docentes', 'TeachersController@index')->name('docentes');
+Route::get('/docentes/{id}', 'TeachersController@bio');
 
 //Route::get('/portal', 'HomeController@index');
 

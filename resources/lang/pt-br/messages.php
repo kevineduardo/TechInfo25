@@ -45,7 +45,9 @@ return [
         'noticia' => 'Notícia',
         'recents' => 'Recentes',
         'users' => 'Usuários',
-		'docente' => 'Docentes',
+		'teachers' => 'Docentes',
+        'teacher' => 'Professores',
+        'coordinator' => 'Coordenadores'
     ],
     'n' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
@@ -103,7 +105,7 @@ return [
         'newuser' => 'Novo usuário',
         'editnews' => 'Editar notícia',
         'edituser' => 'Editar usuário',
-        'docentes' => 'Informação do(a) ',
+        'teachers' => 'Perfil do Educador',
     ],
     // Form's labels
     'form' => [
