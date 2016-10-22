@@ -103,6 +103,7 @@ return [
         'newuser' => 'Novo usuário',
         'editnews' => 'Editar notícia',
         'edituser' => 'Editar usuário',
+        'docentes' => 'Informação do(a) ',
     ],
     // Form's labels
     'form' => [

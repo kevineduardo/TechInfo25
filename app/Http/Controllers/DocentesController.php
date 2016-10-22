@@ -23,9 +23,16 @@ class DocentesController extends Controller
     }
     protected function bio( $id ) {
     	$teacher = Teacher::with('user')->where('user_id',$id)->first();
-    	if ( !$teacher ) { return redirect()->route('docentes'); }
-    	return view('docentes',[
-    		'docente' => $teacher
-    	]);
+    	if ( !$teacher ) { return [ 'ok' => 0 ]; }
+    	return [
+            'ok' => 1,
+    		'docente' => [
+                'name'         => $teacher->user->name,
+                'bio'          => $teacher->bio,
+                'academic_bg'  => $teacher->academic_bg,
+                'tipo'         => ( $teacher->type == 1 ) ? 'professor(a)' : 'coordenador(a)',
+                'tipo_id'      => $teacher->type,
+            ]
+    	];
     }
 }

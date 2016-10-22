@@ -3,9 +3,31 @@
 @section('title', $settings['site_name'] . ' - ' . trans("messages.layout.docente"))
 
 @section('javascript')
-  <meta name="csrf-token" content="{{ csrf_token() }}">
   <script src="{{ URL::asset('js/jquery.js') }}"></script>
+  <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
   <script src="{{ URL::asset('tinymce/tinymce.min.js') }}"></script>
+  <script>
+    function echo(s){console.log(s);}
+    function getInfo(id) {
+      echo('docentes/' + id);
+      $.ajax({
+        method:'GET',
+        url: '/docentes/' + id,
+        dataType: 'json',
+        success: function(data) {
+            console.log(data);
+          if ( data.ok ) {
+            var p = data.docente;
+            $("#Dtipo").html(p.tipo);
+            $("#Dbio").html(p.bio);
+            $("#Dnome").html(p.name);
+            $("#Dformacao").html(p.academic_bg);
+            $("#showinfo").modal('show');
+          }
+        }
+      });
+    }
+  </script>
 @endsection
 
 @section('content')
@@ -19,13 +41,6 @@
       <tbody class="normal">
       <tr><th>
       <div style="width:100%;">
-      @if(isset($docente))
-        <div style="width: 200px; height: 200px; background: url('http://placehold.it/200x200'); background-repeat: no-repeat; display: inline-block;"></div>
-        <div style="display: inline-block; width: calc( 100% - 200px )">
-        {{-- json_encode( $docente ) --}}
-        <div height="50px" style="padding-top: 5px;"><span style="font-size: 20px;" class="vermelho">{{ $docente->user->name }}</span> </div>
-        </div>
-      @else
         <ul class="list-group">
         @foreach( $docentes as $teacher )
           <li class="list-group-item" style="margin-top: 20px; height:auto; overflow:hidden;
@@ -43,7 +58,7 @@
                 </div>
                 <div height="50px">
                   <span style="float:right; color: #333;">
-                    <button class="btn btn-default" onclick="window.location='/docentes/{{$teacher->user->id}}';">Ver mais</button>
+                    <button class="btn btn-default" onclick="getInfo({{ $teacher->user_id }});">Ver mais</button>
                   </span>
                 </div>
               </div>
@@ -53,7 +68,6 @@
         <div style="text-align: center;" width="100%">
           {{ $docentes->links() }}
         </div>
-      @endif
       </div>
       </th></tr>
       </tbody>
@@ -73,5 +87,28 @@
       </th></tr>
     </tbody>
       </table>
+  </div>
+
+  <div class="modal fade" id="showinfo" role="dialog">
+    <div class="modal-dialog modal-sm" style="width: 50%">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">@lang('messages.titles.docentes')<span id="Dtipo">professor(a)</span></h4>
+        </div>
+        <div class="modal-body" style="overflow: hidden;">
+          <div class="col-md" style="display: inline-block; float: left;">
+            <img id="Dimg" src="http://placehold.it/200x200" width="200px" height="200px"/>
+          </div>
+          <div class="col-md" style="display: inline-block; float: right; width: calc( 100% - 210px ); padding-right: 5px;">
+            <h4 class="vermelho">Nome: 
+              <span style="color:#333" id="Dnome"></span>
+            </h4>
+            <h5 class="vermelho">Formação: <span style="color:#333" id="Dformacao"></span></h5>
+            <p id="Dbio" class="nttexto"></p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 @endsection
