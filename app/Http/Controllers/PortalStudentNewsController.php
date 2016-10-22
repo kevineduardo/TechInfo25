@@ -48,6 +48,50 @@ class PortalStudentNewsController extends Controller
      */
     public function store(Request $request)
     {
+        
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request, $id)
+    {
+        if($request->ajax()) {
+            $noticia = StudentNews::find($id);
+            if($noticia) {
+                return response()->json($noticia->toArray());
+            }
+                
+            return response()->json([
+                'msg' => 'error.',
+                ]);
+        }
+        return redirect()->route('notícias-alunos.index');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
         $alunonoticia = StudentNews::find($request->input('id'));
         if($alunonoticia) {
             if($request->input('publicar')) {
@@ -76,50 +120,6 @@ class PortalStudentNewsController extends Controller
             }
         }
         return $this->index();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request, $id)
-    {
-        if($request->ajax()) {
-            $noticia = StudentNews::find($id);
-            if($noticia) {
-                return response()->json($noticia->toArray());
-            }
-                
-            return response()->json([
-                'msg' => 'error.',
-                ]);
-        }
-        return redirect()->route('alunos.index');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-
     }
 
     /**

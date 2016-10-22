@@ -17,8 +17,6 @@
 
 @section('javascripts')
 	@parent
-	<meta name="csrf-token" content="{{ csrf_token() }}">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="{{ URL::asset('js/jquery.js') }}"></script>
 	<script src="{{ URL::asset('tinymce/tinymce.min.js') }}"></script>
 	  <script>
@@ -44,24 +42,34 @@
 				$.ajax(
 				{
 					headers: {
-						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+						'X-CSRF-TOKEN': Laravel.csrfToken,
 					},
 					type:'GET',
-					url:'/portal/notícias/alunos/' + id,
+					url:'/portal/notícias-alunos/' + id,
 					success:function(data){
 					{{-- console.log(data); --}}
 					if ( data ) {
-						$(".notid").attr("value", id)
-						$("#title").attr("value", data['title'])
-						$("#subtitle").attr("value", data['subtitle'])
+						$(".notid").attr("value", id);
+						$("#title").attr("value", data['title']);
+						$("#subtitle").attr("value", data['subtitle']);
 						tinyMCE.activeEditor.setContent(data['text']);
-						$("#ap_noticia").modal('show')
+						$("#ap_noticia").modal('show');
 					}
 				   }
 				}
 				);
 			}
 		</script>
+		<script>
+      $(document).ready (function(){
+            $(".alert-success").fadeTo(2200, 500).slideUp(500, function(){
+            $(".alert-success").slideUp(500);
+            });
+            $(".alert-danger").fadeTo(10000, 500).slideUp(500, function(){
+            $(".alert-danger").slideUp(500);
+            });
+      });
+    </script>
 @endsection
 
 @section('content')
@@ -119,7 +127,7 @@
 			</thead>
 			@if(count($noticias) != 0)
 			@foreach ($noticias as $not)
-        	<tr style="cursor: pointer;" onclick="getNotData({!! $not['id']; !!})">
+        	<tr style="cursor: pointer;" onclick="getNotData({{ $not['id'] }})">
 			    <td>{{ str_limit($not->title, 10) }}</td>
 			    <td>{{ str_limit($not->subtitle, 10) }}</td>
 			    <td>{{ str_limit($not->author->name, 20) }}</td>
@@ -148,8 +156,9 @@
           <h4 class="modal-title">@lang('messages.titles.newnews')</h4>
         </div>
         <div class="modal-body">
-        <form method="post" action="{{ route('alunos.store') }}" class="form-horizontal">
-					{{ csrf_field() }}
+        <form method="post" action="{{ route('notícias-alunos.update') }}" class="form-horizontal">
+        {{ method_field('PUT') }}
+		{{ csrf_field() }}
         <fieldset class="form-horizontal">
             <div class="form-group">
                 <label for="title">@lang('messages.form.news.title')</label>
@@ -173,6 +182,7 @@
 					<button class="btn btn-danger" type="submit" name="deletar" value="true">@lang('messages.buttons.palunos_descartar')</button>
             </div>
         </fieldset>
+        </form>
         </div>
       </div>
     </div>

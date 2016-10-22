@@ -42,14 +42,22 @@ Route::get('/docentes', 'DocentesController@index');
 Route::group(['prefix' => 'portal'], function () {
 	Route::get('início', 'PortalController@index')->name('portal_inicio');
 	Route::get('/', function() {
-	return redirect()->route('portal_inicio');
-});
+		return redirect()->route('portal_inicio');
+	});
 	Route::resource('/notas', 'PortalGradesController');
 	Route::resource('/trabalhos', 'PortalHomeworksController');
-	Route::resource('/notícias', 'PortalNewsController');
 	Route::resource('/fotos', 'PortalPicturesController');
-	Route::resource('/usuários', 'PortalUsersController');
+	//Route::resource('/usuários', 'PortalUsersController');
+	Route::get('/usuários/{id}', 'PortalUsersController@show')->name('usuários.show');
+	Route::get('/usuários', 'PortalUsersController@index')->name('usuários.index');
+	Route::put('/usuários', 'PortalUsersController@update')->name('usuários.update');
 	Route::resource('/configurações', 'PortalSettingsController@inicio');
+	//Route::resource('/notícias', 'PortalNewsController');
+	Route::get('/notícias', 'PortalNewsController@index')->name('notícias.index');
+	Route::post('/notícias', 'PortalNewsController@store')->name('notícias.store');
+	Route::get('/notícias/{id}', 'PortalNewsController@show')->name('notícias.show');
+	Route::put('/notícias', 'PortalNewsController@update')->name('notícias.update');
+	Route::delete('/notícias/{id}', 'PortalNewsController@destroy')->name('notícias.destroy');
 
 	// Rotas de Buscas
 	Route::post('/notícias/buscar', 'SearchController@newsSearch')->name('notícias.search');
@@ -59,13 +67,19 @@ Route::group(['prefix' => 'portal'], function () {
 
 
 	// Rotas Especiais - teachers only
-	Route::resource('/notícias/alunos', 'PortalStudentNewsController');
-	Route::post('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search')->middleware(VerifyTeacher::class);
-	Route::get('/notícias/alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search')->middleware(VerifyTeacher::class);
-
-	Route::get('/usuários/alunos', 'PortalUsersController@alunos')->name('usuários.alunos');
-	Route::post('/usuários/alunos/buscar', 'SearchController@alunosUserSearch')->name('usuários.alunos.search');
-	Route::get('/usuários/alunos/buscar', 'SearchController@alunosUserSearch')->name('usuários.alunos.search');
+	//Route::resource('/notícias-alunos', 'PortalStudentNewsController');
+	Route::get('/notícias-alunos', 'PortalStudentNewsController@index')->name('notícias-alunos.index');
+	//Route::post('/notícias-alunos', 'PortalStudentNewsController@store')->name('notícias-alunos.store');
+	Route::get('/notícias-alunos/{id}', 'PortalStudentNewsController@show')->name('notícias-alunos.show');
+	Route::put('/notícias-alunos', 'PortalStudentNewsController@update')->name('notícias-alunos.update');
+	Route::delete('/notícias-alunos/{id}', 'PortalStudentNewsController@destroy')->name('notícias.destroy');
+	
+	Route::post('/notícias-alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search')->middleware(VerifyTeacher::class);
+	Route::get('/notícias-alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search')->middleware(VerifyTeacher::class);
+	// ainda não foi implementado
+	//Route::get('/usuários-alunos', 'PortalUsersController@alunos')->name('usuários.alunos');
+	//Route::post('/usuários-alunos/buscar', 'SearchController@alunosUserSearch')->name('usuários.alunos.search');
+	//Route::get('/usuários-alunos/buscar', 'SearchController@alunosUserSearch')->name('usuários.alunos.search');
 });
 
 // OAuth

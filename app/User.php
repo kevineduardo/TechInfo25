@@ -31,16 +31,7 @@ class User extends Authenticatable
     ];
 
     public function teacher() {
-        // Gambiarra has been made :( i failed
-        $user = $this;
-        $professor = Teacher::where('user_id', $user->id)->first();
-        if(!$professor) {
-            return false;
-        } else {
-            return $professor;
-        }
-
-        return false;
+        return $this->hasOne('App\Teacher');    
     }
 
     // Get user profile's picture
@@ -68,5 +59,9 @@ class User extends Authenticatable
 
     public function studentNews() {
         return $this->hasMany('App\StudentNews', 'author_id');
+    }
+
+    public function student() {
+        return $this->hasOne('App\Student');
     }
 }

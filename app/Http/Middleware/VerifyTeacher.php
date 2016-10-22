@@ -8,19 +8,23 @@ use Auth;
 class VerifyTeacher
 {
     /**
-     * Handle an incoming request.
+     * Handle the incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
+     * @param  string  $role
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $type = 1)
     {
+        $type = (int) $type;
         $user = Auth::user();
-        if(!$user->teacher()) {
-            redirect()->route('portal_inicio');
+        if(!$user->has('teacher')) {
+            return redirect()->route('portal_inicio');
         }
-        
+        if($user->teacher->type < $type) {
+            return redirect()->route('portal_inicio');
+        }
         return $next($request);
     }
 }

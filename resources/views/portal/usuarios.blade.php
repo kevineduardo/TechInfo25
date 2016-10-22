@@ -16,6 +16,46 @@
 	</style>
 @endsection
 
+@section('javascripts')
+  @parent
+  <script src="{{ URL::asset('js/jquery.js') }}"></script>
+<script>
+      function getUserData(id) {
+        $.ajax(
+        {
+          headers: {
+            'X-CSRF-TOKEN': Laravel.csrfToken,
+          },
+          type:'GET',
+          url:'/portal/usuários/' + id,
+          success:function(data){
+          if ( data ) {
+            console.log(data);
+            $(".userid").attr("value", id);
+            $("#name").attr("value", data['name']);
+            if(data['teacher'] != null) {
+              $("#teacher").prop("checked", true);
+            } else {
+              $("#notteacher").prop("checked", true);
+            }
+            $("#editarusuario").modal('show');
+          }
+           }
+        }
+        );
+      }
+    </script>
+    <script>
+      $(document).ready (function(){
+            $(".alert-success").fadeTo(2200, 500).slideUp(500, function(){
+            $(".alert-success").slideUp(500);
+            });
+            $(".alert-danger").fadeTo(10000, 500).slideUp(500, function(){
+            $(".alert-danger").slideUp(500);
+            });
+      });
+    </script>
+@endsection
 
 @section('content')
 @if (count($errors) > 0)
@@ -30,10 +70,20 @@
 </div>
 @endif
 @if(isset($success))
+@if($success)
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <strong>@lang('messages.form.success.post.title')</strong> @lang('messages.form.success.post.msg')
+  <strong>@lang('messages.form.success_user.edit.title')</strong> @lang('messages.form.success_user.edit.msg')
 </div>
+@endif
+@endif
+@if(isset($deletado))
+@if($deletado)
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>@lang('messages.form.success_user.delete.title')</strong> @lang('messages.form.success_user.delete.msg')
+</div>
+@endif
 @endif
 <div id="controles" style="margin-bottom: 5px;">
 {!! Form::open(array('route' => 'usuários.search', 'class'=>'form form-inline col-md-5')) !!}
@@ -48,8 +98,7 @@
     </div>
     </div>
  {!! Form::close() !!}
- <button type="button" onclick="window.location='{{ route('usuários.alunos')}}';" style="margin-top: 5px;" class="btn btn-primary col-md-3">@lang('messages.buttons.alunosinvite')</button>
- <button type="button" style="margin-top: 5px;" class="btn btn-primary col-md-2 col-md-offset-1" data-toggle="modal" data-target="#novousuario">@lang('messages.buttons.novousuario')</button>
+ <button type="button" onclick="window.location='{{-- route('usuários-alunos.index') --}}';" style="margin-top: 5px;" class="btn btn-primary col-md-3">@lang('messages.buttons.alunosinvite')</button>
 </div>
 <div id="usuarios">
             <table class="table table-hover">
@@ -60,10 +109,10 @@
 			  </tr>
 			</thead>
 			@if(count($usuarios) != 0)
-			@foreach ($usuarios as $not)
-        	<tr>
-			    <td>{{ str_limit($not->name, 40) }}</td>
-			    <td>{{ str_limit($not->email, 40) }}</td>
+			@foreach ($usuarios as $user)
+        	<tr style="cursor: pointer;" onclick="getUserData({{ $user['id'] }})">
+			    <td>{{ str_limit($user->name, 40) }}</td>
+			    <td>{{ str_limit($user->email, 40) }}</td>
 			  </tr>
     		@endforeach
 			@else
@@ -80,15 +129,43 @@
 			{{ $usuarios->links() }}
 			</div>
 </div>
-  <div class="modal fade" id="novousuario" role="dialog">
-    <div class="modal-dialog modal-lg">
+  {{-- form de editar user --}}
+  <div class="modal fade" id="editarusuario" role="dialog">
+    <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">@lang('messages.titles.newuser')</h4>
+          <h4 class="modal-title">@lang('messages.titles.edituser')</h4>
         </div>
         <div class="modal-body">
-        Fazer aqui o form
+        <form method="post" action="{{ route('usuários.update') }}" class="form-horizontal">
+        {{ method_field('PUT') }}
+        {{ csrf_field() }}
+        <fieldset class="form-horizontal">
+            <div class="form-group">
+                <label for="name">@lang('messages.form.user.name')</label>
+                <input autocomplete="off" class="form-control" id=
+                "name" name="name"
+                required="" type="text" value="">
+            </div>
+            <div class="form-group">
+                <label for="teacher">@lang('messages.form.user.level')</label>
+                <div class="radio">
+                    <label><input id="teacher" name="teacher" type=
+                    "radio" value="1"> @lang('messages.form.teacher.true')</label>
+                </div>
+                <div class="radio">
+                    <label><input id="notteacher" name="teacher" type="radio" value=
+                    "0"> @lang('messages.form.teacher.false')</label>
+                </div>
+            </div>
+            <div class="form-group">
+          <input type="hidden" class="userid" name="id" value=""></input>
+          <button class="btn btn-success" type="submit" name="salvar" value="true">@lang('messages.buttons.salvaruser')</button>
+          <button class="btn btn-danger" type="submit" name="deletar" value="true">@lang('messages.buttons.deletaruser')</button>
+            </div>
+        </fieldset>
+        </form>
         </div>
       </div>
     </div>

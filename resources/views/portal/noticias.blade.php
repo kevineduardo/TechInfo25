@@ -36,6 +36,43 @@
 	     });
 	    
 	     </script>
+	     <script>
+			function getNotData(id) {
+				$.ajax(
+				{
+					headers: {
+						'X-CSRF-TOKEN': Laravel.csrfToken,
+					},
+					type:'GET',
+					url:'/portal/notícias/' + id,
+					success:function(data){
+					if ( data ) {
+						$(".notid").attr("value", id);
+						$("#etitle").attr("value", data['title']);
+						$("#esubtitle").attr("value", data['subtitle']);
+						tinyMCE.activeEditor.setContent(data['text']);
+						if(data['published'] == true) {
+							$("#epublicado").prop("checked", true);
+						} else {
+							$("#erascunho").prop("checked", true);
+						}
+						$("#edit_noticia").modal('show');
+					}
+				   }
+				}
+				);
+			}
+		</script>
+    <script>
+      $(document).ready (function(){
+            $(".alert-success").fadeTo(2200, 500).slideUp(500, function(){
+            $(".alert-success").slideUp(500);
+            });
+            $(".alert-danger").fadeTo(10000, 500).slideUp(500, function(){
+            $(".alert-danger").slideUp(500);
+            });
+      });
+    </script>
 @endsection
 
 @section('content')
@@ -51,10 +88,28 @@
 </div>
 @endif
 @if(isset($success))
+@if($success)
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <strong>@lang('messages.form.success.post.title')</strong> @lang('messages.form.success.post.msg')
 </div>
+@endif
+@endif
+@if(isset($editado))
+@if($editado)
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>@lang('messages.form.success.edited.title')</strong> @lang('messages.form.success.edited.msg')
+</div>
+@endif
+@endif
+@if(isset($deletado))
+@if($deletado)
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>@lang('messages.form.success.delete.title')</strong> @lang('messages.form.success.delete.msg')
+</div>
+@endif
 @endif
 <div id="controles" style="margin-bottom: 5px;">
 @if($professor)
@@ -74,7 +129,7 @@
     </div>
  {!! Form::close() !!}
  @if($professor)
- <button type="button" onclick="window.location='{{ route('alunos.index')}}';" style="margin-top: 5px;" class="btn btn-primary col-md-3">@lang('messages.buttons.palunos')</button>
+ <button type="button" onclick="window.location='{{ route('notícias-alunos.index')}}';" style="margin-top: 5px;" class="btn btn-primary col-md-3">@lang('messages.buttons.palunos')</button>
  <button type="button" style="margin-top: 5px;" class="btn btn-primary col-md-2 col-md-offset-1" data-toggle="modal" data-target="#novanoticia">@lang('messages.buttons.novanoticia')</button>
  @else
  <button type="button" style="margin-top: 5px;" class="btn btn-primary col-md-2" data-toggle="modal" data-target="#novanoticia">@lang('messages.buttons.novanoticia')</button>
@@ -98,7 +153,7 @@
 			</thead>
 			@if(count($noticias) != 0)
 			@foreach ($noticias as $not)
-        	<tr>
+        	<tr style="cursor: pointer;" onclick="getNotData({{ $not['id'] }})">
         		@if($professor)
 			    <td>{{ str_limit($not->title, 10) }}</td>
 			    <td>{{ str_limit($not->subtitle, 10) }}</td>
@@ -164,6 +219,7 @@
                 <label for="text">@lang('messages.form.news.text')</label> 
                 <textarea id="text" name="text"></textarea>
             </div>
+            @if($professor)
             <div class="form-group">
                 <div class="radio">
                     <label><input checked id="published" name="published" type=
@@ -174,8 +230,58 @@
                     "false"> @lang('messages.form.publish.false')</label>
                 </div>
             </div>
+            @endif
             <div class="form-group">
                 <button class="btn btn-success" type="submit">@lang('messages.form.save')</button>
+            </div>
+        </fieldset>
+    	</form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="edit_noticia" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">@lang('messages.titles.editnews')</h4>
+        </div>
+        <div class="modal-body">
+        <form id="editando" method="post" class="form-horizontal" action="{{ route('notícias.index') }}">
+        {{ method_field('PUT') }}
+        {{ csrf_field() }}
+        <input type="hidden" class="notid" name="id" value=""></input>
+        <fieldset>
+            <div class="form-group">
+                <label for="title">@lang('messages.form.news.title')</label>
+                <input autocomplete="off" class="form-control" id=
+                "etitle" name="title" placeholder="Boas novas!"
+                required="" type="text" value="">
+            </div>
+            <div class="form-group">
+                <label for="subtitle">@lang('messages.form.news.subtitle')</label>
+                <input autocomplete="off" class="form-control" id=
+                "esubtitle" name="subtitle" placeholder=
+                "Temos novidades..." required="" type="text" value="">
+            </div>
+            <div class="form-group">
+                <label for="text">@lang('messages.form.news.text')</label> 
+                <textarea id="text" name="text"></textarea>
+            </div>
+            <div class="form-group">
+                <div class="radio">
+                    <label><input id="epublicado" name="published" type=
+                    "radio" value="1"> @lang('messages.form.epublish.true')</label>
+                </div>
+                <div class="radio">
+                    <label><input id="erascunho" name="published" type="radio" value=
+                    "0"> @lang('messages.form.epublish.false')</label>
+                </div>
+            </div>
+            <div class="form-group">
+					<button class="btn btn-success" type="submit" name="salvar" value="true">@lang('messages.buttons.salvarnot')</button>
+					<button class="btn btn-danger" type="submit" name="deletar" value="true">@lang('messages.buttons.deletarnot')</button>
             </div>
         </fieldset>
     	</form>

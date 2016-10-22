@@ -1,6 +1,6 @@
 @extends('layouts.portal')
 
-@section('title', 'Portal')
+@section('title', trans('messages.portal'))
 
 @section('content')
 <div class="text-center">

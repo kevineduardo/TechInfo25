@@ -67,6 +67,10 @@ return [
         'novousuario' => 'Novo usuário',
         'palunos_salvar' => 'Salvar & Publicar',
         'palunos_descartar' => 'Descartar',
+        'salvarnot' => 'Salvar',
+        'deletarnot' => 'Deletar',
+        'salvaruser' => 'Salvar',
+        'deletaruser' => 'Deletar',
     ],
     // Placeholders
     'phs' => [
@@ -97,6 +101,8 @@ return [
     'titles' => [
         'newnews' => 'Nova notícia',
         'newuser' => 'Novo usuário',
+        'editnews' => 'Editar notícia',
+        'edituser' => 'Editar usuário',
     ],
     // Form's labels
     'form' => [
@@ -105,9 +111,21 @@ return [
         'subtitle' => 'Sub-título da Notícia',
         'text' => 'Texto da Notícia',
         ],
+        'user' => [
+        'name' => 'Nome do Usuário',
+        'level' => 'Nível de Acesso',
+        ],
         'publish' => [
             'true' => 'Publicar imediatamente',
             'false' => 'Salvar como rascunho',
+        ],
+        'epublish' => [
+            'true' => 'Publicado',
+            'false' => 'Rascunho',
+        ],
+        'teacher' => [
+            'true' => 'Professor (a)',
+            'false' => 'Aluno (a)',
         ],
         'save' => 'Salvar',
         'errors' => [
@@ -125,6 +143,20 @@ return [
             'approved' => [
                 'title' => 'Aprovado com sucesso!',
                 'msg' => 'A notícia foi aprovada.',
+            ],
+            'edited' => [
+                'title' => 'Editada com sucesso!',
+                'msg' => 'A notícia foi editada.',
+            ],
+        ],
+        'success_user' => [
+            'edit' => [
+                'title' => 'Usuário editado!',
+                'msg' => 'O usuário foi editado com sucesso!',
+            ],
+            'delete' => [
+                'title' => 'Usuário deletado!',
+                'msg' => 'O usuário foi deletado com sucesso!',
             ],
         ],
     ],

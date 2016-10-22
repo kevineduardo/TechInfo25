@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
 use App\Http\Requests\StoreNews;
+use App\Http\Requests\UpdateNews;
 use App\News;
 use App\StudentNews;
 use App\Teacher;
@@ -26,7 +27,7 @@ class PortalNewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($s = false, $d = false)
     {
         $user = Auth::user();
         $professor = Teacher::where('user_id', $user->id)->first();
@@ -35,8 +36,8 @@ class PortalNewsController extends Controller
             return view('portal.noticias', ['noticias' => $noticias,]);
         }
         // se for professor executa esse outro aqui e.e
-        $noticias = News::paginate(15);
-        return view('portal.noticias', ['noticias' => $noticias,]);
+        $noticias = News::orderBy('created_at', 'desc')->paginate(15);
+        return view('portal.noticias', ['noticias' => $noticias, 'editado' => $s, 'deletado' => $d,]);
     }
 
     /**
@@ -105,9 +106,19 @@ class PortalNewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        if($request->ajax()) {
+            $noticia = News::find($id);
+            if($noticia) {
+                return response()->json($noticia->toArray());
+            }
+                
+            return response()->json([
+                'msg' => 'error.',
+                ]);
+        }
+        return redirect()->route('notícias.index');
     }
 
     /**
@@ -128,9 +139,27 @@ class PortalNewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateNews $request)
     {
-        //
+        $id = $request->input('id');
+        $noticia = News::find($id);
+        if($noticia) {
+	        if($request->input('salvar')) {
+	            $noticia->fill($request->all());
+	            try {
+	                $noticia->save();
+	            } catch (\Illuminate\Database\QueryException $e) {
+	                return $e;
+	            }
+	            return $this->index(true);
+	        }
+	        if($request->input('deletar')) {
+	            $noticia->delete();
+	            return $this->index(false, true);
+	        }
+	    } else {
+	    	return $this->index();
+	    }
     }
 
     /**
