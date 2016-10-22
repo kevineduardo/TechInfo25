@@ -12,7 +12,7 @@ return [
     |
     */
     // Sem explicação
-    'portal' => 'Portal do Aluno',
+    'portal' => 'Portal do Estudante',
     'teacher' => 'Professor (a)',
     'student' => 'Aluno (a)',
     'layout' => [
