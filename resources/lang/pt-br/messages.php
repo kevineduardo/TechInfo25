@@ -14,7 +14,7 @@ return [
     // Sem explicação
     'portal' => 'Portal do Aluno',
     'teacher' => 'Professor (a)',
-    'student' => 'Aluno',
+    'student' => 'Aluno (a)',
     'layout' => [
         'name' => 'Escola Técnica Estadual 25 de Julho',
         'home' => 'Início',
