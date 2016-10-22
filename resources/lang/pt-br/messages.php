@@ -14,7 +14,7 @@ return [
     // Sem explicação
     'portal' => 'Portal do Aluno',
     'teacher' => 'Professor (a)',
-    'student' => 'Aluno',
+    'student' => 'Aluno (a)',
     'layout' => [
         'home' => 'Início',
         'tn' => 'Visualizar Navegação',
