@@ -48,38 +48,6 @@
     </section>
     <footer id="footer" class="text-center">
     <h5>{!! $settings['footer'] !!} <br/> Copyright (C) 2016  Kevin Souza & Lucas Tossi - <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL 3.0</a></h5>
-<p>
-    <a href="http://validator.w3.org/check?uri=referer">
-    <img style="border:0;width:88px;height:31px"
-        src="https://www.w3.org/Icons/wai194-v.svg"
-        alt="@lang('messages.alt.acb')" />
-    </a>
-    <a href="http://jigsaw.w3.org/css-validator/check/referer">
-    <img style="border:0;width:88px;height:31px"
-        src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
-        alt="@lang('messages.alt.css')" />
-    </a>
-    <a href="http://validator.w3.org/check?uri=referer">
-    <img style="border:0;width:88px;height:31px"
-        src="https://www.w3.org/Icons/valid-mathml20-blue-v.svg"
-        alt="@lang('messages.alt.mathml')" />
-    </a>
-    <a href="http://validator.w3.org/check?uri=referer">
-    <img style="border:0;width:88px;height:31px"
-        src="https://www.w3.org/Icons/valid-svg11-blue-v.svg"
-        alt="@lang('messages.alt.svg')" />
-    </a>
-    <a href="http://validator.w3.org/check?uri=referer">
-    <img style="border:0;width:88px;height:31px"
-        src="https://www.w3.org/Icons/valid-html401-blue-v.svg"
-        alt="@lang('messages.alt.html')" />
-    </a>
-    <a href="http://validator.w3.org/check?uri=referer">
-    <img style="border:0;width:88px;height:31px"
-        src="https://www.w3.org/html/logo/badge/html5-badge-h-css3-semantics.png"
-        alt="HTML5 Powered with CSS3 / Styling, and Semantics" />
-    </a>
-</p>
     </footer>
 </body>
 </html>

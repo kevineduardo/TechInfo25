@@ -57,7 +57,7 @@
                             <i class="glyphicon glyphicon-camera"></i>
                             @lang('messages.menu.pictures') </a>
                         </li>
-                        @if(Auth::user()->teacher())
+                        @if(Auth::user()->teacher)
                         @if(Auth::user()->teacher->type > 1)
                             <li class="@if(str_contains(Route::currentRouteName(), 'usuários')) active @endif teacher-only">
                                 <a href="{{ route('usuários.index') }}">

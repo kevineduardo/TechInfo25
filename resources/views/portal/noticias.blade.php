@@ -41,7 +41,7 @@
 				$.ajax(
 				{
 					headers: {
-						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+						'X-CSRF-TOKEN': Laravel.csrfToken,
 					},
 					type:'GET',
 					url:'/portal/notícias/' + id,
@@ -63,6 +63,16 @@
 				);
 			}
 		</script>
+    <script>
+      $(document).ready (function(){
+            $(".alert-success").fadeTo(2200, 500).slideUp(500, function(){
+            $(".alert-success").slideUp(500);
+            });
+            $(".alert-danger").fadeTo(10000, 500).slideUp(500, function(){
+            $(".alert-danger").slideUp(500);
+            });
+      });
+    </script>
 @endsection
 
 @section('content')
@@ -78,10 +88,12 @@
 </div>
 @endif
 @if(isset($success))
+@if($success)
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <strong>@lang('messages.form.success.post.title')</strong> @lang('messages.form.success.post.msg')
 </div>
+@endif
 @endif
 @if(isset($editado))
 @if($editado)
@@ -207,6 +219,7 @@
                 <label for="text">@lang('messages.form.news.text')</label> 
                 <textarea id="text" name="text"></textarea>
             </div>
+            @if($professor)
             <div class="form-group">
                 <div class="radio">
                     <label><input checked id="published" name="published" type=
@@ -217,6 +230,7 @@
                     "false"> @lang('messages.form.publish.false')</label>
                 </div>
             </div>
+            @endif
             <div class="form-group">
                 <button class="btn btn-success" type="submit">@lang('messages.form.save')</button>
             </div>

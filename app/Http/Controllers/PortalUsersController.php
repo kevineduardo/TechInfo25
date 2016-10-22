@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 use App\Http\Requests;
 use App\User;
@@ -15,7 +16,7 @@ class PortalUsersController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('verifyteacher:2');
+        $this->middleware('verifyteacher');
     }
 
     /**
@@ -23,12 +24,12 @@ class PortalUsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($s = false, $d = false)
     {
         // essa página só pode ser acessada por professores
         $teacher = Teacher::where('user_id', Auth::user()->id)->first();
         $usuarios = User::paginate(15);
-        return view('portal.usuarios', ['usuarios' => $usuarios,]);
+        return view('portal.usuarios', ['usuarios' => $usuarios, 'success' => $s, 'deletado' => $d,]);
     }
 
     /**
@@ -92,9 +93,42 @@ class PortalUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $id = $request->input('id');
+        $usuario = User::find($id);
+        $professor = Teacher::where('user_id', $id)->first();
+        if(!$professor) {
+            $professor = new Teacher();
+        }
+        if($usuario) {
+            if($request->input('salvar')) {
+                $usuario->name = $request->input('name');
+                if($request->input('teacher')) {
+                    $professor->user_id = $id;
+                    // quando implementar a verificação de type, tem que atualizar aqui, pra pegar o type recebido, além de atualizar a view pra mostrar essa opção
+                    $professor->type = 1;
+                    $professor->created_at = Carbon::now();
+                }
+                try {
+                    $usuario->save();
+                    if($request->input('teacher')) {
+                        $professor->save();
+                    } else {
+                        $professor->delete();
+                    }
+                } catch (\Illuminate\Database\QueryException $e) {
+                    return $e;
+                }
+                return $this->index(true);
+            }
+            if($request->input('deletar')) {
+                $usuario->delete();
+                return $this->index(false, true);
+            }
+        } else {
+            return $this->index();
+        }
     }
 
     /**

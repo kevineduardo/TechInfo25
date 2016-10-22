@@ -17,8 +17,6 @@
 
 @section('javascripts')
 	@parent
-	<meta name="csrf-token" content="{{ csrf_token() }}">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="{{ URL::asset('js/jquery.js') }}"></script>
 	<script src="{{ URL::asset('tinymce/tinymce.min.js') }}"></script>
 	  <script>
@@ -44,7 +42,7 @@
 				$.ajax(
 				{
 					headers: {
-						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+						'X-CSRF-TOKEN': Laravel.csrfToken,
 					},
 					type:'GET',
 					url:'/portal/notícias-alunos/' + id,
@@ -62,6 +60,16 @@
 				);
 			}
 		</script>
+		<script>
+      $(document).ready (function(){
+            $(".alert-success").fadeTo(2200, 500).slideUp(500, function(){
+            $(".alert-success").slideUp(500);
+            });
+            $(".alert-danger").fadeTo(10000, 500).slideUp(500, function(){
+            $(".alert-danger").slideUp(500);
+            });
+      });
+    </script>
 @endsection
 
 @section('content')
@@ -174,6 +182,7 @@
 					<button class="btn btn-danger" type="submit" name="deletar" value="true">@lang('messages.buttons.palunos_descartar')</button>
             </div>
         </fieldset>
+        </form>
         </div>
       </div>
     </div>
