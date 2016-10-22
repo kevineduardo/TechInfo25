@@ -13,7 +13,7 @@ return [
     */
     // Sem explicação
     'portal' => 'Portal do Aluno',
-    'teacher' => 'Professor',
+    'teacher' => 'Professor (a)',
     'student' => 'Aluno',
     'layout' => [
         'name' => 'Escola Técnica Estadual 25 de Julho',
