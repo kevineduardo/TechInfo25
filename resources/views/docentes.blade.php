@@ -43,10 +43,10 @@
       <tr><th>
       <div style="width:100%;">
         <ul class="list-group">
-        <h2>@lang('messages.layout.coordinator')</h2>
-        <hr>
+        <h2 style="margin-bottom: 5px;">@lang('messages.layout.coordinator')</h2>
+        <hr style="margin-top:5px;">
         @foreach( $coordenadores as $coord )
-          <li class="list-group-item" style="margin-top: 20px; height:auto; overflow:hidden;
+          <li class="list-group-item" style="border-radius: 5px; margin-top: 20px; height:auto; overflow:hidden;
           -webkit-box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);
           -moz-box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);
           box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);">
@@ -68,10 +68,10 @@
           </li>
         @endforeach
         <br/>
-        <h2>@lang('messages.layout.teacher')</h2>
-        <hr>
+        <h2 style="margin-bottom: 5px;">@lang('messages.layout.teacher')</h2>
+        <hr style="margin-top:5px;">
         @foreach( $professores as $teacher )
-          <li class="list-group-item" style="margin-top: 20px; height:auto; overflow:hidden;
+          <li class="list-group-item" style="border-radius: 5px; margin-top: 20px; height:auto; overflow:hidden;
           -webkit-box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);
           -moz-box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);
           box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);">
@@ -115,7 +115,7 @@
   </div>
 
   <div class="modal fade" id="showinfo" role="dialog">
-    <div class="modal-dialog modal-sm" style="width: 50%">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
