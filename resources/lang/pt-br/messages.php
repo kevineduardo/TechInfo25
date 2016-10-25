@@ -130,6 +130,7 @@ return [
             'true' => 'Professor (a)',
             'false' => 'Aluno (a)',
         ],
+        'active' => 'Ativado',
         'save' => 'Salvar',
         'errors' => [
             'post' => 'Falha ao postar!',
