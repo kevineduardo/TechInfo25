@@ -103,7 +103,6 @@ class PortalUsersController extends Controller
         }
         if($usuario) {
             if($request->input('salvar')) {
-                $usuario->active = $request->input('active', 0);
                 $usuario->name = $request->input('name');
                 if($request->input('teacher')) {
                     $professor->user_id = $id;

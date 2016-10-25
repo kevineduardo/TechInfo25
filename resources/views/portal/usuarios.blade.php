@@ -38,8 +38,6 @@
             } else {
               $("#notteacher").prop("checked", true);
             }
-            console.log(data['active']);
-            $("#active").prop("checked", data['active'] == 1);
             $("#editarusuario").modal('show');
           }
            }
@@ -49,7 +47,6 @@
     </script>
     <script>
       $(document).ready (function(){
-            $("#active").click( function() { $(this).attr('value',$(this).is(":checked")?1:0); } )
             $(".alert-success").fadeTo(2200, 500).slideUp(500, function(){
             $(".alert-success").slideUp(500);
             });
@@ -160,12 +157,6 @@
                 <div class="radio">
                     <label><input id="notteacher" name="teacher" type="radio" value=
                     "0"> @lang('messages.form.teacher.false')</label>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label><input id="active" name="active" type="checkbox" value=
-                    "0"> @lang('messages.form.active')</label>
                 </div>
             </div>
             <div class="form-group">
