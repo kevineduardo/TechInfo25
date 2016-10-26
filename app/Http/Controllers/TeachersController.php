@@ -56,7 +56,6 @@ class TeachersController extends Controller
     public function show($id)
     {
         $teacher = Teacher::with('user')->where('user_id',$id)->first();
-        $data = [];
         if ( !$teacher ) { return response()->json( $data, 406 ); }
 
         $docente = [
@@ -68,9 +67,7 @@ class TeachersController extends Controller
 
         ];
 
-        $data = array_add( $data, 'docente', $docente );
-
-        return response()->json( $data );
+        return response()->json( [ 'docente' => $docente ] );
     }
 
     /**
