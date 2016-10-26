@@ -14,7 +14,7 @@
                     <div class="text-muted"><small>{{ str_limit($news[1]->title, 50) }}</small></div>
                     <p>
                     <div class="nttexto">
-                   {!! str_limit($news[1]->text, 60) !!}
+                   {!! str_limit($news[1]->subtitle, 60) !!}
                     </div>
                     </p>
                   </div>
@@ -23,7 +23,7 @@
                     <div class="text-muted"><small>{{ str_limit($news[2]->title, 50) }}</small></div>
                     <p>
                     <div class="nttexto">
-                    {!! str_limit($news[2]->text, 60) !!}
+                    {!! str_limit($news[2]->subtitle, 60) !!}
                     </div>
                     </p>
                   </div>

@@ -116,7 +116,7 @@ class PortalNewsController extends Controller
                 
             return response()->json([
                 'msg' => 'error.',
-                ]);
+                ], 404);
         }
         return redirect()->route('notícias.index');
     }

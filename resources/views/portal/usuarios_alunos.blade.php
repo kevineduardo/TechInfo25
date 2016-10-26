@@ -1,7 +1,7 @@
 
 @extends('layouts.portal')
 
-@section('title', trans('messages.layout.users'))
+@section('title', trans('messages.layout.usersinvite'))
 
 @section('styles')
 	@parent
@@ -27,17 +27,12 @@
             'X-CSRF-TOKEN': Laravel.csrfToken,
           },
           type:'GET',
-          url:'/portal/usuários/' + id,
+          url:'/portal/usuários-alunos/' + id,
           success:function(data){
           if ( data ) {
             $(".userid").attr("value", id);
-            $("#name").attr("value", data['name']);
-            if(data['teacher'] != null) {
-              $("#teacher").prop("checked", true);
-            } else {
-              $("#notteacher").prop("checked", true);
-            }
-            $("#editarusuario").modal('show');
+            $("#email").attr("value", data['email']);
+            $("#delconvite").modal('show');
           }
            }
         }
@@ -72,12 +67,12 @@
 @if($success)
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <strong>@lang('messages.form.success_user.edit.title')</strong> @lang('messages.form.success_user.edit.msg')
+  <strong>@lang('messages.form.success_user.invite.title')</strong> @lang('messages.form.success_user.invite.msg')
 </div>
 @endif
 @endif
-@if(isset($deletado))
-@if($deletado)
+@if(isset($deleted))
+@if($deleted)
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <strong>@lang('messages.form.success_user.delete.title')</strong> @lang('messages.form.success_user.delete.msg')
@@ -97,21 +92,23 @@
     </div>
     </div>
  {!! Form::close() !!}
- <button type="button" onclick="window.location='{{ route('usuários-alunos.index') }}';" style="margin-top: 5px;" class="btn btn-primary col-md-3">@lang('messages.buttons.usersinvite')</button>
+ <button type="button" style="margin-top: 5px;" class="btn btn-primary col-md-2 col-md-offset-5" data-toggle="modal" data-target="#novoconvite">@lang('messages.buttons.novoconvite')</button>
 </div>
 <div id="usuarios">
             <table class="table table-hover">
             <thead>
 			  <tr>
-			    <th><span class="vermelho">@lang('messages.cm.name')</span></th>
 			    <th><span class="vermelho">@lang('messages.cm.email')</span></th>
+			    <th><span class="vermelho">@lang('messages.cm.class')</span></th>
+			    <th><span class="vermelho">@lang('messages.cm.resp')</span></th>
 			  </tr>
 			</thead>
 			@if(count($usuarios) != 0)
 			@foreach ($usuarios as $user)
         	<tr style="cursor: pointer;" onclick="getUserData({{ $user['id'] }})">
-			    <td>{{ str_limit($user->name, 40) }}</td>
 			    <td>{{ str_limit($user->email, 40) }}</td>
+			    <td>@if($user->classe->variant) {{ $user->classe->number . $user->classe->variant }} @else {{ $user->classe->number }} @endif</td>
+			    <td>{{ str_limit($user->teacher->user->name, 40) }}</td>
 			  </tr>
     		@endforeach
 			@else
@@ -128,43 +125,61 @@
 			{{ $usuarios->links() }}
 			</div>
 </div>
-  {{-- form de editar user --}}
-  <div class="modal fade" id="editarusuario" role="dialog">
+  {{-- form de deletar convite de user --}}
+  <div class="modal fade" id="delconvite" role="dialog">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">@lang('messages.titles.edituser')</h4>
+          <h4 class="modal-title">@lang('messages.titles.deleteinvite')</h4>
         </div>
         <div class="modal-body">
-        <form method="post" action="{{ route('usuários.update') }}" class="form-horizontal">
+        <form method="post" action="{{ route('usuários-alunos.update') }}" class="form-horizontal">
         {{ method_field('PUT') }}
         {{ csrf_field() }}
         <fieldset class="form-horizontal">
-            <div class="form-group">
-                <label for="name">@lang('messages.form.user.name')</label>
-                <input autocomplete="off" class="form-control" id=
-                "name" name="name"
-                required="" type="text" value="">
-            </div>
-            <div class="form-group">
-                <label for="teacher">@lang('messages.form.user.level')</label>
-                <div class="radio">
-                    <label><input id="teacher" name="teacher" type=
-                    "radio" value="1"> @lang('messages.form.teacher.true')</label>
-                </div>
-                <div class="radio">
-                    <label><input id="notteacher" name="teacher" type="radio" value=
-                    "0"> @lang('messages.form.teacher.false')</label>
-                </div>
-            </div>
+            <p>@lang('messages.dialog.deleteinvite')</p>
             <div class="form-group">
           <input type="hidden" class="userid" name="id" value=""></input>
-          <button class="btn btn-success" type="submit" name="salvar" value="true">@lang('messages.buttons.salvaruser')</button>
-          <button class="btn btn-danger" type="submit" name="deletar" value="true">@lang('messages.buttons.deletaruser')</button>
+          <button class="btn btn-danger center-block" type="submit" name="deletar" value="true">@lang('messages.buttons.deletarconvite')</button>
             </div>
         </fieldset>
         </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- form de adicionar convite --}}
+  <div class="modal fade" id="novoconvite" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">@lang('messages.titles.newinvite')</h4>
+        </div>
+        <div class="modal-body">
+        <form class="form-horizontal" method="post">
+        {{ csrf_field() }}
+        <fieldset>
+            <div class="form-group">
+                <label for="title">@lang('messages.form.userinvite.email')</label>
+                <input autocomplete="off" class="form-control" id=
+                "email" name="email" placeholder="educando@25dejulho.com"
+                required="" type="email" value="">
+            </div>
+            <div class="form-group">
+              <label for="class">@lang('messages.form.userinvite.class')</label>
+              <select id="class" class="form-control" name="class_id" class="form-control">
+                @foreach($classes as $class)
+                <option value="{{ $class->id }}">@if($class->variant) {{ $class->number . $class->variant }} @else {{ $class->number }} @endif</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success center-block" type="submit">@lang('messages.form.save')</button>
+            </div>
+        </fieldset>
+    	</form>
         </div>
       </div>
     </div>
