@@ -12,10 +12,25 @@ class CalendarController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ( request()->ajax() ) {
+            $start = $request->input('start');
+            $end = $request->input('end');
+
+            $datas = [];
+            foreach( Calendar::whereDate('date','>=',$start)->
+                               whereDate('date','<=',$end)->get() as $data ) {
+                $datas[] = [
+                    'title' => $data->name,
+                    'start' => $data->date->format('Y-m-d')
+                ];
+            }
+            return response()->json($datas);
+        }
         return view('calendario');
     }
 
@@ -43,25 +58,12 @@ class CalendarController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($id)
     {
-        $start = $request->input('start');
-        $end = $request->input('end');
 
-        // { INSERT ERROR HANDLING HERE }
-
-        $datas = [];
-        foreach( Calendar::whereDate('date','>=',$start)->
-                           whereDate('date','<=',$end)->get() as $data ) {
-            $datas[] = [
-                'title' => $data->name,
-                'start' => $data->date->format('Y-m-d')
-            ];
-        }
-        return response()->json($datas);
     }
 
     /**
