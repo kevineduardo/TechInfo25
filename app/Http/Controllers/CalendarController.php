@@ -51,12 +51,14 @@ class CalendarController extends Controller
         $start = $request->input('start');
         $end = $request->input('end');
 
+        // { INSERT ERROR HANDLING HERE }
+
         $datas = [];
-        foreach( Calendar::where('date','>',$start)->
-                           where('date','<',$end)->get() as $data ) {
+        foreach( Calendar::whereDate('date','>=',$start)->
+                           whereDate('date','<=',$end)->get() as $data ) {
             $datas[] = [
                 'title' => $data->name,
-                'start' => $data->date->date
+                'start' => $data->date->format('Y-m-d')
             ];
         }
         return response()->json($datas);

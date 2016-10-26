@@ -23,10 +23,25 @@
       <div id="calendario"></div>
       <script>
         $(function(){
-
           $('#calendario').fullCalendar({
-            events : '/calendário/get',
+            events : 'calendário/get',
+          }); 
+          /*
+          $('#calendario').fullCalendar({
+            events : function(start, end, callback) {
+              console.log('ran');
+              $.ajax({
+                method:'GET',
+                dataType: 'json',
+                url : '/calendário/get?start=' + start + '&end=' + end,
+                success: function(data) {
+                  console.log('/calendário/get?start=' + start + '&end=' + end);
+                  console.log(data);
+                }
+              });
+            },
           })
+          */
 
         })
       </script>
