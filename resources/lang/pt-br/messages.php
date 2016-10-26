@@ -59,6 +59,7 @@ return [
         'news' => 'Notícias',
         'map' => 'Mapa',
         'img' => 'Imagens',
+        'usersinvite' => 'Convite de Usuários',
     ],
     'n' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
@@ -80,7 +81,7 @@ return [
         'novadata' => 'Nova Data',
         'buscar' => 'Buscar',
 		'voltar' => 'Voltar',
-        'alunosinvite' => 'Alunos Autorizados',
+        'usersinvite' => 'Convite de Usuários',
         'novousuario' => 'Novo usuário',
         'palunos_salvar' => 'Salvar & Publicar',
         'palunos_descartar' => 'Descartar',
@@ -92,6 +93,8 @@ return [
         'deletarcal' => 'Deletar',
         'clear' => 'Limpar Campos',
         'send' => 'Enviar',
+        'novoconvite' => 'Novo Convite',
+        'deletarconvite' => 'Deletar Convite',
     ],
     // Placeholders
     'phs' => [
@@ -115,6 +118,8 @@ return [
         'place' => 'Local',
         'created' => 'Criado por',
         'date' => 'Data',
+        'class' => 'Turma',
+        'resp' => 'Responsável',
     ],
     // Basic stuff like yes or no
     'b' => [
@@ -130,6 +135,8 @@ return [
         'teachers' => 'Perfil do Educador',
         'editcal' => 'Editar Calendário',
         'newcal' => 'Nova Data'
+        'deleteinvite' => 'Deletar convite',
+        'newinvite' => 'Novo Convite',
     ],
     // Form's labels
     'form' => [
@@ -141,6 +148,11 @@ return [
         'user' => [
         'name' => 'Nome do Usuário',
         'level' => 'Nível de Acesso',
+        'email' => 'Email',
+        ],
+        'userinvite' => [
+        'email' => 'Email',
+        'class' => 'Turma',
         ],
         'publish' => [
             'true' => 'Publicar imediatamente',
@@ -157,6 +169,7 @@ return [
         'save' => 'Salvar',
         'errors' => [
             'post' => 'Falha ao postar!',
+            'save' => 'Falha ao salvar!',
         ],
         'calendar' => [
             'title' => 'Titulo',
@@ -190,6 +203,10 @@ return [
                 'title' => 'Usuário deletado!',
                 'msg' => 'O usuário foi deletado com sucesso!',
             ],
+            'invite' => [
+                'title' => 'Usuário convidado!',
+                'msg' => 'O usuário foi convidado com sucesso!',
+            ],
         ],
     ],
     // Menu
@@ -202,6 +219,7 @@ return [
         // Teachers only from this point
         'users' => 'Usuários',
         'config' => 'Configurações',
+        'usersinvite' => 'Convite de Usuários',
     ],
     // Alts for the alt="" attribute
     'alt' => [
@@ -211,5 +229,9 @@ return [
         'mathml' => 'MathML válido!',
         'svg' => 'SVG 1.1 válido!',
         'html' => 'HTML 4.01 válido!',
+    ],
+    // Dialogs
+    'dialog' => [
+        'deleteinvite' => 'Você realmente deseja deletar o convite?',
     ],
 ];

@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Requests\ModStudentNews;
-use App\Http\Middleware\VerifyTeacher;
 use App\News;
 use App\StudentNews;
 
@@ -16,7 +15,8 @@ class PortalStudentNewsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(VerifyTeacher::class);
+        $this->middleware('auth');
+        $this->middleware('verifyteacher');
     }
     /**
      * Display a listing of the resource.
@@ -67,7 +67,7 @@ class PortalStudentNewsController extends Controller
                 
             return response()->json([
                 'msg' => 'error.',
-                ]);
+                ], 404);
         }
         return redirect()->route('notícias-alunos.index');
     }

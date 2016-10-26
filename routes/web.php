@@ -63,6 +63,13 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::put('/usuários', 'PortalUsersController@update')->name('usuários.update');
 	Route::resource('/configurações', 'PortalSettingsController@inicio');
 
+	//Route::resource('/usuários-alunos', 'PortalUsersController');
+	Route::get('/usuários-alunos/{id}', 'PortalStudentUsersController@show')->name('usuários-alunos.show');
+	Route::get('/usuários-alunos', 'PortalStudentUsersController@index')->name('usuários-alunos.index');
+	Route::put('/usuários-alunos', 'PortalStudentUsersController@update')->name('usuários-alunos.update');
+	Route::post('/usuários-alunos', 'PortalStudentUsersController@store')->name('usuários-alunos.store');
+	Route::resource('/configurações', 'PortalSettingsController');
+	
 	//Route::resource('/notícias', 'PortalNewsController');
 	Route::get('/notícias', 'PortalNewsController@index')->name('notícias.index');
 	Route::post('/notícias', 'PortalNewsController@store')->name('notícias.store');
@@ -73,8 +80,8 @@ Route::group(['prefix' => 'portal'], function () {
 	// Rotas de Buscas
 	Route::post('/notícias/buscar', 'SearchController@newsSearch')->name('notícias.search');
 	Route::get('/notícias/buscar', 'SearchController@newsSearch')->name('notícias.search');
-	Route::post('/usuários/buscar', 'SearchController@newsSearch')->name('usuários.search');
-	Route::get('/usuários/buscar', 'SearchController@newsSearch')->name('usuários.search');
+	Route::post('/usuários/buscar', 'SearchController@usersSearch')->name('usuários.search');
+	Route::get('/usuários/buscar', 'SearchController@usersSearch')->name('usuários.search');
 
 	// Rotas de calendario
 	/*

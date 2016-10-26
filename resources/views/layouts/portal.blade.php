@@ -47,29 +47,35 @@
                             <i class="glyphicon glyphicon-ok"></i>
                             @lang('messages.menu.homeworks') </a>
                         </li>
-                        <li @if(str_contains(Route::currentRouteName(), 'notícias') || str_contains(Route::currentRouteName(), 'alunos')) class="active" @endif>
+                        <li @if(str_contains(Route::currentRouteName(), 'notícias') || str_contains(Route::currentRouteName(), 'notícias-alunos')) class="active" @endif>
                             <a href="{{ route('notícias.index') }}">
                             <i class="glyphicon glyphicon-list-alt"></i>
                             @lang('messages.menu.news') </a>
                         </li>
-                        <li @if(str_contains(Route::currentRouteName(), 'fotos')) class="active" @endif>
+                        @if(Auth::user()->teacher)
+                        <li class="@if(str_contains(Route::currentRouteName(), 'fotos')) active @endif teacher-only">
                             <a href="{{ route('fotos.index') }}">
                             <i class="glyphicon glyphicon-camera"></i>
                             @lang('messages.menu.pictures') </a>
                         </li>
-                        @if(Auth::user()->teacher)
                         @if(Auth::user()->teacher->type > 1)
                             <li class="@if(str_contains(Route::currentRouteName(), 'usuários')) active @endif teacher-only">
                                 <a href="{{ route('usuários.index') }}">
                                 <i class="glyphicon glyphicon-th-list"></i>
                                 @lang('messages.menu.users') </a>
                             </li>
-                        @endif
                         <li class="@if(str_contains(Route::currentRouteName(), 'configurações')) active @endif teacher-only">
                             <a href="{{ route('configurações.index') }}">
                             <i class="glyphicon glyphicon-cog"></i>
                             @lang('messages.menu.config') </a>
                         </li>
+                        @else
+                        <li class="@if(str_contains(Route::currentRouteName(), 'usuários')) active @endif teacher-only">
+                            <a href="{{ route('usuários-alunos.index') }}">
+                            <i class="glyphicon glyphicon-th-list"></i>
+                            @lang('messages.menu.usersinvite') </a>
+                        </li>
+                        @endif
                         @endif
                     </ul>
                 </div>
