@@ -47,7 +47,8 @@ return [
         'users' => 'Usuários',
 		'teachers' => 'Docentes',
         'teacher' => 'Professores',
-        'coordinator' => 'Coordenadores'
+        'coordinator' => 'Coordenadores',
+        'calendar' => 'Calendário',
     ],
     'n' => [
         'nr' => 'Sua busca retornou nenhum resultado.',

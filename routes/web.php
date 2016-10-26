@@ -37,6 +37,9 @@ Route::get('/notícia', function() {
 Route::get('/docentes', 'TeachersController@index')->name('docentes');
 Route::get('/docentes/{id}', 'TeachersController@show');
 
+Route::get('/calendário', 'CalendarController@index')->name('calendário');
+Route::get('/calendário/get', 'CalendarController@show')->name('calendário.get');
+
 //Route::get('/portal', 'HomeController@index');
 
 // Rotas para o Portal
