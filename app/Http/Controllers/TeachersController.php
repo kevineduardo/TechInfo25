@@ -56,17 +56,14 @@ class TeachersController extends Controller
     public function show($id)
     {
         $teacher = Teacher::with('user')->where('user_id',$id)->first();
-        $data = [ 'ok' => 0 ];
-        if ( !$teacher ) { return Response::json( $data ); }
+        $data = [];
+        if ( !$teacher ) { return response()->json( $data, 406 ); }
 
-        $data['ok'] = 1;
         $docente = [
 
             'name' => $teacher->user->name,
             'bio' => $teacher->bio,
             'academic_bg' => $teacher->academic_bg,
-            'tipo' => ( $teacher->type == 1 ) ? 'professor(a)' : 'coordenador(a)',
-            'tipo' => $teacher->type,
             'img' => 'http://placehold.it/200x200',
 
         ];

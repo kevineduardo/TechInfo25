@@ -7,19 +7,15 @@
   <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
   <script src="{{ URL::asset('tinymce/tinymce.min.js') }}"></script>
   <script>
-    function echo(s){console.log(s);}
     function getInfo(id) {
-      echo('docentes/' + id);
       $.ajax({
         method:'GET',
         url: '/docentes/' + id,
         dataType: 'json',
         success: function(data) {
-            console.log(data);
-          if ( data.ok ) {
+          if ( data['docente']!=null ) {
             var p = data.docente;
             $("#Dimg").attr('src',p.img); // PlaceHolder
-            $("#Dtipo").html(p.tipo);
             $("#Dbio").html(p.bio);
             $("#Dnome").html(p.name);
             $("#Dformacao").html(p.academic_bg);
