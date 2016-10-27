@@ -90,7 +90,7 @@ class PortalStudentNewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(ModStudentNews $request)
     {
         $alunonoticia = StudentNews::find($request->input('id'));
         if($alunonoticia) {
