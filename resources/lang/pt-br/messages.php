@@ -32,6 +32,7 @@ return [
         'forgotp' => 'Esqueceu sua senha?',
         'resetp' => 'Resetar Senha',
         'sendresetp' => 'Enviar Link de Recuperação',
+        'config' => 'Configurações',
         'social' => [
             'fb' => 'Entrar com o Facebook',
         ],
