@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use EloquentFilter\Filterable;
 
 use App\Teacher;
 use App\Picture;
@@ -11,6 +12,7 @@ use App\Picture;
 class User extends Authenticatable
 {
     use Notifiable;
+    use Filterable;
 
     /**
      * The attributes that are mass assignable.

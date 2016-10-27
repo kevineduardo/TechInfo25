@@ -45,7 +45,7 @@
 						'X-CSRF-TOKEN': Laravel.csrfToken,
 					},
 					type:'GET',
-					url:'/portal/notícias-alunos/' + id,
+					url:'{{ route('notícias-alunos.index') }}/' + id,
 					success:function(data){
 					{{-- console.log(data); --}}
 					if ( data ) {

@@ -27,7 +27,7 @@
             'X-CSRF-TOKEN': Laravel.csrfToken,
           },
           type:'GET',
-          url:'/portal/usuários/' + id,
+          url:'{{ route('usuários.index') }}/' + id,
           success:function(data){
           if ( data ) {
             $(".userid").attr("value", id);
@@ -87,7 +87,7 @@
 <div id="controles" style="margin-bottom: 5px;">
 {!! Form::open(array('route' => 'usuários.search', 'class'=>'form form-inline col-md-5')) !!}
 	<div class="input-group input-group-md">
-    {!! Form::text('title', null,
+    {!! Form::text('name', null,
                            array('required',
                                 'class'=>'form-control col-xs-4',
                                 'placeholder'=>trans('messages.phs.buscaru'))) !!}
