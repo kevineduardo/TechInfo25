@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\News;
 use App\StudentNews;
+use App\User;
+use App\NewStudent;
 
 class SearchController extends Controller
 {
@@ -25,6 +27,16 @@ class SearchController extends Controller
     }
 
     public function usersSearch(Request $request) {
-    	
+    	$request = $request->all();
+    	unset($request['_token']);
+    	$search = User::filter($request)->paginateFilter();
+    	return view('portal.usuarios', ['usuarios' => $search,]);
+    }
+
+    public function studentUsersSearch(Request $request) {
+    	$request = $request->all();
+    	unset($request['_token']);
+    	$search = NewStudent::filter($request)->paginateFilter();
+    	return view('portal.usuarios_alunos', ['usuarios' => $search,]);
     }
 }

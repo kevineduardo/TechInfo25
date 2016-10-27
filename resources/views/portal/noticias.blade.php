@@ -44,7 +44,7 @@
 						'X-CSRF-TOKEN': Laravel.csrfToken,
 					},
 					type:'GET',
-					url:'/portal/notícias/' + id,
+					url:'{{ route('notícias.index') }}/' + id,
 					success:function(data){
 					if ( data ) {
 						$(".notid").attr("value", id);

@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use EloquentFilter\Filterable;
 
 class NewStudent extends Model
 {
+	use Filterable;
     protected $fillable = ['email', 'class_id', 'responsible'];
 
     public function teacher() {

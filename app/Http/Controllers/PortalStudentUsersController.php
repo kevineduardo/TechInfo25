@@ -29,8 +29,7 @@ class PortalStudentUsersController extends Controller
     public function index($s = false, $d = false)
     {
         $alunos = NewStudent::with('classe', 'teacher.user')->paginate(15);
-        $classes = Classe::all();
-        return view('portal.usuarios_alunos', ['usuarios' => $alunos, 'success' => $s, 'deleted' => $d, 'classes' => $classes]);
+        return view('portal.usuarios_alunos', ['usuarios' => $alunos, 'success' => $s, 'deleted' => $d,]);
     }
 
     /**

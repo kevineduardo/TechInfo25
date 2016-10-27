@@ -64,10 +64,10 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::resource('/configurações', 'PortalSettingsController@inicio');
 
 	//Route::resource('/usuários-alunos', 'PortalUsersController');
-	Route::get('/usuários-alunos/{id}', 'PortalStudentUsersController@show')->name('usuários-alunos.show');
-	Route::get('/usuários-alunos', 'PortalStudentUsersController@index')->name('usuários-alunos.index');
-	Route::put('/usuários-alunos', 'PortalStudentUsersController@update')->name('usuários-alunos.update');
-	Route::post('/usuários-alunos', 'PortalStudentUsersController@store')->name('usuários-alunos.store');
+	Route::get('/usuários-convite/{id}', 'PortalStudentUsersController@show')->name('usuários-alunos.show');
+	Route::get('/usuários-convite', 'PortalStudentUsersController@index')->name('usuários-alunos.index');
+	Route::put('/usuários-convite', 'PortalStudentUsersController@update')->name('usuários-alunos.update');
+	Route::post('/usuários-convite', 'PortalStudentUsersController@store')->name('usuários-alunos.store');
 	Route::resource('/configurações', 'PortalSettingsController');
 	
 	//Route::resource('/notícias', 'PortalNewsController');
@@ -107,8 +107,8 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::get('/notícias-alunos/buscar', 'SearchController@newsSearch')->name('notícias.alunos.search')->middleware(VerifyTeacher::class);
 	// ainda não foi implementado
 	//Route::get('/usuários-alunos', 'PortalUsersController@alunos')->name('usuários.alunos');
-	//Route::post('/usuários-alunos/buscar', 'SearchController@alunosUserSearch')->name('usuários.alunos.search');
-	//Route::get('/usuários-alunos/buscar', 'SearchController@alunosUserSearch')->name('usuários.alunos.search');
+	Route::post('/usuários-convite/buscar', 'SearchController@studentUsersSearch')->name('usuários-alunos.search');
+	Route::get('/usuários-convite/buscar', 'SearchController@studentUsersSearch')->name('usuários-alunos.search');
 });
 
 // OAuth
