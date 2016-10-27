@@ -64,6 +64,7 @@ return [
     'buttons' => [
         'palunos' => 'Postadas por Alunos',
         'novanoticia' => 'Nova notícia',
+        'novadata' => 'Nova Data',
         'buscar' => 'Buscar',
 		'voltar' => 'Voltar',
         'alunosinvite' => 'Alunos Autorizados',
@@ -94,6 +95,9 @@ return [
         'name' => 'Nome',
         'email' => 'E-mail',
         'registered' => 'Registrado',
+        'place' => 'Local',
+        'created' => 'Criado por',
+        'date' => 'Data',
     ],
     // Basic stuff like yes or no
     'b' => [

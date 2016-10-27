@@ -14,4 +14,8 @@ class Calendar extends Model
     public function relatedClass() {
     	return $this->belongsTo('App\Classe', 'related_class');
     }
+
+    public function user() {
+    	return $this->belongsTo('App\User', 'author_id');
+    }
 }
