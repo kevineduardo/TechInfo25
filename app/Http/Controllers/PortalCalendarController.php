@@ -9,6 +9,12 @@ use App\Calendar;
 
 class PortalCalendarController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('verifyteacher');
+    }
+    
     /**
      * Display a listing of the resource.
      *

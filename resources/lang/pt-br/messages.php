@@ -56,6 +56,9 @@ return [
         'na' => 'Não existe nenhuma notícia esperando aprovação.',
         'np' => 'Você não possui nenhuma notícia.',
     ],
+    'd' => [
+        'nd' => 'Não existe nenhuma data marcada.'
+    ],
     'u' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
         'ne' => 'Não existe nenhum usuário'
@@ -111,6 +114,8 @@ return [
         'editnews' => 'Editar notícia',
         'edituser' => 'Editar usuário',
         'teachers' => 'Perfil do Educador',
+        'editcal' => 'Editar Calendário',
+        'newcal' => 'Nova Data',
     ],
     // Form's labels
     'form' => [
