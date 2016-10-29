@@ -18,6 +18,7 @@
 @section('javascripts')
   @parent
   <script src="{{ URL::asset('js/jquery.js') }}"></script>
+  <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
   <script>
     function getData(id) {
       $.ajax({
@@ -27,8 +28,11 @@
         },
         url : '/portal/calendário/' + id,
         success : function(data){
+          $('#cid').attr('value',id);
           $('#cname').attr('value',data['name']);
+          $('#clocal').attr('value',data['place']);
           $('#cdesc').text(data['description']);
+          $('#cdate').attr('value',data['date'].slice(0,10));
           $('#editarcalendario').modal();
         },
       });
@@ -97,24 +101,34 @@
           <h4 class="modal-title">@lang('messages.titles.editcal')</h4>
         </div>
         <div class="modal-body" style="overflow: hidden;">
-        <form method="post" action="{{ route('portal.calendario') }}" class="form-horizontal">
+        <form method="post" action="{{ route('calendário.update') }}" class="form-horizontal">
         {{ method_field('PUT') }}
         {{ csrf_field() }}
+        <input id="cid" type="hidden" name="id" value="-1"/>
         <fieldset class="form-horizontal">
 
           <div class="form-group">
-            <label for="name">TITURO</label>
+            <label for="name">@lang('messages.form.calendar.title')</label>
             <input class="form-control" type="text" name="name" id="cname"/>
           </div>
 
           <div class="form-group">
-            <label for="desc">DESCRIÇÂO</label>
+            <label for="name">@lang('messages.form.calendar.place')</label>
+            <input class="form-control" type="text" name="local" id="clocal"/>
+          </div>
+
+          <div class="form-group">
+            <label for="desc">@lang('messages.form.calendar.descr')</label>
             <textarea style="resize:vertical; height: 200px;" class="form-control" name="desc" id="cdesc"></textarea>
           </div>
 
           <div class="form-group">
-            <button type="submit" class="btn btn-success">SUBMIT</button>
-            <button type="submit" class="btn btn-danger">DELETAR</button>
+            <input class="form-control" type="text" name="date" id="cdate"/>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" name="salvar" value="true" class="btn btn-success">@lang('messages.buttons.salvarcal')</button>
+            <button type="submit" name="deletar" value="true" class="btn btn-danger">@lang('messages.buttons.deletarcal')</button>
           </div>
         </fieldset>
         </form>

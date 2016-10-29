@@ -78,6 +78,8 @@ return [
         'deletarnot' => 'Deletar',
         'salvaruser' => 'Salvar',
         'deletaruser' => 'Deletar',
+        'salvarcal' => 'Salvar',
+        'deletarcal' => 'Deletar',
     ],
     // Placeholders
     'phs' => [
@@ -143,6 +145,11 @@ return [
         'save' => 'Salvar',
         'errors' => [
             'post' => 'Falha ao postar!',
+        ],
+        'calendar' => [
+            'title' => 'Titulo',
+            'place' => 'Local',
+            'descr' => 'Descrição',
         ],
         'success' => [
             'post' => [

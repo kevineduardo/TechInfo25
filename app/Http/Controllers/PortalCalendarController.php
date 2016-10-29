@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Calendar;
+use Carbon\Carbon;
 
 class PortalCalendarController extends Controller
 {
@@ -14,7 +15,7 @@ class PortalCalendarController extends Controller
         $this->middleware('auth');
         $this->middleware('verifyteacher');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -55,9 +56,8 @@ class PortalCalendarController extends Controller
      */
     public function show($id)
     {
-        if ( !request()->ajax() ) { return redirect()->route('portal_calendário'); }
+        if ( !request()->ajax() ) { return redirect()->route('calendário.index'); }
         $data = Calendar::with('user')->where('id', $id)->first();
-        // SOME ERROR HANDLING LATER...
         return response()->json($data);
     }
 
@@ -79,9 +79,20 @@ class PortalCalendarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request)
+    {   
+        $id = $request->input('id');
+        $date = Calendar::with('user')->where('id', $id)->first();
+        if( $request->input('salvar') ) {
+            $date->name = $request->input('name');
+            $date->description = $request->input('desc');
+            $date->date = Carbon::parse($request->input('date'));
+            $date->save();
+        }
+        if( $request->input('deletar') ) {
+            $date->delete();
+        }
+        return redirect()->route( 'calendário.index' );
     }
 
     /**

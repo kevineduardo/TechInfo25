@@ -39,9 +39,6 @@ Route::get('/docentes/{id}', 'TeachersController@show');
 
 Route::get('/calendário', 'CalendarController@index')->name('calendário');
 
-Route::get('/portal/calendário', 'PortalCalendarController@index')->name('portal_calendário');
-Route::get('/portal/calendário/{id}', 'PortalCalendarController@show');
-
 
 //Route::get('/portal', 'HomeController@index');
 
@@ -51,14 +48,17 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::get('/', function() {
 		return redirect()->route('portal_inicio');
 	});
+
 	Route::resource('/notas', 'PortalGradesController');
 	Route::resource('/trabalhos', 'PortalHomeworksController');
 	Route::resource('/fotos', 'PortalPicturesController');
+
 	//Route::resource('/usuários', 'PortalUsersController');
 	Route::get('/usuários/{id}', 'PortalUsersController@show')->name('usuários.show');
 	Route::get('/usuários', 'PortalUsersController@index')->name('usuários.index');
 	Route::put('/usuários', 'PortalUsersController@update')->name('usuários.update');
 	Route::resource('/configurações', 'PortalSettingsController@inicio');
+
 	//Route::resource('/notícias', 'PortalNewsController');
 	Route::get('/notícias', 'PortalNewsController@index')->name('notícias.index');
 	Route::post('/notícias', 'PortalNewsController@store')->name('notícias.store');
@@ -72,10 +72,18 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::post('/usuários/buscar', 'SearchController@newsSearch')->name('usuários.search');
 	Route::get('/usuários/buscar', 'SearchController@newsSearch')->name('usuários.search');
 
+	// Rotas de calendario
+	Route::get('/calendário', 'PortalCalendarController@index')->name('calendário.index');
+	Route::get('/calendário/{id}', 'PortalCalendarController@show');
+	Route::put('/calendário', 'PortalCalendarController@update')->name('calendário.update');
+
+	// Fotos
+	Route::get('/fotos','PortalPicturesController@index');
 
 	// Rotas Especiais - teachers only
 	//Route::resource('/notícias-alunos', 'PortalStudentNewsController');
 	Route::get('/notícias-alunos', 'PortalStudentNewsController@index')->name('notícias-alunos.index');
+
 	//Route::post('/notícias-alunos', 'PortalStudentNewsController@store')->name('notícias-alunos.store');
 	Route::get('/notícias-alunos/{id}', 'PortalStudentNewsController@show')->name('notícias-alunos.show');
 	Route::put('/notícias-alunos', 'PortalStudentNewsController@update')->name('notícias-alunos.update');
