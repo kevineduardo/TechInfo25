@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Calendar;
 use Carbon\Carbon;
+use Auth;
 
 class PortalCalendarController extends Controller
 {
@@ -45,7 +46,21 @@ class PortalCalendarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+        $date = new Calendar();
+
+        $date->name = $request->input('name');
+        $date->description = $request->input('desc');
+        $date->place = $request->input('local');
+        $date->date = Carbon::parse($request->input('date'));
+        $date->author_id = $user->id;
+
+        $date->role = 1;
+        $date->time = '00:00:00';
+
+        $date->save();
+
+        return redirect()->route( 'calendário.index' );
     }
 
     /**
@@ -86,6 +101,7 @@ class PortalCalendarController extends Controller
         if( $request->input('salvar') ) {
             $date->name = $request->input('name');
             $date->description = $request->input('desc');
+            $date->place = $request->input('local');
             $date->date = Carbon::parse($request->input('date'));
             $date->save();
         }

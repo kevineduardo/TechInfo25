@@ -4,6 +4,7 @@
 
 @section('styles')
   @parent
+  <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/bootstrap-datepicker3.min.css') }}" />
   <style type="text/css">
     .form-group {
         margin-right: 0px !important;
@@ -19,7 +20,14 @@
   @parent
   <script src="{{ URL::asset('js/jquery.js') }}"></script>
   <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+  <script async defer src="{{ URL::asset('js/bootstrap-datepicker.min.js') }}"></script>
   <script>
+    function dpcb(){
+      $('#cdate').datepicker({});
+    };
+    function formatDate(date) {
+      return (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear();
+    }
     function getData(id) {
       $.ajax({
         headers: 
@@ -28,21 +36,38 @@
         },
         url : '/portal/calendário/' + id,
         success : function(data){
+          $('#method').attr('value','PUT');
+          $('#mtitle').text('{{ trans('messages.titles.editcal') }}');
           $('#cid').attr('value',id);
           $('#cname').attr('value',data['name']);
           $('#clocal').attr('value',data['place']);
           $('#cdesc').text(data['description']);
-          $('#cdate').attr('value',data['date'].slice(0,10));
+          $('#cdateinp').attr('value',formatDate(new Date( data['date'] )));
+          $('#bdel').show(0);
           $('#editarcalendario').modal();
         },
       });
     }
+    $(function(){
+      $('#nova').click(function(){
+        $('#method').attr('value','POST');
+        $('#mtitle').text('{{ trans('messages.titles.newcal') }}');
+        $('#cid').attr('value',null);
+        $('#cname').attr('value','');
+        $('#clocal').attr('value','');
+        $('#cdesc').text('');
+        $('#cdateinp').attr('value',formatDate(new Date()));
+        $('#bdel').hide(0);
+        $('#editarcalendario').modal();
+      });
+      console.log('ran');
+      });
   </script>
 @endsection
 
 @section('content')
   <div class="col-md-12" style="text-align: right;">
-    <button class="btn btn-success">
+    <button class="btn btn-success" id="nova">
       <span class="glyphicon glyphicon-plus"></span>&nbsp;@lang('messages.buttons.novadata')
     </button>
   </div>
@@ -98,11 +123,11 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">@lang('messages.titles.editcal')</h4>
+          <h4 class="modal-title" id="mtitle">@lang('messages.titles.editcal')</h4>
         </div>
         <div class="modal-body" style="overflow: hidden;">
         <form method="post" action="{{ route('calendário.update') }}" class="form-horizontal">
-        {{ method_field('PUT') }}
+        <input id="method" type="hidden" name="_method" value="PUT">
         {{ csrf_field() }}
         <input id="cid" type="hidden" name="id" value="-1"/>
         <fieldset class="form-horizontal">
@@ -123,12 +148,14 @@
           </div>
 
           <div class="form-group">
-            <input class="form-control" type="text" name="date" id="cdate"/>
+            <div class="input-group date" id="cdate">
+              <input name="date" id="cdateinp" type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+            </div>
           </div>
 
           <div class="form-group">
-            <button type="submit" name="salvar" value="true" class="btn btn-success">@lang('messages.buttons.salvarcal')</button>
-            <button type="submit" name="deletar" value="true" class="btn btn-danger">@lang('messages.buttons.deletarcal')</button>
+            <button type="submit" id="bsav" name="salvar" value="true" class="btn btn-success">@lang('messages.buttons.salvarcal')</button>
+            <button type="submit" id="bdel" name="deletar" value="true" class="btn btn-danger">@lang('messages.buttons.deletarcal')</button>
           </div>
         </fieldset>
         </form>

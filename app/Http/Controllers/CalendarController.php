@@ -26,7 +26,8 @@ class CalendarController extends Controller
                                whereDate('date','<=',$end)->get() as $data ) {
                 $datas[] = [
                     'title' => $data->name,
-                    'start' => $data->date->format('Y-m-d')
+                    'start' => $data->date->format('Y-m-d'),
+                    'url'   => route( 'calendário.show', $data->id )
                 ];
             }
             return response()->json($datas);
@@ -63,7 +64,10 @@ class CalendarController extends Controller
      */
     public function show($id)
     {
-
+        if ( !request()->ajax() ) { return redirect()->route( 'calendário' ); }
+        $data = Calendar::where('id',$id)->first();
+        if ( !$data ) { abort( 404 ); }
+        return response()->json( $data );
     }
 
     /**

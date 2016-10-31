@@ -38,7 +38,10 @@ Route::get('/docentes', 'TeachersController@index')->name('docentes');
 Route::get('/docentes/{id}', 'TeachersController@show');
 
 Route::get('/calendário', 'CalendarController@index')->name('calendário');
+Route::get('/calendário/{id}', 'CalendarController@show')->name('calendário.show');
 
+Route::get('/contato', 'ContactController@index')->name('contato');
+Route::post('/contato', 'ContactController@mail')->name('contato.send');
 
 //Route::get('/portal', 'HomeController@index');
 
@@ -76,9 +79,10 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::get('/calendário', 'PortalCalendarController@index')->name('calendário.index');
 	Route::get('/calendário/{id}', 'PortalCalendarController@show');
 	Route::put('/calendário', 'PortalCalendarController@update')->name('calendário.update');
+	Route::post('/calendário', 'PortalCalendarController@store')->name('calendário.update');
 
 	// Fotos
-	Route::get('/fotos','PortalPicturesController@index');
+	Route::get('/fotos','PortalPicturesController@index')->name('fotos.index');
 
 	// Rotas Especiais - teachers only
 	//Route::resource('/notícias-alunos', 'PortalStudentNewsController');

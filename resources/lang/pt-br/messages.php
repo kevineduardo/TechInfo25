@@ -49,6 +49,12 @@ return [
         'teacher' => 'Professores',
         'coordinator' => 'Coordenadores',
         'calendar' => 'Calendário',
+
+        'contact' => 'Contato',
+        'cname' => 'Nome Completo',
+        'cemail' => 'E-Mail',
+        'cmessage' => 'Mensagem',
+        'csubj' => 'Assunto',
     ],
     'n' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
@@ -80,6 +86,8 @@ return [
         'deletaruser' => 'Deletar',
         'salvarcal' => 'Salvar',
         'deletarcal' => 'Deletar',
+        'clear' => 'Limpar Campos',
+        'send' => 'Enviar',
     ],
     // Placeholders
     'phs' => [
@@ -117,7 +125,7 @@ return [
         'edituser' => 'Editar usuário',
         'teachers' => 'Perfil do Educador',
         'editcal' => 'Editar Calendário',
-        'newcal' => 'Nova Data',
+        'newcal' => 'Nova Data'
     ],
     // Form's labels
     'form' => [
