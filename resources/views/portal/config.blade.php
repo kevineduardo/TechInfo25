@@ -48,9 +48,9 @@
 @endif
   <div class="col-md-9">
   <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-      <h3>HOME</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <div id="config" class="tab-pane fade in active">
+      <h3>@lang('messages.layout.settings')</h3>
+      <p>Configurações</p>
     </div>
     <div id="menu1" class="tab-pane fade">
       <h3>Menu 1</h3>
@@ -69,7 +69,7 @@
   <vr>
   <div class="col-md-3">
   <ul class="nav nav-pills nav-stacked">
-    <li class="active"><a data-toggle="pill" href="#home">Home</a></li>
+    <li class="active"><a data-toggle="pill" href="#config">@lang('messages.layout.settings')</a></li>
     <li><a data-toggle="pill" href="#menu1">Menu 1</a></li>
     <li><a data-toggle="pill" href="#menu2">Menu 2</a></li>
     <li><a data-toggle="pill" href="#menu3">Menu 3</a></li>
