@@ -47,6 +47,7 @@ return [
         'recents' => 'Recentes',
         'users' => 'Usuários',
         'usersinvite' => 'Convite de Usuários',
+        'settings' => 'Configurações',
     ],
     'n' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
