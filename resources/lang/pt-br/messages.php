@@ -47,7 +47,8 @@ return [
         'recents' => 'Recentes',
         'users' => 'Usuários',
         'usersinvite' => 'Convite de Usuários',
-        'settings' => 'Configurações',
+        'settings' => 'Configurações Gerais',
+        'classes' => 'Gerenciar Turmas',
     ],
     'n' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
@@ -80,6 +81,10 @@ return [
     'phs' => [
         'buscar' => 'Buscar notícia...',
         'buscaru' => 'Buscar usuário...',
+        'email_aluno' => 'educando@25dejulho.com',
+        'site_name' => 'Tech Info 25',
+        'fb_url' => 'https://www.facebook.com/TechInfo25',
+        'sfooter' => 'ESCOLA TÉCNICA ESTADUAL 25 DE JULHO <br/>IJUÍ - RS',
     ],
     // Colummns field's name
     'cm' => [
@@ -127,6 +132,13 @@ return [
         'userinvite' => [
         'email' => 'Email',
         'class' => 'Turma',
+        ],
+        'settings' => [
+        'site_name' => 'Nome do Site',
+        'mnt' => 'Manutenção',
+        'fb' => 'URL da Página do Facebook',
+        'pa' => 'Portal do Estudante (para Alunos)',
+        'footer' => 'Footer do Site',
         ],
         'publish' => [
             'true' => 'Publicar imediatamente',

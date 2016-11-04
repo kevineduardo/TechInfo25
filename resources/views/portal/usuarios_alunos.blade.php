@@ -162,9 +162,9 @@
         {{ csrf_field() }}
         <fieldset>
             <div class="form-group">
-                <label for="title">@lang('messages.form.userinvite.email')</label>
+                <label for="email">@lang('messages.form.userinvite.email')</label>
                 <input autocomplete="off" class="form-control" id=
-                "email" name="email" placeholder="educando@25dejulho.com"
+                "email" name="email" placeholder="@lang('messages.phs.email_aluno')"
                 required="" type="email" value="">
             </div>
             <div class="form-group">

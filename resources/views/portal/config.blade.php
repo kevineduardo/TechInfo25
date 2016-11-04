@@ -49,12 +49,50 @@
   <div class="col-md-9">
   <div class="tab-content">
     <div id="config" class="tab-pane fade in active">
-      <h3>@lang('messages.layout.settings')</h3>
-      <p>Configurações</p>
+      <form class="form-horizontal" method="post">
+        {{ csrf_field() }}
+        <fieldset>
+            <div class="form-group">
+                <label for="sitename">@lang('messages.form.settings.site_name')</label>
+                <input autocomplete="off" class="form-control" id=
+                "sitename" name="site_name" placeholder="@lang('messages.phs.site_name')"
+                required="" type="text" value="@if($settings['site_name']) {{ $settings['site_name'] }} @endif">
+            </div>
+            <div class="form-group">
+              <label for="mnt">@lang('messages.form.settings.mnt')</label>
+              <select id="mnt" class="form-control" name="maintenance" class="form-control">
+                <option @if($settings['maintenance'] == "true") selected @endif value="1">Ativado</option>
+                <option @if($settings['maintenance'] == "false") selected @endif value="0">Desativado</option>
+              </select>
+            </div>
+            <div class="form-group">
+                <label for="fb">@lang('messages.form.settings.fb')</label>
+                <input autocomplete="off" class="form-control" id=
+                "fb" name="facebook_page_url" placeholder="@lang('messages.phs.fb_url')"
+                required="" type="text" value="@if($settings['facebook_page_url']) {{ urldecode($settings['facebook_page_url']) }} @endif">
+            </div>
+            <div class="form-group">
+                <label for="portal_a">@lang('messages.form.settings.pa')</label>
+                <select id="portal_a" class="form-control" name="portal_activated" class="form-control">
+                <option @if($settings['portal_activated'] == "true") selected @endif value="1">Ativado</option>
+                <option @if($settings['portal_activated'] == "false") selected @endif value="0">Desativado</option>
+              </select>
+            </div>
+            <div class="form-group">
+                <label for="sfooter">@lang('messages.form.settings.footer')</label>
+                <input autocomplete="off" class="form-control" id=
+                "sfooter" name="footer" placeholder="@lang('messages.phs.sfooter')"
+                required="" type="text" value="@if($settings['footer']) {{ $settings['footer'] }} @endif">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success center-block" type="submit">@lang('messages.form.save')</button>
+            </div>
+        </fieldset>
+      </form>
     </div>
-    <div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <div id="turmas" class="tab-pane fade">
+      <h3>Turmas</h3>
+      <p>TRETA.</p>
     </div>
     <div id="menu2" class="tab-pane fade">
       <h3>Menu 2</h3>
@@ -70,7 +108,7 @@
   <div class="col-md-3">
   <ul class="nav nav-pills nav-stacked">
     <li class="active"><a data-toggle="pill" href="#config">@lang('messages.layout.settings')</a></li>
-    <li><a data-toggle="pill" href="#menu1">Menu 1</a></li>
+    <li><a data-toggle="pill" href="#turmas">@lang('messages.layout.classes')</a></li>
     <li><a data-toggle="pill" href="#menu2">Menu 2</a></li>
     <li><a data-toggle="pill" href="#menu3">Menu 3</a></li>
   </ul>
