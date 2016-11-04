@@ -27,6 +27,8 @@
 
     <!-- Scripts -->
     @section('javascripts')
+    <script src="{{ URL::asset('js/jquery.js') }}"></script>
+    <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
@@ -86,8 +88,5 @@
 
         @yield('portal')
     </div>
-
-    <!-- Scripts -->
-    <script src="/js/app.js"></script>
 </body>
 </html>

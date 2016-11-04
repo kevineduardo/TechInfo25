@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="row">
-        <div class="col-md-3">
+        <div id="menusidebar" class="col-md-3">
             <div class="profile-sidebar" style="margin-bottom: 10px;">
                 <div class="profile-userpic">
                     @if(Auth::user()->avatar())
@@ -81,7 +81,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
+        <div id="conteudogeral" class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-heading">@yield('title')</div>
 
