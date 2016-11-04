@@ -17,7 +17,6 @@
 
 @section('javascripts')
 	@parent
-	<script src="{{ URL::asset('js/jquery.js') }}"></script>
 	<script src="{{ URL::asset('tinymce/tinymce.min.js') }}"></script>
 	  <script>
 	  tinymce.init({ 

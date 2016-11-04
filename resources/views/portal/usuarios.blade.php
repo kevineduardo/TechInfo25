@@ -18,7 +18,6 @@
 
 @section('javascripts')
   @parent
-  <script src="{{ URL::asset('js/jquery.js') }}"></script>
 <script>
       function getUserData(id) {
         $.ajax(
