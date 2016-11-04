@@ -8,6 +8,7 @@
   <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
   <script src="{{ URL::asset('js/moment.js') }}"></script>
   <script src='{{ URL::asset('js/fullcalendar.js') }}'></script>
+  <script src='{{ URL::asset('js/fullcalendar-pt-br.js') }}'></script>
   <script type="text/javascript">
     function getData( url ) 
     {

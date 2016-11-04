@@ -47,22 +47,4 @@ class SiteController extends Controller
         }
         return view('foto', $foto);
     }
-
-    public function noticia($id) {
-        $nts = Cache::tags('notícias')->get('notícias');
-        if ($nts != null) {
-            $nt = $nts->find($id);
-            if(!$nt) {
-                return redirect()->route('inicio');
-            }
-            $nts = Cache::tags('rnotícias')->get('rnotícias');
-            return view('noticia', ['nt' => $nt, 'nts' => $nts,]);
-        } 
-        $nt = News::where('published', true)->find($id);
-        $nts = News::where('published', true)->orderBy('published_at', 'desc')->take(10)->get();
-        if(!$nt) {
-            return redirect()->route('inicio');
-        }
-        return view('noticia', ['nt' => $nt, 'nts' => $nts,]);
-    }
 }

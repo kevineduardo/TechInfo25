@@ -29,10 +29,8 @@ Route::get('/foto', function() {
 	return redirect()->route('inicio');
 });
 
-Route::get('/notícia/{id}', 'SiteController@noticia')->name('notícia');
-Route::get('/notícia', function() {
-	return redirect()->route('inicio');
-});
+Route::get('/notícias/{id}', 'NewsController@show')->name('notícia');
+Route::get('/notícias', 'NewsController@index');
 
 Route::get('/docentes', 'TeachersController@index')->name('docentes');
 Route::get('/docentes/{id}', 'TeachersController@show');
