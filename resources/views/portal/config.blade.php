@@ -5,8 +5,9 @@
 
 @section('javascripts')
 	@parent
-	<script src="{{ URL::asset('js/jquery.js') }}"></script>
+  <script src="{{ URL::asset('jqueryui/jquery-ui.min.js') }}"></script>
     <script>
+      var triggered = false;
       $(document).ready (function(){
             $(".alert-success").fadeTo(2200, 500).slideUp(500, function(){
             $(".alert-success").slideUp(500);
@@ -14,7 +15,42 @@
             $(".alert-danger").fadeTo(10000, 500).slideUp(500, function(){
             $(".alert-danger").slideUp(500);
             });
+            $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+              var target = $(e.target).attr("href") // activated tab
+              if (target == "#turmas") {
+                triggered = true;
+                hidesidebar();
+              } else {
+                if(triggered == true) {
+                  showsidebar();
+                }
+              }
+            });
       });
+
+      function hidesidebar() {
+        $( "#menusidebar" ).animate({
+                width: "hide",
+                height: "hide",
+              }, 700, function() {
+                $( "#menusidebar" ).css({
+                    'display': 'none',
+                });
+                $('#conteudogeral').switchClass( "col-md-9", "col-md-12", 300, "easeInOutQuad" );
+              });
+      }
+
+      function showsidebar() {
+        $('#conteudogeral').switchClass( "col-md-12", "col-md-9", 300, "easeInOutQuad" );
+        $( "#menusidebar" ).animate({
+                width: "show",
+                height: "show",
+              }, 700, function() {
+                $( "#menusidebar" ).css({
+                    'display': 'initial',
+                });
+              });
+      }
     </script>
 @endsection
 
