@@ -55,6 +55,7 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::put('/usuários-convite', 'PortalStudentUsersController@update')->name('usuários-alunos.update');
 	Route::post('/usuários-convite', 'PortalStudentUsersController@store')->name('usuários-alunos.store');
 	Route::resource('/configurações', 'PortalSettingsController');
+	Route::resource('/professor', 'TeacherDashboardController');
 	Route::get('/ajax/turma', 'PortalSettingsController@turma')->name('ajax.turma');
 	Route::get('/ajax/turma/{id}', 'PortalSettingsController@turma');
 	//Route::resource('/notícias', 'PortalNewsController');
