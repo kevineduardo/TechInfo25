@@ -104,89 +104,25 @@
                 });
               });
       }
-      // target elements with the "draggable" class
-      interact('.draggable')
-        .draggable({
-          // enable inertial throwing
-          inertia: true,
-          // keep the element within the area of it's parent
-          restrict: {
-            restriction: "parent",
-            endOnly: true,
-            elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
+
+      function getTurmaData(id) {
+        $.ajax(
+        {
+          headers: {
+            'X-CSRF-TOKEN': Laravel.csrfToken,
           },
-          // enable autoScroll
-          autoScroll: true,
-
-          // call this function on every dragmove event
-          onmove: dragMoveListener,
-          // call this function on every dragend event
-          onend: function (event) {
-            var textEl = event.target.querySelector('p');
-
-            textEl && (textEl.textContent =
-              'moved a distance of '
-              + (Math.sqrt(event.dx * event.dx +
-                           event.dy * event.dy)|0) + 'px');
+          type:'GET',
+          url:'{{ route('ajax.turma') }}/' + id,
+          success:function(data){
+          if ( data ) {
+            $("#enumber").attr("value", data['number']);
+            $("#evariant").attr("value", data['variant']);
+            $("#editarturma").modal('show');
           }
-        });
-
-        function dragMoveListener (event) {
-            var target = event.target,
-                // keep the dragged position in the data-x/data-y attributes
-                x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-                y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-
-            // translate the element
-            target.style.webkitTransform =
-            target.style.transform =
-              'translate(' + x + 'px, ' + y + 'px)';
-
-            // update the posiion attributes
-            target.setAttribute('data-x', x);
-            target.setAttribute('data-y', y);
-          }
-
-        /* The dragging code for '.draggable' from the demo above
-         * applies to this demo as well so it doesn't have to be repeated. */
-
-        // enable draggables to be dropped into this
-        interact('.dropzone').dropzone({
-          // only accept elements matching this CSS selector
-          accept: '#yes-drop',
-          // Require a 75% element overlap for a drop to be possible
-          overlap: 0.75,
-
-          // listen for drop related events:
-
-          ondropactivate: function (event) {
-            // add active dropzone feedback
-            event.target.classList.add('drop-active');
-          },
-          ondragenter: function (event) {
-            var draggableElement = event.relatedTarget,
-                dropzoneElement = event.target;
-
-            // feedback the possibility of a drop
-            dropzoneElement.classList.add('drop-target');
-            draggableElement.classList.add('can-drop');
-            draggableElement.textContent = 'Dragged in';
-          },
-          ondragleave: function (event) {
-            // remove the drop feedback style
-            event.target.classList.remove('drop-target');
-            event.relatedTarget.classList.remove('can-drop');
-            event.relatedTarget.textContent = 'Dragged out';
-          },
-          ondrop: function (event) {
-            event.relatedTarget.textContent = 'Dropped';
-          },
-          ondropdeactivate: function (event) {
-            // remove active dropzone feedback
-            event.target.classList.remove('drop-active');
-            event.target.classList.remove('drop-target');
-          }
-        });
+           }
+        }
+        );
+      }
     </script>
 @endsection
 
@@ -263,15 +199,34 @@
       </form>
     </div>
     <div id="turmas" class="tab-pane fade">
-      <div id="no-drop" class="draggable drag-drop"> #no-drop </div>
-
-      <div id="yes-drop" class="draggable drag-drop"> #yes-drop </div>
-
-      <div id="outer-dropzone" class="dropzone">
-        #outer-dropzone
-        <div id="inner-dropzone" class="dropzone">#inner-dropzone</div>
-       </div>
-
+            <table class="table table-hover">
+            <thead>
+        <tr>
+          <th><span class="vermelho">@lang('messages.cm.class')</span></th>
+          <th><span class="vermelho">@lang('messages.cm.inityear')</span></th>
+        </tr>
+      </thead>
+      @if(count($turmas) != 0)
+      <button type="button" style="margin-top: 5px;" class="btn btn-primary" data-toggle="modal" data-target="#novaturma">@lang('messages.buttons.novaturma')</button>
+      @foreach ($turmas as $turma)
+          <tr style="cursor: pointer;" onclick="getTurmaData({{ $turma['id'] }})">
+          <td>@if($turma->variant) {{ $turma->number . $turma->variant }} @else {{ $turma->number }} @endif</td>
+          <td>{{ Carbon\Carbon::parse($turma->inityear)->format('d/m/Y') }}</td>
+        </tr>
+        @endforeach
+      @else
+      <tr class="text-center">
+        @if(str_contains(Route::currentRouteName(), 'search'))
+          <td colspan="4">@lang('messages.t.nr')</td>
+          @else
+          <td colspan="4">@lang('messages.t.ne')</td>
+          @endif
+      </tr>
+      @endif
+      </table>
+      <div class="text-center">
+      {{ $turmas->links() }}
+      </div>
     </div>
     <div id="menu2" class="tab-pane fade">
       <h3>Menu 2</h3>
@@ -292,4 +247,56 @@
     <li><a data-toggle="pill" href="#menu3">Menu 3</a></li>
   </ul>
 </div>
+  <div class="modal fade" id="novaturma" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">@lang('messages.titles.newclass')</h4>
+        </div>
+        <div class="modal-body">
+        <form class="form-horizontal" method="post">
+        {{ csrf_field() }}
+        <fieldset>
+            <div class="form-group">
+                <label for="number">@lang('messages.form.class.number')</label>
+                <input autocomplete="off" class="form-control" id=
+                "number" name="number" placeholder="@lang('messages.phs.turma_number')"
+                required="" type="number" value="">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success center-block" type="submit">@lang('messages.form.save')</button>
+            </div>
+        </fieldset>
+      </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="editarturma" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">@lang('messages.titles.editclass')</h4>
+        </div>
+        <div class="modal-body">
+        <form class="form-horizontal" method="post">
+        {{ csrf_field() }}
+        <fieldset>
+            <div class="form-group">
+                <label for="number">@lang('messages.form.class.number')</label>
+                <input autocomplete="off" class="form-control" id=
+                "enumber" name="number" placeholder="@lang('messages.phs.turma_number')"
+                required="" type="number" value="">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success center-block" type="submit">@lang('messages.form.save')</button>
+            </div>
+        </fieldset>
+      </form>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection

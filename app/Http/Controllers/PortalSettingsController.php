@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Classe;
 
 class PortalSettingsController extends Controller
 {
@@ -20,7 +21,8 @@ class PortalSettingsController extends Controller
      */
     public function index()
     {
-        return view('portal.config');
+        $turmas = Classe::paginate(15);
+        return view('portal.config', ['turmas' => $turmas,]);
     }
 
     /**
@@ -87,5 +89,16 @@ class PortalSettingsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function turma(Request $request, $id) {
+        if($request->ajax()) {
+            $turma = Classe::find($id);
+            if(!$turma) {
+                abort(404);
+            }
+            return response()->json($turma->toArray());
+        }
+        return redirect()->route('portal_inicio');
     }
 }
