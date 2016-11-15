@@ -75,7 +75,11 @@ return [
     ],
     'u' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
-        'ne' => 'Não existe nenhum usuário'
+        'ne' => 'Não existe nenhum usuário',
+    ],
+    't' => [
+        'nr' => 'Sua busca retornou nenhum resultado.',
+        'ne' => 'Não existe nenhuma turma',
     ],
     // Buttons, dude!
     'buttons' => [
@@ -98,6 +102,7 @@ return [
         'send' => 'Enviar',
         'novoconvite' => 'Novo Convite',
         'deletarconvite' => 'Deletar Convite',
+        'novaturma' => 'Nova Turma',
     ],
     // Placeholders
     'phs' => [
@@ -107,6 +112,7 @@ return [
         'site_name' => 'Tech Info 25',
         'fb_url' => 'https://www.facebook.com/TechInfo25',
         'sfooter' => 'ESCOLA TÉCNICA ESTADUAL 25 DE JULHO <br/>IJUÍ - RS',
+        'turma_number' => '121C',
     ],
     // Colummns field's name
     'cm' => [
@@ -126,6 +132,7 @@ return [
         'created' => 'Criado por',
         'date' => 'Data',
         'class' => 'Turma',
+        'inityear' => 'Data de Início',
         'resp' => 'Responsável',
     ],
     // Basic stuff like yes or no
@@ -143,7 +150,10 @@ return [
         'editcal' => 'Editar Calendário',
         'newcal' => 'Nova Data'
         'deleteinvite' => 'Deletar convite',
+        'deleteinvite' => 'Deletar Convite',
         'newinvite' => 'Novo Convite',
+        'newclass' => 'Nova Turma',
+        'editclass' => 'Editar Turma',
     ],
     // Form's labels
     'form' => [
@@ -160,6 +170,10 @@ return [
         'userinvite' => [
         'email' => 'Email',
         'class' => 'Turma',
+        ],
+        'class' => [
+        'number' => 'Número',
+        'variant' => 'Variante',
         ],
         'settings' => [
         'site_name' => 'Nome do Site',

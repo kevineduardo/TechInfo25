@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Classe extends Model
 {
-    protected $fillable = ['number', 'variant'];
+    protected $fillable = ['number', 'variant', 'inityear'];
+
+    protected $dates = ['inityear', 'created_at', 'updated_at'];
 
     public function teachers() {
     	return $this->belongsToMany('App\Teacher', 'teacher_subject_class', 'class_id', 'teacher_id');

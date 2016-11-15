@@ -17,6 +17,7 @@ class CreateClassesTable extends Migration
             $table->increments('id');
             $table->integer('number');
             $table->string('variant')->nullable();
+            $table->date('inityear');
             $table->timestamps();
         });
     }
