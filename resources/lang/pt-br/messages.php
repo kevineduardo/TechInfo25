@@ -248,6 +248,7 @@ return [
         'users' => 'Usuários',
         'config' => 'Configurações',
         'usersinvite' => 'Convite de Usuários',
+        'teacherdashboard' => 'Painel do Professor',
     ],
     // Alts for the alt="" attribute
     'alt' => [
