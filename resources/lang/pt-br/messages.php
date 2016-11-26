@@ -63,6 +63,9 @@ return [
         'usersinvite' => 'Convite de Usuários',
         'settings' => 'Configurações Gerais',
         'classes' => 'Gerenciar Turmas',
+        'teacherdashboard' => 'Painel do Professor',
+        'myclasses' => 'Minhas turmas',
+        'subjects' => 'Matérias',
     ],
     'n' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
@@ -75,11 +78,15 @@ return [
     ],
     'u' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
-        'ne' => 'Não existe nenhum usuário',
+        'ne' => 'Não existe nenhum usuário.',
     ],
     't' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
-        'ne' => 'Não existe nenhuma turma',
+        'ne' => 'Não existe nenhuma turma.',
+    ],
+    'm' => [
+        'nr' => 'Sua busca retornou nenhum resultado.',
+        'ne' => 'Não existe nenhuma matéria.',
     ],
     // Buttons, dude!
     'buttons' => [
@@ -105,6 +112,9 @@ return [
         'novaturma' => 'Nova Turma',
         'salvarturma' => 'Salvar',
         'deletarturma' => 'Deletar',
+        'novamateria' => 'Nova Matéria',
+        'salvarmateria' => 'Salvar',
+        'deletarmateria' => 'Deletar',
     ],
     // Placeholders
     'phs' => [
@@ -116,6 +126,10 @@ return [
         'sfooter' => 'ESCOLA TÉCNICA ESTADUAL 25 DE JULHO <br/>IJUÍ - RS',
         'turma_number' => '121',
         'turma_variant' => 'A',
+        'biografia' => 'Sou uma pessoa legal.',
+        'academicbg' => 'Formado em Ciências das Computação...',
+        'subject' => 'Introdução à Informática',
+        'desc' => 'Matéria sobre conceitos básicos de T.I',
     ],
     // Colummns field's name
     'cm' => [
@@ -137,6 +151,8 @@ return [
         'class' => 'Turma',
         'inityear' => 'Data de Início',
         'resp' => 'Responsável',
+        'subject' => 'Matéria',
+        'desc' => 'Descrição',
     ],
     // Basic stuff like yes or no
     'b' => [
@@ -157,6 +173,8 @@ return [
         'newinvite' => 'Novo Convite',
         'newclass' => 'Nova Turma',
         'editclass' => 'Editar Turma',
+        'newsubject' => 'Nova Matéria',
+        'editsubject' => 'Editar Matéria',
     ],
     // Form's labels
     'form' => [
@@ -184,6 +202,14 @@ return [
         'fb' => 'URL da Página do Facebook',
         'pa' => 'Portal do Estudante (para Alunos)',
         'footer' => 'Footer do Site',
+        ],
+        'teacherdashboard' => [
+        'bio' => 'Biografia',
+        'abg' => 'Formação acadêmica',
+        ],
+        'subject' => [
+        'name' => 'Nome da Matéria',
+        'desc' => 'Descrição da Máteria',
         ],
         'publish' => [
             'true' => 'Publicar imediatamente',
@@ -228,9 +254,25 @@ return [
                 'title' => 'Editada com sucesso!',
                 'msg' => 'A turma foi editada.',
             ],
+            'tsaved' => [
+                'title' => 'Salvada com sucesso!',
+                'msg' => 'A turma foi salva.',
+            ],
             'tdeleted' => [
                 'title' => 'Descartado com sucesso!',
                 'msg' => 'A turma foi descartada.',
+            ],
+            'msaved' => [
+                'title' => 'Salvada com sucesso!',
+                'msg' => 'A matéria foi salva.',
+            ],
+            'mdeleted' => [
+                'title' => 'Descartado com sucesso!',
+                'msg' => 'A matéria foi descartada.',
+            ],
+            'medited' => [
+                'title' => 'Editada com sucesso!',
+                'msg' => 'A matéria foi editada.',
             ],
             'saved' => [
                 'title' => 'Salvado com sucesso!',
