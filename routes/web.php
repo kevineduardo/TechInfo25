@@ -74,6 +74,8 @@ Route::group(['prefix' => 'portal'], function () {
 	// gambiarras de leve
 	Route::get('/ajax/turma', 'PortalSettingsController@turma')->name('ajax.turma');
 	Route::get('/ajax/turma/{id}', 'PortalSettingsController@turma');
+	Route::get('/ajax/mturma', 'TeacherDashboardController@turma')->name('ajax.mturma');
+	Route::get('/ajax/mturma/{id}', 'TeacherDashboardController@turma');
 	Route::get('/ajax/materia', 'PortalSettingsController@materia')->name('ajax.materia');
 	Route::get('/ajax/materia/{id}', 'PortalSettingsController@materia');
 	// fim das gambiarras de leve

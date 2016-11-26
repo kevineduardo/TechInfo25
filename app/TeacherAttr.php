@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TeacherAttr extends Model
 {
     protected $table = "teacher_subject_class";
-    protected $fillable = ['teacher_id', 'subject_id', 'class_id'];
+    protected $fillable = ['id', 'teacher_id', 'subject_id', 'class_id'];
     public function teacher() {
     	return $this->belongsTo('App\Teacher');
     }
@@ -16,7 +16,7 @@ class TeacherAttr extends Model
     	return $this->belongsTo('App\Subject');
     }
 
-    public function class() {
-    	return $this->belongsTo('App\Classe');
+    public function classe() {
+    	return $this->belongsTo('App\Classe', 'class_id');
     }
 }

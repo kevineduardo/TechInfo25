@@ -31,7 +31,23 @@
             $(".alert-danger").fadeTo(10000, 500).slideUp(500, function(){
             $(".alert-danger").slideUp(500);
             });
+            $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+              var target = $(e.target).attr("href") // activated tab
+              if (target == "#turmas") {
+                localStorage.ptriggered = "turmas";
+              }
+            });
+
+            if (typeof localStorage.ptriggered !== 'undefined') {
+              if(localStorage.ptriggered == "turmas") {
+                activaTab('turmas');
+              }
+            }
       });
+
+      function activaTab(tab){
+        $('.nav-pills a[href="#' + tab + '"]').tab('show');
+      };
       function getTurmaData(id) {
         $.ajax(
         {
@@ -39,12 +55,12 @@
             'X-CSRF-TOKEN': Laravel.csrfToken,
           },
           type:'GET',
-          url:'{{ route('ajax.turma') }}/' + id,
+          url:'{{ route('ajax.mturma') }}/' + id,
           success:function(data){
           if ( data ) {
-            $("#selected").attr("value", id);
-            $("#enumber").attr("value", data['number']);
-            $("#evariant").attr("value", data['variant']);
+            $("#tselected").attr("value", id);
+            $('#eclass option[value='+ data['class_id'] +']').prop('selected', true);
+            $('#esubject option[value='+ data['subject_id'] +']').prop('selected', true);
             $("#editarturma").modal('show');
           }
            }
@@ -70,20 +86,24 @@
 @if($success)
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <strong>@lang('messages.form.success.saved.title')</strong> @lang('messages.form.success.saved.msg')
+  <strong>@lang('messages.form.success.infosaved.title')</strong> @lang('messages.form.success.infosaved.msg')
 </div>
 @endif
 @endif
-@if(isset($et))
-@if($et)
+@if(isset($msg))
+@if($msg == 1)
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>@lang('messages.form.success.tsaved.title')</strong> @lang('messages.form.success.tsaved.msg')
+</div>
+@endif
+@if($msg == 2)
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <strong>@lang('messages.form.success.tedited.title')</strong> @lang('messages.form.success.tedited.msg')
 </div>
 @endif
-@endif
-@if(isset($dt))
-@if($dt)
+@if($msg == 3)
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <strong>@lang('messages.form.success.tdeleted.title')</strong> @lang('messages.form.success.tdeleted.msg')
@@ -116,24 +136,34 @@
       </form>
     </div>
     <div id="turmas" class="tab-pane fade">
-            <table class="table table-hover">
+      <button type="button" style="margin-top: 5px;" class="btn btn-primary" data-toggle="modal" data-target="#novaturma">@lang('messages.buttons.novaturma')</button>
+      <table class="table table-hover">
             <thead>
         <tr>
           <th><span class="vermelho">@lang('messages.cm.class')</span></th>
           <th><span class="vermelho">@lang('messages.cm.subject')</span></th>
-          {{-- Parei por aqui--}}
         </tr>
       </thead>
-
+      @if(count($turmas) != 0)
+      @foreach ($turmas as $turma)
+          <tr style="cursor: pointer;" onclick="getTurmaData({{ $turma->id }})">
+          <td>@if($turma->classe->variant) {{ $turma->classe->number . $turma->classe->variant }} @else {{ $turma->classe->number }} @endif</td>
+          <td>{{ $turma->subject->name }}</td>
+        </tr>
+        @endforeach
+      @else
+      <tr class="text-center">
+        @if(str_contains(Route::currentRouteName(), 'search'))
+          <td colspan="4">@lang('messages.t.nr')</td>
+          @else
+          <td colspan="4">@lang('messages.t.ne')</td>
+          @endif
+      </tr>
+      @endif
       </table>
-    </div>
-    <div id="menu2" class="tab-pane fade">
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-    </div>
-    <div id="menu3" class="tab-pane fade">
-      <h3>Menu 3</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+      <div class="text-center">
+      {{ $turmas->links() }}
+      </div>
     </div>
   </div>
   </div>
@@ -142,8 +172,6 @@
   <ul class="nav nav-pills nav-stacked">
     <li class="active"><a data-toggle="pill" href="#config">@lang('messages.layout.teacherdashboard')</a></li>
     <li><a data-toggle="pill" href="#turmas">@lang('messages.layout.myclasses')</a></li>
-    <li><a data-toggle="pill" href="#menu2">Menu 2</a></li>
-    <li><a data-toggle="pill" href="#menu3">Menu 3</a></li>
   </ul>
 </div>
   <div class="modal fade" id="novaturma" role="dialog">
@@ -158,16 +186,21 @@
         {{ csrf_field() }}
         <fieldset class="form-horizontal">
             <div class="form-group">
-                <label for="number">@lang('messages.form.class.number')</label>
-                <input type="hidden" name="newclass" value="1">
-                <input autocomplete="off" class="form-control" id=
-                "number" name="number" placeholder="@lang('messages.phs.turma_number')"
-                required="" type="number" min="100" max="999" value="">
+              <label for="class">@lang('messages.form.teacherdashboard.class')</label>
+              <input type="hidden" name="newclass" value="1">
+              <select id="class" class="form-control" name="class_id" class="form-control">
+                @foreach($classes as $class)
+                <option value="{{ $class->id }}">@if($class->variant) {{ $class->number . $class->variant }} @else {{ $class->number }} @endif</option>
+                @endforeach
+              </select>
             </div>
             <div class="form-group">
-                <label for="variant">@lang('messages.form.class.variant')</label>
-                <input autocomplete="off" class="form-control" id=
-                "variant" name="variant" placeholder="@lang('messages.phs.turma_variant')"  type="text" value="">
+              <label for="subject">@lang('messages.form.teacherdashboard.subject')</label>
+              <select id="subject" class="form-control" name="subject_id" class="form-control">
+                @foreach($subjects as $subject)
+                <option value="{{ $subject->id }}">@if($subject->name) {{ $subject->name }} @endif</option>
+                @endforeach
+              </select>
             </div>
             <div class="form-group">
                 <button class="btn btn-success center-block" type="submit">@lang('messages.buttons.salvarturma')</button>
@@ -190,17 +223,22 @@
         {{ csrf_field() }}
         <fieldset>
             <div class="form-group">
-                <label for="number">@lang('messages.form.class.number')</label>
-                <input type="hidden" name="editclass" value="1">
-                <input type="hidden" id="selected" name="selected" value="">
-                <input autocomplete="off" class="form-control" id=
-                "enumber" name="number" placeholder="@lang('messages.phs.turma_number')"
-                required="" type="number" min="100" max="999" value="">
+              <label for="eclass">@lang('messages.form.teacherdashboard.class')</label>
+              <input type="hidden" name="editclass" value="1">
+              <input type="hidden" id="tselected" name="selected" value="">
+              <select id="eclass" class="form-control" name="class_id" class="form-control">
+                @foreach($classes as $class)
+                <option value="{{ $class->id }}">@if($class->variant) {{ $class->number . $class->variant }} @else {{ $class->number }} @endif</option>
+                @endforeach
+              </select>
             </div>
             <div class="form-group">
-                <label for="variant">@lang('messages.form.class.variant')</label>
-                <input autocomplete="off" class="form-control" id=
-                "evariant" name="variant" placeholder="@lang('messages.phs.turma_variant')"  type="text" value="">
+              <label for="esubject">@lang('messages.form.teacherdashboard.subject')</label>
+              <select id="esubject" class="form-control" name="subject_id" class="form-control">
+                @foreach($subjects as $subject)
+                <option value="{{ $subject->id }}">@if($subject->name) {{ $subject->name }} @endif</option>
+                @endforeach
+              </select>
             </div>
             <div class="form-group">
                 <button class="btn btn-success" name="salvar" value="true" type="submit">@lang('messages.buttons.salvarturma')</button>

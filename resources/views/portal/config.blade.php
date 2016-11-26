@@ -32,7 +32,7 @@ form {
               var target = $(e.target).attr("href") // activated tab
               if (target == "#turmas") {
                 triggered = true;
-                localStorage.triggered = "turmas";
+                localStorage.ctriggered = "turmas";
                 hidesidebar();
               } else {
                 if(triggered == true) {
@@ -40,17 +40,17 @@ form {
                 }
               }
               if (target == "#materias") {
-                localStorage.triggered = "materias";
+                localStorage.ctriggered = "materias";
               }
             });
 
-            if (typeof localStorage.triggered !== 'undefined') {
-              if(localStorage.triggered == "turmas") {
+            if (typeof localStorage.ctriggered !== 'undefined') {
+              if(localStorage.ctriggered == "turmas") {
                 triggered = true;
                 activaTab('turmas');
                 hidesidebar();
               }
-              if(localStorage.triggered == "materias") {
+              if(localStorage.ctriggered == "materias") {
                 activaTab('materias');
               }
             }

@@ -8,6 +8,9 @@ use App\Http\Requests;
 use Auth;
 use App\Teacher;
 use App\User;
+use App\Subject;
+use App\Classe;
+use App\TeacherAttr;
 
 class TeacherDashboardController extends Controller
 {
@@ -16,12 +19,15 @@ class TeacherDashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($ss = false, $msg = 0)
     {
         $usuario = Auth::user();
+        $turmas = TeacherAttr::where('teacher_id', $usuario->teacher->id)->paginate(15);
+        $subs = Subject::all();
+        $classes = Classe::all();
         $bio = $usuario->teacher->bio;
         $abg = $usuario->teacher->academic_bg;
-        return view('portal.professor')->with(['bio' => $bio, 'abg' => $abg,]);
+        return view('portal.professor')->with(['success' => $ss, 'turmas' => $turmas, 'classes' => $classes, 'subjects' => $subs, 'bio' => $bio, 'abg' => $abg, 'msg' => $msg,]);
     }
 
     /**
@@ -42,7 +48,27 @@ class TeacherDashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if((bool)$request->info) {
+            $this->validate($request, [
+                'bio' => 'required|max:400',
+                'abg' => 'required|alpha_num',
+            ]);
+            return $this->handleinfo($request);
+        }
+        if((bool)$request->newclass) {
+            $this->validate($request, [
+                'class_id' => 'required|numeric',
+                'subject_id' => 'required|numeric',
+            ]);
+            return $this->handleclass($request);
+        }
+        if((bool)$request->editclass) {
+            $this->validate($request, [
+                'class_id' => 'required|numeric',
+                'subject_id' => 'required|numeric',
+            ]);
+            return $this->handleclass($request);
+        }
     }
 
     /**
@@ -88,5 +114,48 @@ class TeacherDashboardController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function turma(Request $request, $id) {
+        if($request->ajax()) {
+            $turma = TeacherAttr::find($id);
+            if(!$turma) {
+                abort(404);
+            }
+            return response()->json($turma->toArray());
+        }
+        return redirect()->route('portal_inicio');
+    }
+
+    public function handleinfo(Request $request) {
+        $prof = Auth::user()->teacher;
+        $prof->bio = $request->bio;
+        $prof->academic_bg = $request->abg;
+        $prof->save();
+        return $this->index(true);
+    }
+
+    public function handleclass(Request $request) {
+        if((bool)$request->newclass) {
+            $tm = new TeacherAttr();
+            $tm->teacher_id = Auth::user()->teacher->id;
+            $tm->subject_id = $request->subject_id;
+            $tm->class_id = $request->class_id;
+            $tm->save();
+            return $this->index(false,1);
+        }
+        if((bool)$request->editclass) {
+            $id = (int) $request->selected;
+            $tm = TeacherAttr::find($id);
+            if((bool) $request->deletar) {
+                $tm->delete();
+                return $this->index(false,3);
+            }
+            $tm->teacher_id = Auth::user()->teacher->id;
+            $tm->subject_id = $request->subject_id;
+            $tm->class_id = $request->class_id;
+            $tm->save();
+            return $this->index(false,2);
+        }
     }
 }

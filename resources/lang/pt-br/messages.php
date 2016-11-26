@@ -206,6 +206,8 @@ return [
         'teacherdashboard' => [
         'bio' => 'Biografia',
         'abg' => 'Formação acadêmica',
+        'class' => 'Turma',
+        'subject' => 'Matéria',
         ],
         'subject' => [
         'name' => 'Nome da Matéria',
@@ -273,6 +275,10 @@ return [
             'medited' => [
                 'title' => 'Editada com sucesso!',
                 'msg' => 'A matéria foi editada.',
+            ],
+            'infosaved' => [
+                'title' => 'Salvo com sucesso!',
+                'msg' => 'As informações foram salvas.',
             ],
             'saved' => [
                 'title' => 'Salvado com sucesso!',
