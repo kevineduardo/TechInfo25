@@ -21,7 +21,7 @@ class SiteController extends Controller
         }
 
         $fotos = Picture::where('type', 0)->get();
-        $calendario = Calendar::take(4)->get();
+        $calendario = Calendar::latest()->take(4)->get();
         return view('inicio', ['calendario' => $calendario, 'fotos' => $fotos,]);
     }
 

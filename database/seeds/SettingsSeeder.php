@@ -35,5 +35,9 @@ class SettingsSeeder extends Seeder
             'name' => 'email',
             'value' => 'webmaster@ti25.com',
         ]);
+        DB::table('settings')->insert([
+            'name' => 'phone',
+            'value' => '(55) 55 91234-5678',
+        ]);
     }
 }

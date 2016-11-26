@@ -86,6 +86,7 @@ Coordenadora: Profª. Luciana de Oliveira Ramos. ',
             'text' => '',
             'navbar_icon' => 'glyphicon-briefcase',
             'type' => 1,
+            'custom_url' => 'docentes',
             'author_id' => 1,
         ]);
         DB::table('pages')->insert([

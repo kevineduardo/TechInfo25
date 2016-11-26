@@ -27,6 +27,42 @@
   </script>
 @endsection
 
+@section('styles')
+  @parent
+  <style>
+    hr {
+      margin-top:5px;
+    }
+    h2 {
+      margin-bottom: 5px;
+    }
+    .teacher {
+      border-radius: 5px; 
+      margin-top: 20px; 
+      height:auto; 
+      overflow:hidden;
+      -webkit-box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);
+      -moz-box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);
+      box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);
+    }
+    .teacherimg {
+      background: url('http://placehold.it/200x200'); 
+      background-position: center; 
+      background-repeat: no-repeat; 
+      height: 200px; 
+      width: 200px; 
+      float:left;
+    }
+    .imgdiv {
+      width: calc(100% - 220px); 
+      height: 200px; 
+      overflow: hidden; 
+      display: inline-block; 
+      float:right;
+    }
+  </style>
+@endsection
+
 @section('content')
 <div id="principal" class="table-responsive col-md-8">
     <table class="table">
@@ -39,16 +75,13 @@
       <tr><th>
       <div style="width:100%;">
         <ul class="list-group">
-        <h2 style="margin-bottom: 5px;">@lang('messages.layout.coordinator')</h2>
-        <hr style="margin-top:5px;">
+        <h2>@lang('messages.layout.coordinator')</h2>
+        <hr>
         @foreach( $coordenadores as $coord )
-          <li class="list-group-item" style="border-radius: 5px; margin-top: 20px; height:auto; overflow:hidden;
-          -webkit-box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);
-          -moz-box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);
-          box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);">
-              <div style="background: url('http://placehold.it/200x200'); background-position: center; background-repeat: no-repeat; height: 200px; width: 200px; float:left;">
+          <li class="list-group-item teacher">
+              <div class="teacherimg">
               </div>
-              <div style="width: calc(100% - 220px); height: 200px; overflow: hidden; display: inline-block; float:right;">
+              <div class="imgdiv">
                 <div height="50px" style="padding-top: 5px;"><span style="font-size: 20px;" class="vermelho">{{ $coord->user->name }}</span> </div>
                 <div style="height: 125px; display: table; width: 100%">
                   {{--
@@ -66,16 +99,13 @@
           </li>
         @endforeach
         <br/>
-        <h2 style="margin-bottom: 5px;">@lang('messages.layout.teacher')</h2>
-        <hr style="margin-top:5px;">
+        <h2>@lang('messages.layout.teacher')</h2>
+        <hr>
         @foreach( $professores as $teacher )
-          <li class="list-group-item" style="border-radius: 5px; margin-top: 20px; height:auto; overflow:hidden;
-          -webkit-box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);
-          -moz-box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);
-          box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);">
-              <div style="background: url('http://placehold.it/200x200'); background-position: center; background-repeat: no-repeat; height: 200px; width: 200px; float:left;">
+          <li class="list-group-item teacher">
+              <div class="teacherimg">
               </div>
-              <div style="width: calc(100% - 220px); height: 200px; overflow: hidden; display: inline-block; float:right;">
+              <div class="imgdiv">
                 <div height="50px" style="padding-top: 5px;"><span style="font-size: 20px;" class="vermelho">{{ $teacher->user->name }}</span> </div>
                 <div style="height: 125px; display: table; width: 100%">
                 </div>
