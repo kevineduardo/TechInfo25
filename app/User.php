@@ -35,7 +35,6 @@ class User extends Authenticatable
     public function teacher() {
         return $this->hasOne('App\Teacher');    
     }
-
     // Get user profile's picture
     public function avatar() {
         $user = $this;

@@ -8,7 +8,7 @@ class Teacher extends Model
 {
     protected $fillable = ['user_id', 'type', 'bio', 'academic_bg'];
     public function classes() {
-        return $this->belongsToMany('App\Classe', 'teacher_subject_class', 'teacher_id', 'class_id');
+        return $this->belongsToMany('App\Classe', 'teacher_subject_class', 'class_id', 'teacher_id');
     }
 
     public function subjects() {
