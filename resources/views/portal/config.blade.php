@@ -292,10 +292,6 @@ form {
       {{ $materias->links() }}
       </div>
     </div>
-    <div id="menu3" class="tab-pane fade">
-      <h3>Menu 3</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-    </div>
   </div>
   </div>
   <vr>
@@ -304,7 +300,6 @@ form {
     <li class="active"><a data-toggle="pill" href="#config">@lang('messages.layout.settings')</a></li>
     <li><a data-toggle="pill" href="#turmas">@lang('messages.layout.classes')</a></li>
     <li><a data-toggle="pill" href="#materias">@lang('messages.layout.subjects')</a></li>
-    <li><a data-toggle="pill" href="#menu3">Em breve</a></li>
   </ul>
 </div>
   <div class="modal fade" id="novaturma" role="dialog">
