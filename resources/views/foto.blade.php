@@ -127,13 +127,14 @@
         <div class="modal-body" style="overflow: hidden;">
           <center>
             <a id="img-href">
-              <img id="img-modal" style="width:100%; border-radius: 5px;" src=""/>
+              <img id="img-modal" style="width: 100%; border-radius: 5px;" src=""/>
             </a>
           </center>
           <hr>
           {{-- <button type="button" class="close" data-dismiss="modal">&times;</button> --}}
           <h4 class="vermelho" id="img-title"></h4>
           <p id="img-desc"></p>
+          <button style="float: right;" class="btn btn-default" onclick="window.location = $('#img-href').attr('href');">Abrir imagem</button>
         </div>
       </div>
     </div>
