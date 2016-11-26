@@ -56,8 +56,13 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::post('/usuários-convite', 'PortalStudentUsersController@store')->name('usuários-alunos.store');
 	Route::resource('/configurações', 'PortalSettingsController');
 	Route::resource('/professor', 'TeacherDashboardController');
+
+	// gambiarras de leve
 	Route::get('/ajax/turma', 'PortalSettingsController@turma')->name('ajax.turma');
 	Route::get('/ajax/turma/{id}', 'PortalSettingsController@turma');
+	Route::get('/ajax/materia', 'PortalSettingsController@materia')->name('ajax.materia');
+	Route::get('/ajax/materia/{id}', 'PortalSettingsController@materia');
+	// fim das gambiarras de leve
 	//Route::resource('/notícias', 'PortalNewsController');
 	Route::get('/notícias', 'PortalNewsController@index')->name('notícias.index');
 	Route::post('/notícias', 'PortalNewsController@store')->name('notícias.store');

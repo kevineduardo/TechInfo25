@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Auth;
+use App\Teacher;
+use App\User;
 
 class TeacherDashboardController extends Controller
 {
@@ -15,7 +18,10 @@ class TeacherDashboardController extends Controller
      */
     public function index()
     {
-        //
+        $usuario = Auth::user();
+        $bio = $usuario->teacher->bio;
+        $abg = $usuario->teacher->academic_bg;
+        return view('portal.professor')->with(['bio' => $bio, 'abg' => $abg,]);
     }
 
     /**

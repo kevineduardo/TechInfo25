@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Classe;
 use App\Setting;
+use App\Subject;
 use Carbon\Carbon;
 
 class PortalSettingsController extends Controller
@@ -21,10 +22,11 @@ class PortalSettingsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($ss = false, $st = false, $et = false, $dt = false)
+    public function index($ss = false, $msg = 0)
     {
         $turmas = Classe::paginate(15);
-        return view('portal.config', ['turmas' => $turmas, 'success' => $ss, 'st' => $st, 'et' => $et, 'dt' => $dt,]);
+        $materias = Subject::paginate(15);
+        return view('portal.config', ['turmas' => $turmas, 'materias' => $materias, 'success' => $ss, 'msg' => $msg,]);
     }
 
     /**
@@ -68,6 +70,20 @@ class PortalSettingsController extends Controller
                 'variant' => 'alpha',
             ]);
             return $this->handleturma($request);
+        }
+        if($request->newsubject) {
+            $this->validate($request, [
+                'nome' => 'required|alpha_num|min:3|max:100',
+                'desc' => 'required|min:3|max:300',
+            ]);
+            return $this->handlesubject($request);
+        }
+        if($request->editsubject) {
+            $this->validate($request, [
+                'nome' => 'required|alpha_num|min:3|max:100',
+                'desc' => 'required|min:3|max:300',
+            ]);
+            return $this->handlesubject($request);
         }
     }
 
@@ -127,6 +143,17 @@ class PortalSettingsController extends Controller
         return redirect()->route('portal_inicio');
     }
 
+    public function materia(Request $request, $id) {
+        if($request->ajax()) {
+            $materia = Subject::find($id);
+            if(!$materia) {
+                abort(404);
+            }
+            return response()->json($materia->toArray());
+        }
+        return redirect()->route('portal_inicio');
+    }
+
     public function handleconfig(Request $request) {
         $nome = Setting::where('name', 'site_name')->first();
         $nome->value = $request->site_name;
@@ -152,18 +179,41 @@ class PortalSettingsController extends Controller
             $novaturma->fill($request->all());
             $novaturma->inityear = Carbon::now();
             $novaturma->save();
-            return $this->index(false,true,false, false);
+            return $this->index(false,3);
         }
         if((bool)$request->editclass) {
             $id = (int)$request->selected;
             $turma = Classe::find($id);
             if($request->deletar) {
                 $turma->delete();
-                return $this->index(false,false,false,true);
+                return $this->index(false,2);
             }
             $turma->fill($request->all());
             $turma->save();
-            return $this->index(false,false,true,false);
+            return $this->index(false,1);
+        }
+        return redirect()->route('configurações.index');
+    }
+
+    public function handlesubject(Request $request) {
+        if((bool)$request->newsubject) {
+            $materia = new Subject();
+            $materia->name = $request->nome;
+            $materia->description = $request->desc;
+            $materia->save();
+            return $this->index(false,4);
+        }
+        if((bool)$request->editsubject) {
+            $id = (int)$request->selected;
+            $materia = Subject::find($id);
+            if($request->deletar) {
+                $materia->delete();
+                return $this->index(false, 5);
+            }
+            $materia->name = $request->nome;
+            $materia->description = $request->desc;
+            $materia->save();
+            return $this->index(false,6);
         }
         return redirect()->route('configurações.index');
     }

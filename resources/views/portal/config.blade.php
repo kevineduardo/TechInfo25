@@ -6,12 +6,12 @@
   @parent
   <style type="text/css">
 .form-group {
-        margin-right: 0px !important;
-        margin-left: 0px !important;
-        }
-        form {
-          margin-top: 5px;
-        }
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+}
+form {
+  margin-top: 5px;
+}
   </style>
 @endsection
 
@@ -32,20 +32,26 @@
               var target = $(e.target).attr("href") // activated tab
               if (target == "#turmas") {
                 triggered = true;
-                localStorage.triggered = true;
+                localStorage.triggered = "turmas";
                 hidesidebar();
               } else {
                 if(triggered == true) {
                   showsidebar();
                 }
               }
+              if (target == "#materias") {
+                localStorage.triggered = "materias";
+              }
             });
 
             if (typeof localStorage.triggered !== 'undefined') {
-              if(localStorage.triggered == "true") {
+              if(localStorage.triggered == "turmas") {
                 triggered = true;
                 activaTab('turmas');
                 hidesidebar();
+              }
+              if(localStorage.triggered == "materias") {
+                activaTab('materias');
               }
             }
       });
@@ -98,6 +104,26 @@
         }
         );
       }
+
+      function getMateriaData(id) {
+        $.ajax(
+        {
+          headers: {
+            'X-CSRF-TOKEN': Laravel.csrfToken,
+          },
+          type:'GET',
+          url:'{{ route('ajax.materia') }}/' + id,
+          success:function(data){
+          if ( data ) {
+            $("#mselected").attr("value", id);
+            $("#enome").attr("value", data['name']);
+            $("#edesc").text(data['description']);
+            $("#editarmateria").modal('show');
+          }
+           }
+        }
+        );
+      }
     </script>
 @endsection
 
@@ -121,19 +147,41 @@
 </div>
 @endif
 @endif
-@if(isset($et))
-@if($et)
+@if(isset($msg))
+@if($msg == 1)
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <strong>@lang('messages.form.success.tedited.title')</strong> @lang('messages.form.success.tedited.msg')
 </div>
 @endif
-@endif
-@if(isset($dt))
-@if($dt)
+@if($msg == 2)
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <strong>@lang('messages.form.success.tdeleted.title')</strong> @lang('messages.form.success.tdeleted.msg')
+</div>
+@endif
+@if($msg == 3)
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>@lang('messages.form.success.tsaved.title')</strong> @lang('messages.form.success.tsaved.msg')
+</div>
+@endif
+@if($msg == 4)
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>@lang('messages.form.success.msaved.title')</strong> @lang('messages.form.success.msaved.msg')
+</div>
+@endif
+@if($msg == 5)
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>@lang('messages.form.success.mdeleted.title')</strong> @lang('messages.form.success.mdeleted.msg')
+</div>
+@endif
+@if($msg == 6)
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>@lang('messages.form.success.medited.title')</strong> @lang('messages.form.success.medited.msg')
 </div>
 @endif
 @endif
@@ -185,6 +233,7 @@
       </form>
     </div>
     <div id="turmas" class="tab-pane fade">
+          <button type="button" style="margin-top: 5px;" class="btn btn-primary" data-toggle="modal" data-target="#novaturma">@lang('messages.buttons.novaturma')</button>
             <table class="table table-hover">
             <thead>
         <tr>
@@ -193,7 +242,6 @@
         </tr>
       </thead>
       @if(count($turmas) != 0)
-      <button type="button" style="margin-top: 5px;" class="btn btn-primary" data-toggle="modal" data-target="#novaturma">@lang('messages.buttons.novaturma')</button>
       @foreach ($turmas as $turma)
           <tr style="cursor: pointer;" onclick="getTurmaData({{ $turma['id'] }})">
           <td>@if($turma->variant) {{ $turma->number . $turma->variant }} @else {{ $turma->number }} @endif</td>
@@ -214,9 +262,35 @@
       {{ $turmas->links() }}
       </div>
     </div>
-    <div id="menu2" class="tab-pane fade">
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    <div id="materias" class="tab-pane fade">
+    <button type="button" style="margin-top: 5px;" class="btn btn-primary" data-toggle="modal" data-target="#novamateria">@lang('messages.buttons.novamateria')</button>
+      <table class="table table-hover">
+            <thead>
+        <tr>
+          <th><span class="vermelho">@lang('messages.cm.subject')</span></th>
+          <th><span class="vermelho">@lang('messages.cm.desc')</span></th>
+        </tr>
+      </thead>
+      @if(count($materias) != 0)
+      @foreach ($materias as $materia)
+          <tr style="cursor: pointer;" onclick="getMateriaData({{ $materia->id }})">
+          <td>@if($materia->name) {{ $materia->name }} @endif</td>
+          <td>@if($materia->description) {{ str_limit($materia->description, 30) }} @endif</td>
+        </tr>
+        @endforeach
+      @else
+      <tr class="text-center">
+        @if(str_contains(Route::currentRouteName(), 'search'))
+          <td colspan="4">@lang('messages.m.nr')</td>
+          @else
+          <td colspan="4">@lang('messages.m.ne')</td>
+          @endif
+      </tr>
+      @endif
+      </table>
+      <div class="text-center">
+      {{ $materias->links() }}
+      </div>
     </div>
     <div id="menu3" class="tab-pane fade">
       <h3>Menu 3</h3>
@@ -229,7 +303,7 @@
   <ul class="nav nav-pills nav-stacked">
     <li class="active"><a data-toggle="pill" href="#config">@lang('messages.layout.settings')</a></li>
     <li><a data-toggle="pill" href="#turmas">@lang('messages.layout.classes')</a></li>
-    <li><a data-toggle="pill" href="#menu2">Em breve</a></li>
+    <li><a data-toggle="pill" href="#materias">@lang('messages.layout.subjects')</a></li>
     <li><a data-toggle="pill" href="#menu3">Em breve</a></li>
   </ul>
 </div>
@@ -292,6 +366,72 @@
             <div class="form-group">
                 <button class="btn btn-success" name="salvar" value="true" type="submit">@lang('messages.buttons.salvarturma')</button>
                 <button class="btn btn-danger" name="deletar" value="true" type="submit">@lang('messages.buttons.deletarturma')</button>
+            </div>
+        </fieldset>
+      </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="novamateria" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">@lang('messages.titles.newsubject')</h4>
+        </div>
+        <div class="modal-body">
+        <form class="form-horizontal" method="post">
+        {{ csrf_field() }}
+        <fieldset class="form-horizontal">
+            <div class="form-group">
+                <label for="nome">@lang('messages.form.subject.name')</label>
+                <input type="hidden" name="newsubject" value="1">
+                <input autocomplete="off" class="form-control" id=
+                "nome" name="nome" placeholder="@lang('messages.phs.subject')"
+                required="" type="text" value="">
+            </div>
+            <div class="form-group">
+                <label for="desc">@lang('messages.form.subject.desc')</label>
+                <textarea autocomplete="off" class="form-control" id=
+                "desc" name="desc" placeholder="@lang('messages.phs.desc')"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success center-block" type="submit">@lang('messages.buttons.salvarmateria')</button>
+            </div>
+        </fieldset>
+      </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="editarmateria" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">@lang('messages.titles.editsubject')</h4>
+        </div>
+        <div class="modal-body">
+        <form class="form-horizontal" method="post">
+        {{ csrf_field() }}
+        <fieldset class="form-horizontal">
+            <div class="form-group">
+                <label for="nome">@lang('messages.form.subject.name')</label>
+                <input type="hidden" name="editsubject" value="1">
+                <input type="hidden" id="mselected" name="selected" value="">
+                <input autocomplete="off" class="form-control" id=
+                "enome" name="nome" placeholder="@lang('messages.phs.subject')"
+                required="" type="text" value="">
+            </div>
+            <div class="form-group">
+                <label for="desc">@lang('messages.form.subject.desc')</label>
+                <textarea autocomplete="off" class="form-control" id=
+                "edesc" name="desc" placeholder="@lang('messages.phs.desc')"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success" name="salvar" value="1" type="submit">@lang('messages.buttons.salvarmateria')</button>
+                <button class="btn btn-danger" name="deletar" value="1" type="submit">@lang('messages.buttons.deletarmateria')</button>
             </div>
         </fieldset>
       </form>
