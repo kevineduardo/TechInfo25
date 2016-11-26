@@ -96,6 +96,15 @@
           </tr>
           @endforeach
         </tbody>
+        <tfoot>
+          <tr>
+            <td>
+              <center>
+              {{ $nts->links() }}
+              </center>
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </div>
 

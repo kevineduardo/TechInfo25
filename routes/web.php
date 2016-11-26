@@ -24,10 +24,9 @@ Route::get('/página', function() {
 	return redirect()->route('inicio');
 });
 
-Route::get('/foto/{id}', 'SiteController@foto')->name('foto');
-Route::get('/foto', function() {
-	return redirect()->route('inicio');
-});
+Route::get('/fotos/{id}', 'PictureController@show')->name('foto');
+Route::get('/fotos', 'PictureController@index')->name('fotos');
+Route::post('/fotos', 'PictureController@ajax')->name('fotos_ajax');
 
 Route::get('/notícias/{id}', 'NewsController@show')->name('notícia');
 Route::get('/notícias', 'NewsController@index');
@@ -40,6 +39,8 @@ Route::get('/calendário/{id}', 'CalendarController@show')->name('calendário.sh
 
 Route::get('/contato', 'ContactController@index')->name('contato');
 Route::post('/contato', 'ContactController@mail')->name('contato.send');
+
+Route::get('/localização', 'MapController@index')->name('contato');
 
 //Route::get('/portal', 'HomeController@index');
 

@@ -55,7 +55,9 @@ return [
         'cemail' => 'E-Mail',
         'cmessage' => 'Mensagem',
         'csubj' => 'Assunto',
-        'news' => 'Notícias'
+        'news' => 'Notícias',
+        'map' => 'Mapa',
+        'img' => 'Imagens',
     ],
     'n' => [
         'nr' => 'Sua busca retornou nenhum resultado.',

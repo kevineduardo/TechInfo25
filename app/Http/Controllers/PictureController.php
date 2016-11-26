@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Lang;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Cache;
 
-use App\Teacher;
-use App\User;
 use App\Http\Requests;
+use App\Picture;
 
-class TeachersController extends Controller
+class PictureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,10 +16,25 @@ class TeachersController extends Controller
      */
     public function index()
     {
-        return view('docentes',[ 
-           'professores' => Teacher::where('type', 1)->with('user')->get(),
-           'coordenadores' => Teacher::where('type', 2)->with('user')->get(),
-        ]);
+        $pics = Picture::with('authors')->where('type', 0)->paginate(12*2);
+        return view( 'foto', [ 'pics' => $pics ] );
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function ajax(Request $request)
+    {
+        if( !$request->ajax() ) {
+            return redirect()->route('fotos');
+        }
+        $id = $request->input('id');
+        $pic = Picture::with('authors')->where('type', 0)->find($id);
+        if(is_null($pic)) { return response()->json( [], 404 ); }
+        return response()->json( $pic, 200 );
     }
 
     /**
@@ -55,19 +66,12 @@ class TeachersController extends Controller
      */
     public function show($id)
     {
-        $teacher = Teacher::with('user')->where('user_id',$id)->first();
-        if ( !$teacher ) { return response()->json( [], 406 ); }
+        $foto = Picture::with('authors')->where('type', 0)->find($id);
 
-        $docente = [
-
-            'name' => $teacher->user->name,
-            'bio' => $teacher->bio,
-            'academic_bg' => $teacher->academic_bg,
-            'img' => 'http://placehold.it/200x200',
-
-        ];
-
-        return response()->json( [ 'docente' => $docente ] );
+        if(!$foto) {
+            return redirect()->route('inicio');
+        }
+        return view('foto', $foto);
     }
 
     /**

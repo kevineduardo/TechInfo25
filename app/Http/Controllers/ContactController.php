@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
+use App\Mail\ContatoMail;
 use App\Http\Requests;
 use App\Setting;
 
@@ -26,15 +27,7 @@ class ContactController extends Controller
     	$name = $request->input('name');
     	$title = $request->input('subject');
     	$msg = $request->input('message');
-    	$to = Setting::where('name','email')->first();
-
-    	Mail::send('mails.base', ['title' => $title, 'content' => $msg], function ($message)
-        {
-
-            $message->from( $from, $name );
-
-            $message->to( $to );
-
-        });
+    	$to = Setting::where('name','email')->first()->value;
+    	Mail::to([$to])->send(new ContatoMail( $msg, $title, $from ));
     }
 }

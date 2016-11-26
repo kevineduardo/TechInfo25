@@ -38,13 +38,4 @@ class SiteController extends Controller
         }
         return view('pagina', $pagina);
     }
-
-    public function foto($id = 0) {
-        $foto = Picture::with('authors')->where('type', 0)->find($id);
-
-        if(!$foto) {
-            return redirect()->route('inicio');
-        }
-        return view('foto', $foto);
-    }
 }
