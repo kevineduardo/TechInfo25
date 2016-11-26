@@ -5,55 +5,6 @@
 @section('styles')
   @parent
   <style type="text/css">
-    #outer-dropzone {
-  height: 140px;
-}
-
-#inner-dropzone {
-  height: 80px;
-}
-
-.dropzone {
-  background-color: #ccc;
-  border: dashed 4px transparent;
-  border-radius: 4px;
-  margin: 10px auto 30px;
-  padding: 10px;
-  width: 80%;
-  transition: background-color 0.3s;
-}
-
-.drop-active {
-  border-color: #aaa;
-}
-
-.drop-target {
-  background-color: #29e;
-  border-color: #fff;
-  border-style: solid;
-}
-
-.drag-drop {
-  display: inline-block;
-  min-width: 40px;
-  padding: 2em 0.5em;
-
-  color: #fff;
-  background-color: #29e;
-  border: solid 2px #fff;
-
-  -webkit-transform: translate(0px, 0px);
-          transform: translate(0px, 0px);
-
-  transition: background-color 0.3s;
-}
-
-.drag-drop.can-drop {
-  color: #000;
-  background-color: #4e4;
-}
-
-
 .form-group {
         margin-right: 0px !important;
         margin-left: 0px !important;
@@ -278,8 +229,8 @@
   <ul class="nav nav-pills nav-stacked">
     <li class="active"><a data-toggle="pill" href="#config">@lang('messages.layout.settings')</a></li>
     <li><a data-toggle="pill" href="#turmas">@lang('messages.layout.classes')</a></li>
-    <li><a data-toggle="pill" href="#menu2">Menu 2</a></li>
-    <li><a data-toggle="pill" href="#menu3">Menu 3</a></li>
+    <li><a data-toggle="pill" href="#menu2">Em breve</a></li>
+    <li><a data-toggle="pill" href="#menu3">Em breve</a></li>
   </ul>
 </div>
   <div class="modal fade" id="novaturma" role="dialog">
