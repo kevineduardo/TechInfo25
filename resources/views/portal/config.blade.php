@@ -52,6 +52,15 @@
   color: #000;
   background-color: #4e4;
 }
+
+
+.form-group {
+        margin-right: 0px !important;
+        margin-left: 0px !important;
+        }
+        form {
+          margin-top: 5px;
+        }
   </style>
 @endsection
 
@@ -72,6 +81,7 @@
               var target = $(e.target).attr("href") // activated tab
               if (target == "#turmas") {
                 triggered = true;
+                localStorage.triggered = true;
                 hidesidebar();
               } else {
                 if(triggered == true) {
@@ -79,7 +89,19 @@
                 }
               }
             });
+
+            if (typeof localStorage.triggered !== 'undefined') {
+              if(localStorage.triggered == "true") {
+                triggered = true;
+                activaTab('turmas');
+                hidesidebar();
+              }
+            }
       });
+
+      function activaTab(tab){
+        $('.nav-pills a[href="#' + tab + '"]').tab('show');
+      };
 
       function hidesidebar() {
         $( "#menusidebar" ).animate({
@@ -94,6 +116,7 @@
       }
 
       function showsidebar() {
+        localStorage.triggered = false;
         $('#conteudogeral').switchClass( "col-md-12", "col-md-9", 300, "easeInOutQuad" );
         $( "#menusidebar" ).animate({
                 width: "show",
@@ -115,6 +138,7 @@
           url:'{{ route('ajax.turma') }}/' + id,
           success:function(data){
           if ( data ) {
+            $("#selected").attr("value", id);
             $("#enumber").attr("value", data['number']);
             $("#evariant").attr("value", data['variant']);
             $("#editarturma").modal('show');
@@ -130,7 +154,7 @@
 @if (count($errors) > 0)
 <div class="alert alert-dismissible alert-danger">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <strong>@lang('messages.form.errors.post')</strong>
+  <strong>@lang('messages.form.errors.save')</strong>
   <ul>
   @foreach ($errors->all() as $error)
   	<li>{{ $error }}</li>
@@ -142,15 +166,23 @@
 @if($success)
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <strong>@lang('messages.form.success.post.title')</strong> @lang('messages.form.success.post.msg')
+  <strong>@lang('messages.form.success.saved.title')</strong> @lang('messages.form.success.saved.msg')
 </div>
 @endif
 @endif
-@if(isset($editado))
-@if($editado)
+@if(isset($et))
+@if($et)
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <strong>@lang('messages.form.success.edited.title')</strong> @lang('messages.form.success.edited.msg')
+  <strong>@lang('messages.form.success.tedited.title')</strong> @lang('messages.form.success.tedited.msg')
+</div>
+@endif
+@endif
+@if(isset($dt))
+@if($dt)
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>@lang('messages.form.success.tdeleted.title')</strong> @lang('messages.form.success.tdeleted.msg')
 </div>
 @endif
 @endif
@@ -162,10 +194,12 @@
         <fieldset>
             <div class="form-group">
                 <label for="sitename">@lang('messages.form.settings.site_name')</label>
+                <input type="hidden" name="settings" value="1">
                 <input autocomplete="off" class="form-control" id=
                 "sitename" name="site_name" placeholder="@lang('messages.phs.site_name')"
-                required="" type="text" value="@if($settings['site_name']) {{ $settings['site_name'] }} @endif">
+                required="" type="text" value="@if($settings['site_name']){{$settings['site_name']}}@endif">
             </div>
+            {{--
             <div class="form-group">
               <label for="mnt">@lang('messages.form.settings.mnt')</label>
               <select id="mnt" class="form-control" name="maintenance" class="form-control">
@@ -173,11 +207,12 @@
                 <option @if($settings['maintenance'] == "false") selected @endif value="0">Desativado</option>
               </select>
             </div>
+            --}}
             <div class="form-group">
                 <label for="fb">@lang('messages.form.settings.fb')</label>
                 <input autocomplete="off" class="form-control" id=
                 "fb" name="facebook_page_url" placeholder="@lang('messages.phs.fb_url')"
-                required="" type="text" value="@if($settings['facebook_page_url']) {{ urldecode($settings['facebook_page_url']) }} @endif">
+                required="" type="text" value="@if($settings['facebook_page_url']){{urldecode($settings['facebook_page_url'])}}@endif">
             </div>
             <div class="form-group">
                 <label for="portal_a">@lang('messages.form.settings.pa')</label>
@@ -190,7 +225,7 @@
                 <label for="sfooter">@lang('messages.form.settings.footer')</label>
                 <input autocomplete="off" class="form-control" id=
                 "sfooter" name="footer" placeholder="@lang('messages.phs.sfooter')"
-                required="" type="text" value="@if($settings['footer']) {{ $settings['footer'] }} @endif">
+                required="" type="text" value="@if($settings['footer']){{$settings['footer']}}@endif">
             </div>
             <div class="form-group">
                 <button class="btn btn-success center-block" type="submit">@lang('messages.form.save')</button>
@@ -257,15 +292,21 @@
         <div class="modal-body">
         <form class="form-horizontal" method="post">
         {{ csrf_field() }}
-        <fieldset>
+        <fieldset class="form-horizontal">
             <div class="form-group">
                 <label for="number">@lang('messages.form.class.number')</label>
+                <input type="hidden" name="newclass" value="1">
                 <input autocomplete="off" class="form-control" id=
                 "number" name="number" placeholder="@lang('messages.phs.turma_number')"
-                required="" type="number" value="">
+                required="" type="number" min="100" max="999" value="">
             </div>
             <div class="form-group">
-                <button class="btn btn-success center-block" type="submit">@lang('messages.form.save')</button>
+                <label for="variant">@lang('messages.form.class.variant')</label>
+                <input autocomplete="off" class="form-control" id=
+                "variant" name="variant" placeholder="@lang('messages.phs.turma_variant')"  type="text" value="">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success center-block" type="submit">@lang('messages.buttons.salvarturma')</button>
             </div>
         </fieldset>
       </form>
@@ -286,12 +327,20 @@
         <fieldset>
             <div class="form-group">
                 <label for="number">@lang('messages.form.class.number')</label>
+                <input type="hidden" name="editclass" value="1">
+                <input type="hidden" id="selected" name="selected" value="">
                 <input autocomplete="off" class="form-control" id=
                 "enumber" name="number" placeholder="@lang('messages.phs.turma_number')"
-                required="" type="number" value="">
+                required="" type="number" min="100" max="999" value="">
             </div>
             <div class="form-group">
-                <button class="btn btn-success center-block" type="submit">@lang('messages.form.save')</button>
+                <label for="variant">@lang('messages.form.class.variant')</label>
+                <input autocomplete="off" class="form-control" id=
+                "evariant" name="variant" placeholder="@lang('messages.phs.turma_variant')"  type="text" value="">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success" name="salvar" value="true" type="submit">@lang('messages.buttons.salvarturma')</button>
+                <button class="btn btn-danger" name="deletar" value="true" type="submit">@lang('messages.buttons.deletarturma')</button>
             </div>
         </fieldset>
       </form>

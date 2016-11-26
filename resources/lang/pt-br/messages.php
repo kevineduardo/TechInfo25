@@ -103,6 +103,8 @@ return [
         'novoconvite' => 'Novo Convite',
         'deletarconvite' => 'Deletar Convite',
         'novaturma' => 'Nova Turma',
+        'salvarturma' => 'Salvar',
+        'deletarturma' => 'Deletar',
     ],
     // Placeholders
     'phs' => [
@@ -112,7 +114,8 @@ return [
         'site_name' => 'Tech Info 25',
         'fb_url' => 'https://www.facebook.com/TechInfo25',
         'sfooter' => 'ESCOLA TÉCNICA ESTADUAL 25 DE JULHO <br/>IJUÍ - RS',
-        'turma_number' => '121C',
+        'turma_number' => '121',
+        'turma_variant' => 'A',
     ],
     // Colummns field's name
     'cm' => [
@@ -173,7 +176,7 @@ return [
         ],
         'class' => [
         'number' => 'Número',
-        'variant' => 'Variante',
+        'variant' => 'Variante (se houver)',
         ],
         'settings' => [
         'site_name' => 'Nome do Site',
@@ -220,6 +223,18 @@ return [
             'edited' => [
                 'title' => 'Editada com sucesso!',
                 'msg' => 'A notícia foi editada.',
+            ],
+            'tedited' => [
+                'title' => 'Editada com sucesso!',
+                'msg' => 'A turma foi editada.',
+            ],
+            'tdeleted' => [
+                'title' => 'Descartado com sucesso!',
+                'msg' => 'A turma foi descartada.',
+            ],
+            'saved' => [
+                'title' => 'Salvado com sucesso!',
+                'msg' => 'As configurações foram salvas.',
             ],
         ],
         'success_user' => [
