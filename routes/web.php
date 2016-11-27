@@ -64,6 +64,10 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::get('/ajax/mturma/{id}', 'TeacherDashboardController@turma');
 	Route::get('/ajax/materia', 'PortalSettingsController@materia')->name('ajax.materia');
 	Route::get('/ajax/materia/{id}', 'PortalSettingsController@materia');
+	Route::get('/ajax/foto', 'PortalPicturesController@foto')->name('ajax.foto');
+	Route::get('/ajax/foto/{id}', 'PortalPicturesController@foto');
+	Route::get('/ajax/nota', 'PortalGradesController@grade')->name('ajax.nota');
+	Route::get('/ajax/nota/{id}', 'PortalGradesController@grade');
 	// fim das gambiarras de leve
 	//Route::resource('/notícias', 'PortalNewsController');
 	Route::get('/notícias', 'PortalNewsController@index')->name('notícias.index');

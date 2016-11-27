@@ -4,6 +4,7 @@
 
 @section('styles')
   @parent
+  <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-select.min.css') }}" />
   <style type="text/css">
 .form-group {
         margin-right: 0px !important;
@@ -21,7 +22,6 @@
 @section('javascripts')
 	@parent
   <script src="{{ URL::asset('jqueryui/jquery-ui.min.js') }}"></script>
-  <script src="{{ URL::asset('js/interact.min.js') }}"></script>
     <script>
       var triggered = false;
       $(document).ready (function(){
@@ -59,8 +59,8 @@
           success:function(data){
           if ( data ) {
             $("#tselected").attr("value", id);
-            $('#eclass option[value='+ data['class_id'] +']').prop('selected', true);
-            $('#esubject option[value='+ data['subject_id'] +']').prop('selected', true);
+            $('#eclass').selectpicker('val', data['class_id']);
+            $('#esubject').selectpicker('val', data['subject_id']);
             $("#editarturma").modal('show');
           }
            }
@@ -188,7 +188,7 @@
             <div class="form-group">
               <label for="class">@lang('messages.form.teacherdashboard.class')</label>
               <input type="hidden" name="newclass" value="1">
-              <select id="class" class="form-control" name="class_id" class="form-control">
+              <select id="class" class="form-control selectpicker" data-live-search="true" name="class_id" class="form-control">
                 @foreach($classes as $class)
                 <option value="{{ $class->id }}">@if($class->variant) {{ $class->number . $class->variant }} @else {{ $class->number }} @endif</option>
                 @endforeach
@@ -196,7 +196,7 @@
             </div>
             <div class="form-group">
               <label for="subject">@lang('messages.form.teacherdashboard.subject')</label>
-              <select id="subject" class="form-control" name="subject_id" class="form-control">
+              <select id="subject" class="form-control selectpicker" data-live-search="true" name="subject_id" class="form-control">
                 @foreach($subjects as $subject)
                 <option value="{{ $subject->id }}">@if($subject->name) {{ $subject->name }} @endif</option>
                 @endforeach
@@ -226,7 +226,7 @@
               <label for="eclass">@lang('messages.form.teacherdashboard.class')</label>
               <input type="hidden" name="editclass" value="1">
               <input type="hidden" id="tselected" name="selected" value="">
-              <select id="eclass" class="form-control" name="class_id" class="form-control">
+              <select id="eclass" class="form-control selectpicker" data-live-search="true" name="class_id" class="form-control">
                 @foreach($classes as $class)
                 <option value="{{ $class->id }}">@if($class->variant) {{ $class->number . $class->variant }} @else {{ $class->number }} @endif</option>
                 @endforeach
@@ -234,7 +234,7 @@
             </div>
             <div class="form-group">
               <label for="esubject">@lang('messages.form.teacherdashboard.subject')</label>
-              <select id="esubject" class="form-control" name="subject_id" class="form-control">
+              <select id="esubject" class="form-control selectpicker" data-live-search="true" name="subject_id" class="form-control">
                 @foreach($subjects as $subject)
                 <option value="{{ $subject->id }}">@if($subject->name) {{ $subject->name }} @endif</option>
                 @endforeach
@@ -250,4 +250,6 @@
       </div>
     </div>
   </div>
+  <script src="{{ URL::asset('js/bootstrap-select.min.js') }}"></script>
+  <script src="{{ URL::asset('js/i18n/defaults-pt_BR.js') }}"></script>
 @endsection

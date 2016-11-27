@@ -5,7 +5,7 @@ $factory->define(App\Teacher::class, function (Faker\Generator $faker) {
 
     return [
         'user_id' => 1,
-        'type' => $type ?: $type = 0,
+        'type' => $type ?: $type = 1,
         'bio' => str_random(100),
         'academic_bg' => str_random(10),
     ];

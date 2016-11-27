@@ -8,6 +8,7 @@ use App\Http\Requests;
 use Socialite;
 use App\User;
 use App\Picture;
+use App\Student;
 use Auth;
 
 class OAuthController extends Controller
@@ -53,6 +54,9 @@ class OAuthController extends Controller
 	        	'type' => 1,
 	        	'author_id' => $cad->id,
 	        	]);
+            Student::create([
+                'user_id' => $cad->id,
+                ]);
 	        if (Auth::login($cad, true)) {
             // Autenticado
             return redirect()->route('portal_inicio');

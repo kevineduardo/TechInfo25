@@ -12,6 +12,13 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Student::class, function (Faker\Generator $faker) {
+    static $type;
+
+    return [
+        'user_id' => factory(App\User::class)->create()->id,
+    ];
+});
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 

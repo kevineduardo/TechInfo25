@@ -5,6 +5,7 @@
 
 @section('styles')
 	@parent
+  <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-select.min.css') }}" />
 	<style type="text/css">
 		.form-group {
 		    margin-right: 0px !important;
@@ -168,7 +169,7 @@
             </div>
             <div class="form-group">
               <label for="class">@lang('messages.form.userinvite.class')</label>
-              <select id="class" class="form-control" name="class_id" class="form-control">
+              <select id="class" class="form-control selectpicker" data-live-search="true" name="class_id" class="form-control">
                 @foreach($classes as $class)
                 <option value="{{ $class->id }}">@if($class->variant) {{ $class->number . $class->variant }} @else {{ $class->number }} @endif</option>
                 @endforeach
@@ -183,4 +184,6 @@
       </div>
     </div>
   </div>
+  <script src="{{ URL::asset('js/bootstrap-select.min.js') }}"></script>
+  <script src="{{ URL::asset('js/i18n/defaults-pt_BR.js') }}"></script>
 @endsection

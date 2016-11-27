@@ -92,6 +92,8 @@
       </table>
   </div>
 
+  @if(isset($fotos))
+  @if(count($fotos) >= 9)
   <div class="semscroll table-responsive col-md-12">
     <table class="table">
     <thead>
@@ -103,9 +105,7 @@
     <tr><th>
       <div id="galeria">
       <div id="carousel">
-      @if(isset($fotos))
         @each('partials.fancybox_picture', $fotos, 'fotos')
-      @endif
       </div>
       <a href="#" id="ui-carousel-next"><span>next</span></a>
       <a href="#" id="ui-carousel-prev"><span>prev</span></a>
@@ -113,5 +113,7 @@
     </th></tr>
   </tbody>
     </table>
-</div>
+  </div>
+  @endif
+  @endif
 @endsection

@@ -18,7 +18,6 @@ form {
 @section('javascripts')
 	@parent
   <script src="{{ URL::asset('jqueryui/jquery-ui.min.js') }}"></script>
-  <script src="{{ URL::asset('js/interact.min.js') }}"></script>
     <script>
       var triggered = false;
       $(document).ready (function(){

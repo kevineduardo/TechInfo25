@@ -205,14 +205,14 @@
             <div class="form-group">
                 <label for="title">@lang('messages.form.news.title')</label>
                 <input autocomplete="off" class="form-control" id=
-                "title" name="title" placeholder="Boas novas!"
+                "title" name="title" placeholder="@lang('messages.phs.ntitle')"
                 required="" type="text" value="">
             </div>
             <div class="form-group">
                 <label for="subtitle">@lang('messages.form.news.subtitle')</label>
                 <input autocomplete="off" class="form-control" id=
                 "subtitle" name="subtitle" placeholder=
-                "Temos novidades..." required="" type="text" value="">
+                "@lang('messages.phs.nsubtitle')" required="" type="text" value="">
             </div>
             <div class="form-group">
                 <label for="text">@lang('messages.form.news.text')</label> 
@@ -255,14 +255,14 @@
             <div class="form-group">
                 <label for="title">@lang('messages.form.news.title')</label>
                 <input autocomplete="off" class="form-control" id=
-                "etitle" name="title" placeholder="Boas novas!"
+                "etitle" name="title" placeholder="@lang('messages.phs.ntitle')"
                 required="" type="text" value="">
             </div>
             <div class="form-group">
                 <label for="subtitle">@lang('messages.form.news.subtitle')</label>
                 <input autocomplete="off" class="form-control" id=
                 "esubtitle" name="subtitle" placeholder=
-                "Temos novidades..." required="" type="text" value="">
+                "@lang('messages.phs.nsubtitle')" required="" type="text" value="">
             </div>
             <div class="form-group">
                 <label for="text">@lang('messages.form.news.text')</label> 

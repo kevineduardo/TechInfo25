@@ -108,14 +108,26 @@ class PortalUsersController extends Controller
                     $professor->user_id = $id;
                     // quando implementar a verificação de type, tem que atualizar aqui, pra pegar o type recebido, além de atualizar a view pra mostrar essa opção
                     $professor->type = 1;
+                    if($usuario->teacher->type > 3) {
+                    $professor->type = 99;
+                    }
                     $professor->created_at = Carbon::now();
                 }
                 try {
                     $usuario->save();
                     if($request->input('teacher')) {
                         $professor->save();
+                        $aluno = Student::find($id);
+                        if($aluno) {
+                            $aluno->delete();
+                        }
                     } else {
                         $professor->delete();
+                        $aluno = Student::find($id);
+                        if(!$aluno) {
+                            $aluno->user_id = $id;
+                            $aluno->save();
+                        }
                     }
                 } catch (\Illuminate\Database\QueryException $e) {
                     Log::error('Erro ao editar usuário no banco de dados.');
@@ -131,6 +143,9 @@ class PortalUsersController extends Controller
                 return $this->index(true);
             }
             if($request->input('deletar')) {
+                if($usuario->teacher->type > 3) {
+                    abort(503);
+                }
                 $usuario->delete();
                 return $this->index(false, true);
             }
