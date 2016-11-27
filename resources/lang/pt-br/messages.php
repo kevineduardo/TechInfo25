@@ -66,6 +66,8 @@ return [
         'teacherdashboard' => 'Painel do Professor',
         'myclasses' => 'Minhas turmas',
         'subjects' => 'Matérias',
+        'pictures' => 'Fotos',
+        'grades' => 'Notas',
     ],
     'n' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
@@ -87,6 +89,10 @@ return [
     'm' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
         'ne' => 'Não existe nenhuma matéria.',
+    ],
+    'nn' => [
+        'nr' => 'Sua busca retornou nenhum resultado.',
+        'ne' => 'Não existe nenhuma nota.',
     ],
     // Buttons, dude!
     'buttons' => [
@@ -115,6 +121,13 @@ return [
         'novamateria' => 'Nova Matéria',
         'salvarmateria' => 'Salvar',
         'deletarmateria' => 'Deletar',
+        'novafoto' => 'Nova Foto',
+        'salvarfoto' => 'Salvar',
+        'deletarfoto' => 'Deletar',
+        'arq' => 'Selecionar Arquivo',
+        'novanota' => 'Nova Nota',
+        'salvarnota' => 'Salvar',
+        'deletarnota' => 'Deletar',
     ],
     // Placeholders
     'phs' => [
@@ -124,12 +137,17 @@ return [
         'site_name' => 'Tech Info 25',
         'fb_url' => 'https://www.facebook.com/TechInfo25',
         'sfooter' => 'ESCOLA TÉCNICA ESTADUAL 25 DE JULHO <br/>IJUÍ - RS',
+        'ntitle' => 'Boas novas!',
+        'nsubtitle' => 'Temos novidades...',
         'turma_number' => '121',
         'turma_variant' => 'A',
         'biografia' => 'Sou uma pessoa legal.',
         'academicbg' => 'Formado em Ciências das Computação...',
         'subject' => 'Introdução à Informática',
         'desc' => 'Matéria sobre conceitos básicos de T.I',
+        'ftitle' => 'Foto dos docentes! YAY!',
+        'fdesc' => 'Uma foto com todos os professores...',
+        'grade' => 'APTO',
     ],
     // Colummns field's name
     'cm' => [
@@ -153,6 +171,9 @@ return [
         'resp' => 'Responsável',
         'subject' => 'Matéria',
         'desc' => 'Descrição',
+        'teacher' => 'Professor (a)',
+        'grade' => 'Nota',
+        'student' => 'Aluno',
     ],
     // Basic stuff like yes or no
     'b' => [
@@ -175,6 +196,10 @@ return [
         'editclass' => 'Editar Turma',
         'newsubject' => 'Nova Matéria',
         'editsubject' => 'Editar Matéria',
+        'newpicture' => 'Nova Foto',
+        'editpicture' => 'Editar Foto',
+        'newgrade' => 'Nova Nota',
+        'editgrade' => 'Editar Nota',
     ],
     // Form's labels
     'form' => [
@@ -196,6 +221,11 @@ return [
         'number' => 'Número',
         'variant' => 'Variante (se houver)',
         ],
+        'pics' => [
+        'title' => 'Título',
+        'desc' => 'Descrição',
+        'arq' => 'Arquivo de Imagem',
+        ],
         'settings' => [
         'site_name' => 'Nome do Site',
         'mnt' => 'Manutenção',
@@ -212,6 +242,12 @@ return [
         'subject' => [
         'name' => 'Nome da Matéria',
         'desc' => 'Descrição da Máteria',
+        ],
+        'grade' => [
+        'student' => 'Nome do Aluno',
+        'subject' => 'Nome da Matéria',
+        'class' => 'Turma do Estudante',
+        'gd' => 'Nota',
         ],
         'publish' => [
             'true' => 'Publicar imediatamente',
@@ -280,6 +316,30 @@ return [
                 'title' => 'Salvo com sucesso!',
                 'msg' => 'As informações foram salvas.',
             ],
+            'psaved' => [
+                'title' => 'Salvada com sucesso!',
+                'msg' => 'A foto foi salva.',
+            ],
+            'pedited' => [
+                'title' => 'Editada com sucesso!',
+                'msg' => 'A foto foi editada.',
+            ],
+            'pdeleted' => [
+                'title' => 'Deletada com sucesso!',
+                'msg' => 'A foto foi deletada.',
+            ],
+            'gdeleted' => [
+                'title' => 'Deletada com sucesso!',
+                'msg' => 'A nota foi deletada.',
+            ],
+            'gsaved' => [
+                'title' => 'Salvada com sucesso!',
+                'msg' => 'A nota foi salva.',
+            ],
+            'gedited' => [
+                'title' => 'Editada com sucesso!',
+                'msg' => 'A nota foi editada.',
+            ],
             'saved' => [
                 'title' => 'Salvado com sucesso!',
                 'msg' => 'As configurações foram salvas.',
@@ -325,5 +385,13 @@ return [
     // Dialogs
     'dialog' => [
         'deleteinvite' => 'Você realmente deseja deletar o convite?',
+    ],
+    'helpblock' => [
+        'arq' => 'Formatos aceitos jpeg, png, bmp, gif, e svg.',
+    ],
+    'stl' => [
+        'student' => 'Escolha um aluno...',
+        'subject' => 'Escolha uma matéria...',
+        'class' => 'Escolha uma turma...',
     ],
 ];

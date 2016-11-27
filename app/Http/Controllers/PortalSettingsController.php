@@ -73,14 +73,14 @@ class PortalSettingsController extends Controller
         }
         if($request->newsubject) {
             $this->validate($request, [
-                'nome' => 'required|alpha_num|min:3|max:100',
+                'nome' => 'required|min:3|max:100',
                 'desc' => 'required|min:3|max:300',
             ]);
             return $this->handlesubject($request);
         }
         if($request->editsubject) {
             $this->validate($request, [
-                'nome' => 'required|alpha_num|min:3|max:100',
+                'nome' => 'required|min:3|max:100',
                 'desc' => 'required|min:3|max:300',
             ]);
             return $this->handlesubject($request);
@@ -184,6 +184,9 @@ class PortalSettingsController extends Controller
         if((bool)$request->editclass) {
             $id = (int)$request->selected;
             $turma = Classe::find($id);
+            if(!$turma) {
+                return redirect()->route('portal_inicio');
+            }
             if($request->deletar) {
                 $turma->delete();
                 return $this->index(false,2);
@@ -206,6 +209,9 @@ class PortalSettingsController extends Controller
         if((bool)$request->editsubject) {
             $id = (int)$request->selected;
             $materia = Subject::find($id);
+            if(!$materia) {
+                return redirect()->route('portal_inicio');
+            }
             if($request->deletar) {
                 $materia->delete();
                 return $this->index(false, 5);
