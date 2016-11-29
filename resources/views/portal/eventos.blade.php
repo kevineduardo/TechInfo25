@@ -24,7 +24,6 @@ textarea {
   <script src="{{ URL::asset('jqueryui/jquery-ui.min.js') }}"></script>
   <script src="{{ URL::asset('js/jquery.datetimepicker.full.min.js') }}"></script>
     <script>
-      var triggered = false;
       $(document).ready (function(){
             $(".alert-success").fadeTo(2200, 500).slideUp(500, function(){
             $(".alert-success").slideUp(500);
@@ -121,9 +120,9 @@ textarea {
       @else
       <tr class="text-center">
         @if(str_contains(Route::currentRouteName(), 'search'))
-          <td colspan="4">@lang('messages.nn.nr')</td>
+          <td colspan="4">@lang('messages.e.nr')</td>
           @else
-          <td colspan="4">@lang('messages.nn.ne')</td>
+          <td colspan="4">@lang('messages.e.ne')</td>
           @endif
       </tr>
       @endif

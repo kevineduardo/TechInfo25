@@ -1,10 +1,11 @@
 @extends('layouts.portal')
 
-@section('title', trans('messages.layout.grades'))
+@section('title', trans('messages.layout.homeworks'))
 
 @section('styles')
   @parent
   <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-select.min.css') }}" />
+  <link rel="stylesheet" href="{{ URL::asset('css/jquery.datetimepicker.css') }}" />
   <style type="text/css">
 .form-group {
         margin-right: 0px !important;
@@ -22,6 +23,7 @@
 @section('javascripts')
 	@parent
   <script src="{{ URL::asset('jqueryui/jquery-ui.min.js') }}"></script>
+  <script src="{{ URL::asset('js/jquery.datetimepicker.full.min.js') }}"></script>
     <script>
       $(document).ready (function(){
             $(".alert-success").fadeTo(2200, 500).slideUp(500, function(){
@@ -30,23 +32,30 @@
             $(".alert-danger").fadeTo(10000, 500).slideUp(500, function(){
             $(".alert-danger").slideUp(500);
             });
+            jQuery.datetimepicker.setLocale('pt-BR');
+            jQuery('#data').datetimepicker({
+             format:'d/m/Y H:i'
+            });
       });
-      function getNotaData(id) {
+      function getTrabalhoData(id) {
         $.ajax(
         {
           headers: {
             'X-CSRF-TOKEN': Laravel.csrfToken,
           },
           type:'GET',
-          url:'{{ route('ajax.nota') }}/' + id,
+          url:'{{ route('ajax.trabalho') }}/' + id,
           success:function(data){
           if ( data ) {
             $("#selected").attr("value", id);
-            $('#estudent').selectpicker('val', data['student_id']);
             $('#esubject').selectpicker('val', data['subject_id']);
             $('#eclass').selectpicker('val', data['class_id']);
-            $('#egrade').attr('value', data['grade']);
-            $("#editarnota").modal('show');
+            $('#etitle').attr('value', data['title']);
+            jQuery('#edata').datetimepicker({
+              value:data['deadline'],
+              format:'d/m/Y H:i',
+            });
+            $("#editartrabalho").modal('show');
           }
            }
         }
@@ -71,7 +80,7 @@
 @if($success)
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <strong>@lang('messages.form.success.gsaved.title')</strong> @lang('messages.form.success.gsaved.msg')
+  <strong>@lang('messages.form.success.trsaved.title')</strong> @lang('messages.form.success.trsaved.msg')
 </div>
 @endif
 @endif
@@ -79,85 +88,74 @@
 @if($msg == 1)
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <strong>@lang('messages.form.success.gedited.title')</strong> @lang('messages.form.success.gedited.msg')
+  <strong>@lang('messages.form.success.tredited.title')</strong> @lang('messages.form.success.tredited.msg')
 </div>
 @endif
 @if($msg == 2)
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <strong>@lang('messages.form.success.gdeleted.title')</strong> @lang('messages.form.success.gdeleted.msg')
+  <strong>@lang('messages.form.success.trdeleted.title')</strong> @lang('messages.form.success.trdeleted.msg')
 </div>
 @endif
 @endif
-<div id="notas">
+<div id="trabalhos">
 	@if($professor)
-      <button type="button" style="margin-top: 5px;" class="btn btn-primary" data-toggle="modal" data-target="#novanota">@lang('messages.buttons.novanota')</button>
+      <button type="button" style="margin-top: 5px;" class="btn btn-primary" data-toggle="modal" data-target="#novotrabalho">@lang('messages.buttons.novotrabalho')</button>
     @endif
       <table class="table table-hover">
             <thead>
         <tr>
-          <th><span class="vermelho">@lang('messages.cm.grade')</span></th>
+          <th><span class="vermelho">@lang('messages.cm.homework')</span></th>
           <th><span class="vermelho">@lang('messages.cm.subject')</span></th>
           <th><span class="vermelho">@lang('messages.cm.class')</span></th>
-          @if($professor)
-          <th><span class="vermelho">@lang('messages.cm.student')</span></th>
-          @else
+          @if(!$professor)
           <th><span class="vermelho">@lang('messages.cm.teacher')</span></th>
           @endif
+          <th><span class="vermelho">@lang('messages.cm.deadline')</span></th>
         </tr>
       </thead>
-      @if(count($notas) != 0)
-      @foreach ($notas as $nota)
+      @if(count($trabalhos) != 0)
+      @foreach ($trabalhos as $trabalho)
       	@if($professor)
-          <tr style="cursor: pointer;" onclick="getNotaData({{ $nota->id }})">
+          <tr style="cursor: pointer;" onclick="getTrabalhoData({{ $trabalho->id }})">
         @endif
-          <td> {{ $nota->grade }}</td>
-          <td>{{ $nota->subject->name }}</td>
-          <td>@if($nota->classe->variant) {{ $nota->classe->number . $nota->classe->variant }} @else {{ $nota->classe->number }} @endif</td>
-          @if($professor)
-          <td>{{ str_limit($nota->student->user->name,20) }}</td>
-          @else
-          <td>{{ str_limit($nota->teacher->user->name,20) }}</td>
+          <td> {{ $trabalho->title }}</td>
+          <td>{{ $trabalho->subject->name }}</td>
+          <td>@if($trabalho->classe->variant) {{ $trabalho->classe->number . $trabalho->classe->variant }} @else {{ $trabalho->classe->number }} @endif</td>
+          @if(!$professor)
+          <td>{{ str_limit($trabalho->teacher->user->name,20) }}</td>
           @endif
+          <td> {{ Carbon\Carbon::parse($trabalho->deadline)->format('d/m/Y') }}</td>
         </tr>
         @endforeach
       @else
       <tr class="text-center">
         @if(str_contains(Route::currentRouteName(), 'search'))
-          <td colspan="4">@lang('messages.nn.nr')</td>
+          <td colspan="4">@lang('messages.tr.nr')</td>
           @else
-          <td colspan="4">@lang('messages.nn.ne')</td>
+          <td colspan="4">@lang('messages.tr.ne')</td>
           @endif
       </tr>
       @endif
       </table>
       <div class="text-center">
-      {{ $notas->links() }}
+      {{ $trabalhos->links() }}
       </div>
 </div>
 @if($professor)
-<div class="modal fade" id="novanota" role="dialog">
+<div class="modal fade" id="novotrabalho" role="dialog">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">@lang('messages.titles.newgrade')</h4>
+          <h4 class="modal-title">@lang('messages.titles.newhomework')</h4>
         </div>
         <div class="modal-body">
         <form class="form-horizontal" method="post">
         {{ csrf_field() }}
         <fieldset class="form-horizontal">
             <div class="form-group">
-              <label for="student">@lang('messages.form.grade.student')</label>
-              <input type="hidden" name="newgrade" value="1">
-              <select id="student" class="form-control selectpicker" data-live-search="true" name="student_id" class="form-control" title="@lang('messages.stl.student')">
-                @foreach($students as $student)
-                <option value="{{ $student->id }}"> {{ $student->user->name }}</option>
-                @endforeach
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="subject">@lang('messages.form.grade.subject')</label>
+              <label for="subject">@lang('messages.form.homework.subject')</label>
               <select id="subject" class="form-control selectpicker" data-live-search="true" name="subject_id" class="form-control" title="@lang('messages.stl.subject')">
                 @foreach($subjects as $subject)
                 <option value="{{ $subject->subject->id }}">{{ $subject->subject->name }}</option>
@@ -165,7 +163,7 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="class">@lang('messages.form.grade.class')</label>
+              <label for="class">@lang('messages.form.homework.class')</label>
               <select id="class" class="form-control selectpicker" data-live-search="true" name="class_id" class="form-control" title="@lang('messages.stl.class')">
                 @foreach($classes as $classe)
                 <option value="{{ $classe->classe->id }}">@if($classe->classe->variant) {{ $classe->classe->number . $classe->classe->variant }} @else {{ $classe->classe->number }} @endif</option>
@@ -173,11 +171,27 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="grade">@lang('messages.form.grade.gd')</label>
-              <input type="text" class="form-control" id="grade" name="grade" placeholder="@lang('messages.phs.grade')">
+              <label for="title">@lang('messages.form.homework.hm')</label>
+              <input type="text" class="form-control" autocomplete="off" id="title" name="title" placeholder="@lang('messages.phs.homeworktitle')">
             </div>
             <div class="form-group">
-                <button class="btn btn-success center-block" type="submit">@lang('messages.buttons.salvarnota')</button>
+              <label for="arq">@lang('messages.form.homework.arq')</label>
+                <label class="btn btn-default btn-file">
+                    @lang('messages.buttons.arq') <input type="file" id="arq" name="arquivo" style="display: none;">
+                </label>
+                <p class="help-block">@lang('messages.helpblock.arq2')</p>
+            </div>
+            <div class="form-group">
+              <label for="data">@lang('messages.form.homework.deadline')</label>
+              <div class="input-group date">
+                    <input id="data" name="data" type="text" class="form-control">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+              </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success center-block" type="submit">@lang('messages.buttons.salvartrabalho')</button>
             </div>
         </fieldset>
       </form>
@@ -185,29 +199,21 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="editarnota" role="dialog">
+  <div class="modal fade" id="editartrabalho" role="dialog">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">@lang('messages.titles.editgrade')</h4>
+          <h4 class="modal-title">@lang('messages.titles.edithomework')</h4>
         </div>
         <div class="modal-body">
         <form class="form-horizontal" method="post">
         {{ csrf_field() }}
         <fieldset class="form-horizontal">
             <div class="form-group">
-              <label for="estudent">@lang('messages.form.grade.student')</label>
-              <input type="hidden" name="editgrade" value="1">
+              <label for="esubject">@lang('messages.form.homework.subject')</label>
               <input type="hidden" id="selected" name="selected" value="">
-              <select id="estudent" class="form-control selectpicker" data-live-search="true" name="student_id" class="form-control" title="@lang('messages.stl.student')">
-                @foreach($students as $student)
-                <option value="{{ $student->id }}"> {{ $student->user->name }}</option>
-                @endforeach
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="esubject">@lang('messages.form.grade.subject')</label>
+              <input type="hidden" name="edithomework" value="1">
               <select id="esubject" class="form-control selectpicker" data-live-search="true" name="subject_id" class="form-control" title="@lang('messages.stl.subject')">
                 @foreach($subjects as $subject)
                 <option value="{{ $subject->subject->id }}">{{ $subject->subject->name }}</option>
@@ -215,7 +221,7 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="eclass">@lang('messages.form.grade.class')</label>
+              <label for="eclass">@lang('messages.form.homework.class')</label>
               <select id="eclass" class="form-control selectpicker" data-live-search="true" name="class_id" class="form-control" title="@lang('messages.stl.class')">
                 @foreach($classes as $classe)
                 <option value="{{ $classe->classe->id }}">@if($classe->classe->variant) {{ $classe->classe->number . $classe->classe->variant }} @else {{ $classe->classe->number }} @endif</option>
@@ -223,12 +229,28 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="egrade">@lang('messages.form.grade.gd')</label>
-              <input type="text" class="form-control" id="egrade" name="grade" placeholder="@lang('messages.phs.grade')">
+              <label for="etitle">@lang('messages.form.homework.hm')</label>
+              <input type="text" class="form-control" autocomplete="off" id="etitle" name="title" placeholder="@lang('messages.phs.homeworktitle')">
             </div>
             <div class="form-group">
-                <button class="btn btn-success" name="salvar" value="1" type="submit">@lang('messages.buttons.salvarnota')</button>
-                <button class="btn btn-danger" name="deletar" value="1" type="submit">@lang('messages.buttons.deletarnota')</button>
+              <label for="arq">@lang('messages.form.homework.arq')</label>
+                <label class="btn btn-default btn-file">
+                    @lang('messages.buttons.arq') <input type="file" id="arq" name="arquivo" style="display: none;">
+                </label>
+                <p class="help-block">@lang('messages.helpblock.arq2')</p>
+            </div>
+            <div class="form-group">
+              <label for="edata">@lang('messages.form.homework.deadline')</label>
+              <div class="input-group date">
+                    <input id="edata" name="data" type="text" class="form-control">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+              </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success" name="salvar" value="1" type="submit">@lang('messages.buttons.salvartrabalho')</button>
+                <button class="btn btn-danger" name="deletar" value="1" type="submit">@lang('messages.buttons.deletartrabalho')</button>
             </div>
         </fieldset>
       </form>

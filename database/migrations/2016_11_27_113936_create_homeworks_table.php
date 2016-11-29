@@ -28,6 +28,7 @@ class CreateHomeworksTable extends Migration
                     ->references('id')->on('classes')
                     ->onDelete('cascade');
             $table->string('title');
+            $table->dateTime('deadline');
             $table->string('path');
             $table->timestamps();
         });
