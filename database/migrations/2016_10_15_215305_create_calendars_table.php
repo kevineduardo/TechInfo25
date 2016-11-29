@@ -18,8 +18,7 @@ class CreateCalendarsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('place');
-            $table->date('date');
-            $table->time('time');
+            $table->dateTime('date');
             // em role será definido se é pra agenda pública do técnico ou para uma turma especifica
             // exemplos:
             // role = 1 // agenda pública
@@ -29,7 +28,7 @@ class CreateCalendarsTable extends Migration
             $table->foreign('related_class')
                     ->references('id')->on('classes')
                     ->onDelete('cascade');
-            $table->integer('author_id')->unsigned()->nullable();
+            $table->integer('author_id')->unsigned();
             $table->foreign('author_id')
                     ->references('id')->on('users')
                     ->onDelete('set null');

@@ -64,6 +64,11 @@
                             @lang('messages.menu.teacherdashboard') </a>
                         </li>
                         @if(Auth::user()->teacher->type > 1)
+                        <li class="@if(str_contains(Route::currentRouteName(), 'eventos')) active @endif teacher-only">
+                                <a href="{{ route('eventos.index') }}">
+                                <i class="glyphicon glyphicon-check"></i>
+                                @lang('messages.menu.eventos') </a>
+                            </li>
                             <li class="@if(str_contains(Route::currentRouteName(), 'usuários')) active @endif teacher-only">
                                 <a href="{{ route('usuários.index') }}">
                                 <i class="glyphicon glyphicon-th-list"></i>

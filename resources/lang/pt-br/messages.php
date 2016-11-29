@@ -54,6 +54,7 @@ return [
         'subjects' => 'Matérias',
         'pictures' => 'Fotos',
         'grades' => 'Notas',
+        'events' => 'Eventos',
     ],
     'n' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
@@ -106,6 +107,9 @@ return [
         'novanota' => 'Nova Nota',
         'salvarnota' => 'Salvar',
         'deletarnota' => 'Deletar',
+        'salvarevento' => 'Salvar',
+        'deletarevento' => 'Deletar',
+        'novoevento' => 'Novo Evento',
     ],
     // Placeholders
     'phs' => [
@@ -126,6 +130,9 @@ return [
         'ftitle' => 'Foto dos docentes! YAY!',
         'fdesc' => 'Uma foto com todos os professores...',
         'grade' => 'APTO',
+        'eventname' => 'Lanche Coletivo',
+        'eventdesc' => 'Em comemoração de...',
+        'eventplace' => 'E.T.E 25 de Julho',
     ],
     // Colummns field's name
     'cm' => [
@@ -149,6 +156,7 @@ return [
         'teacher' => 'Professor (a)',
         'grade' => 'Nota',
         'student' => 'Aluno',
+        'date' => 'Data',
     ],
     // Basic stuff like yes or no
     'b' => [
@@ -171,6 +179,8 @@ return [
         'editpicture' => 'Editar Foto',
         'newgrade' => 'Nova Nota',
         'editgrade' => 'Editar Nota',
+        'newevent' => 'Novo Evento',
+        'editevent' => 'Editar Evento',
     ],
     // Form's labels
     'form' => [
@@ -219,6 +229,12 @@ return [
         'subject' => 'Nome da Matéria',
         'class' => 'Turma do Estudante',
         'gd' => 'Nota',
+        ],
+        'event' => [
+        'name' => 'Nome do Evento',
+        'desc' => 'Descrição',
+        'place' => 'Local',
+        'date' => 'Data',
         ],
         'publish' => [
             'true' => 'Publicar imediatamente',
@@ -306,6 +322,18 @@ return [
                 'title' => 'Editada com sucesso!',
                 'msg' => 'A nota foi editada.',
             ],
+            'esaved' => [
+                'title' => 'Salvado com sucesso!',
+                'msg' => 'O evento foi salvo.',
+            ],
+            'eedited' => [
+                'title' => 'Editado com sucesso!',
+                'msg' => 'O evento foi editado.',
+            ],
+            'edeleted' => [
+                'title' => 'Deletado com sucesso!',
+                'msg' => 'O evento foi deletado.',
+            ],
             'saved' => [
                 'title' => 'Salvado com sucesso!',
                 'msg' => 'As configurações foram salvas.',
@@ -334,6 +362,7 @@ return [
         'news' => 'Notícias',
         'pictures' => 'Fotos',
         // Teachers only from this point
+        'eventos' => 'Eventos',
         'users' => 'Usuários',
         'config' => 'Configurações',
         'usersinvite' => 'Convite de Usuários',
