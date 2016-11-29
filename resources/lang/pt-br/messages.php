@@ -35,6 +35,7 @@ return [
         'social' => [
             'fb' => 'Entrar com o Facebook',
         ],
+        'alunoauth' => 'Sem autorização para registro.',
         'agenda' => 'Agenda do Técnico',
         'sagenda' => 'Sem nada na agenda...',
         'galeria' => 'Galeria de Fotos',
@@ -87,6 +88,9 @@ return [
         'nr' => 'Sua busca retornou nenhum resultado.',
         'ne' => 'Não existe nenhum trabalho.',
     ],
+    'f' => [
+        'ne' => 'Não existe nenhuma foto.',
+    ],
     // Buttons, dude!
     'buttons' => [
         'palunos' => 'Postadas por Alunos',
@@ -122,6 +126,7 @@ return [
         'novotrabalho' => 'Novo Trabalho',
         'salvartrabalho' => 'Salvar',
         'deletartrabalho' => 'Deletar',
+        'dltrabalho' => 'Baixar',
     ],
     // Placeholders
     'phs' => [
@@ -198,6 +203,7 @@ return [
         'editevent' => 'Editar Evento',
         'newhomework' => 'Novo Trabalho',
         'edithomework' => 'Editar Trabalho',
+        'dlhomework' => 'Baixar Trabalho',
     ],
     // Form's labels
     'form' => [
@@ -417,6 +423,7 @@ return [
     // Dialogs
     'dialog' => [
         'deleteinvite' => 'Você realmente deseja deletar o convite?',
+        'dltrabalho' => 'Você deseja baixar o trabalho?',
     ],
     'helpblock' => [
         'arq' => 'Formatos aceitos jpeg, png, bmp, gif, e svg.',

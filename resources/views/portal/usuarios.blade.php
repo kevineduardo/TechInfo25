@@ -5,6 +5,8 @@
 
 @section('styles')
 	@parent
+  <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-select.min.css') }}" />
+  <link rel="stylesheet" href="{{ URL::asset('css/jquery.datetimepicker.css') }}" />
 	<style type="text/css">
 		.form-group {
 		    margin-right: 0px !important;
@@ -29,6 +31,7 @@
           url:'{{ route('usuários.index') }}/' + id,
           success:function(data){
           if ( data ) {
+            console.log(data);
             $(".userid").attr("value", id);
             $("#name").attr("value", data['name']);
             if(data['teacher'] != null) {
@@ -36,6 +39,7 @@
             } else {
               $("#notteacher").prop("checked", true);
             }
+            $('#class').selectpicker('val', data['class_id']);
             $("#editarusuario").modal('show');
           }
            }
@@ -158,6 +162,14 @@
                 </div>
             </div>
             <div class="form-group">
+              <label for="class">@lang('messages.form.userinvite.class')</label>
+              <select id="class" class="form-control selectpicker" data-live-search="true" name="class_id" class="form-control" title="@lang('messages.stl.class')">
+                @foreach($classes as $classe)
+                <option value="{{ $classe->id }}">@if($classe->variant) {{ $classe->number . $classe->variant }} @else {{ $classe->number }} @endif</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="form-group">
           <input type="hidden" class="userid" name="id" value=""></input>
           <button class="btn btn-success" type="submit" name="salvar" value="true">@lang('messages.buttons.salvaruser')</button>
           <button class="btn btn-danger" type="submit" name="deletar" value="true">@lang('messages.buttons.deletaruser')</button>
@@ -168,4 +180,6 @@
       </div>
     </div>
   </div>
+  <script src="{{ URL::asset('js/bootstrap-select.min.js') }}"></script>
+  <script src="{{ URL::asset('js/i18n/defaults-pt_BR.js') }}"></script>
 @endsection

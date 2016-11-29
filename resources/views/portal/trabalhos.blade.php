@@ -37,6 +37,7 @@
              format:'d/m/Y H:i'
             });
       });
+      @if($professor)
       function getTrabalhoData(id) {
         $.ajax(
         {
@@ -61,6 +62,26 @@
         }
         );
       }
+      @else
+      function getTrabalhoDataAluno(id) {
+        $.ajax(
+        {
+          headers: {
+            'X-CSRF-TOKEN': Laravel.csrfToken,
+          },
+          type:'GET',
+          url:'{{ route('ajax.trabalho') }}/' + id,
+          success:function(data){
+          if ( data ) {
+            console.log(data);
+            $('#dl').attr('href',"{{ url('/') }}/" + data['path']);
+            $("#dltrabalho").modal('show');
+          }
+           }
+        }
+        );
+      }
+      @endif
     </script>
 @endsection
 
@@ -118,6 +139,8 @@
       @foreach ($trabalhos as $trabalho)
       	@if($professor)
           <tr style="cursor: pointer;" onclick="getTrabalhoData({{ $trabalho->id }})">
+        @else
+          <tr style="cursor: pointer;" onclick="getTrabalhoDataAluno({{ $trabalho->id }})">
         @endif
           <td> {{ $trabalho->title }}</td>
           <td>{{ $trabalho->subject->name }}</td>
@@ -151,11 +174,12 @@
           <h4 class="modal-title">@lang('messages.titles.newhomework')</h4>
         </div>
         <div class="modal-body">
-        <form class="form-horizontal" method="post">
+        <form class="form-horizontal" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
         <fieldset class="form-horizontal">
             <div class="form-group">
               <label for="subject">@lang('messages.form.homework.subject')</label>
+              <input type="hidden" name="newhomework" value="1">
               <select id="subject" class="form-control selectpicker" data-live-search="true" name="subject_id" class="form-control" title="@lang('messages.stl.subject')">
                 @foreach($subjects as $subject)
                 <option value="{{ $subject->subject->id }}">{{ $subject->subject->name }}</option>
@@ -207,7 +231,7 @@
           <h4 class="modal-title">@lang('messages.titles.edithomework')</h4>
         </div>
         <div class="modal-body">
-        <form class="form-horizontal" method="post">
+        <form class="form-horizontal" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
         <fieldset class="form-horizontal">
             <div class="form-group">
@@ -260,5 +284,21 @@
   </div>
   <script src="{{ URL::asset('js/bootstrap-select.min.js') }}"></script>
   <script src="{{ URL::asset('js/i18n/defaults-pt_BR.js') }}"></script>
+@else
+<div class="modal fade" id="dltrabalho" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">@lang('messages.titles.dlhomework')</h4>
+        </div>
+        <div class="modal-body">
+        <h3 style="text-align: center;">@lang('messages.dialog.dltrabalho')</h3>
+        <a id="dl" href="" style="text-decoration: none;">
+        <button class="btn btn-success center-block" name="salvar" value="1" type="submit">@lang('messages.buttons.dltrabalho')</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
 @endif
 @endsection

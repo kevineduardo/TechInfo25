@@ -99,11 +99,15 @@
 </div>
 <hr>
 <div>
+  @if(count($pics) > 0)
   @foreach($pics as $pic)
               @if(empty($pic->ext_path))
                 <img class="imggl2 img" img="{{ $pic->id }}" title="{{ $pic->title }}" onclick="getFotoData({{ $pic['id'] }})" src="{{ URL::asset($pic->path) }}"/>
               @endif
   @endforeach
+  @else
+  <h3 class="center-block" style="text-align: center;">@lang('messages.f.ne')</h3>
+  @endif
   <div class="text-center">
       {{ $pics->links() }}
       </div>

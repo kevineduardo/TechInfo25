@@ -9,6 +9,8 @@ use App\Http\Requests;
 use App\User;
 use App\Student;
 use App\Teacher;
+use App\Classe;
+use App\ClasseAttr;
 use Auth;
 
 class PortalUsersController extends Controller
@@ -29,7 +31,8 @@ class PortalUsersController extends Controller
         // essa página só pode ser acessada por professores
         $teacher = Teacher::where('user_id', Auth::user()->id)->first();
         $usuarios = User::paginate(15);
-        return view('portal.usuarios', ['usuarios' => $usuarios, 'success' => $s, 'deletado' => $d,]);
+        $classes = Classe::all();
+        return view('portal.usuarios', ['usuarios' => $usuarios, 'success' => $s, 'deletado' => $d, 'classes' => $classes,]);
     }
 
     /**
@@ -65,7 +68,12 @@ class PortalUsersController extends Controller
             $user = User::with('teacher')->find($id);
             if($user) {
                 unset($user['oauth_id']);
-                return response()->json($user->toArray());
+                $ar = $user->toArray();
+                $alun = Student::where('user_id', $user->id)->first();
+                if($alun) {
+                $ar['class_id'] = $alun->classe->class_id;
+                }
+                return response()->json($ar);
             }
                 
             return response()->json([
@@ -106,16 +114,13 @@ class PortalUsersController extends Controller
                 $usuario->name = $request->input('name');
                 if($request->input('teacher')) {
                     $professor->user_id = $id;
-                    // quando implementar a verificação de type, tem que atualizar aqui, pra pegar o type recebido, além de atualizar a view pra mostrar essa opção
                     $professor->type = 1;
-                    if($usuario->teacher->type > 3) {
-                    $professor->type = 99;
-                    }
                     $professor->created_at = Carbon::now();
                 }
                 try {
                     $usuario->save();
                     if($request->input('teacher')) {
+                        //
                         $professor->save();
                         $aluno = Student::find($id);
                         if($aluno) {

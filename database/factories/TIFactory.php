@@ -58,8 +58,7 @@ $factory->define(App\Calendar::class, function (Faker\Generator $faker) {
         'name' => $faker->unique()->numerify('Event ###'),
         'description' => str_random(30),
         'place' => 'Copacabana',
-        'date' => $faker->date($format = 'Y-m-d', $max = 'now'),
-        'time' => $faker->time(),
+        'date' => $faker->date($format = 'Y-m-d H:i:s', $min = 'now'),
         'role' => 1,
         'author_id' => 1,
     ];
