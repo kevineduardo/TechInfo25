@@ -8,7 +8,7 @@ class Homework extends Model
 {
     protected $fillable = ['teacher_id', 'subject_id', 'class_id', 'path'];
 
-    protected $dates = ['created_at', 'updated_at'];
+    protected $dates = ['deadline', 'created_at', 'updated_at'];
 
     public function teacher() {
     	return $this->belongsTo('App\Teacher');

@@ -71,6 +71,8 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::get('/ajax/nota/{id}', 'PortalGradesController@grade');
 	Route::get('/ajax/evento', 'PortalCalendarController@evento')->name('ajax.evento');
 	Route::get('/ajax/evento/{id}', 'PortalCalendarController@evento');
+	Route::get('/ajax/trabalho', 'PortalHomeworksController@trabalho')->name('ajax.trabalho');
+	Route::get('/ajax/trabalho/{id}', 'PortalHomeworksController@trabalho');
 	// fim das gambiarras de leve
 	//Route::resource('/notícias', 'PortalNewsController');
 	Route::get('/notícias', 'PortalNewsController@index')->name('notícias.index');

@@ -55,6 +55,7 @@ return [
         'pictures' => 'Fotos',
         'grades' => 'Notas',
         'events' => 'Eventos',
+        'homeworks' => 'Trabalhos',
     ],
     'n' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
@@ -77,6 +78,14 @@ return [
     'nn' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
         'ne' => 'Não existe nenhuma nota.',
+    ],
+    'e' => [
+        'nr' => 'Sua busca retornou nenhum resultado.',
+        'ne' => 'Não existe nenhum evento.',
+    ],
+    'tr' => [
+        'nr' => 'Sua busca retornou nenhum resultado.',
+        'ne' => 'Não existe nenhum trabalho.',
     ],
     // Buttons, dude!
     'buttons' => [
@@ -110,6 +119,9 @@ return [
         'salvarevento' => 'Salvar',
         'deletarevento' => 'Deletar',
         'novoevento' => 'Novo Evento',
+        'novotrabalho' => 'Novo Trabalho',
+        'salvartrabalho' => 'Salvar',
+        'deletartrabalho' => 'Deletar',
     ],
     // Placeholders
     'phs' => [
@@ -133,6 +145,7 @@ return [
         'eventname' => 'Lanche Coletivo',
         'eventdesc' => 'Em comemoração de...',
         'eventplace' => 'E.T.E 25 de Julho',
+        'homeworktitle' => 'Trabalho Placa-mãe',
     ],
     // Colummns field's name
     'cm' => [
@@ -157,6 +170,8 @@ return [
         'grade' => 'Nota',
         'student' => 'Aluno',
         'date' => 'Data',
+        'homework' => 'Trabalho',
+        'deadline' => 'Prazo Final',
     ],
     // Basic stuff like yes or no
     'b' => [
@@ -181,6 +196,8 @@ return [
         'editgrade' => 'Editar Nota',
         'newevent' => 'Novo Evento',
         'editevent' => 'Editar Evento',
+        'newhomework' => 'Novo Trabalho',
+        'edithomework' => 'Editar Trabalho',
     ],
     // Form's labels
     'form' => [
@@ -227,7 +244,7 @@ return [
         'grade' => [
         'student' => 'Nome do Aluno',
         'subject' => 'Nome da Matéria',
-        'class' => 'Turma do Estudante',
+        'class' => 'Turma do Aluno',
         'gd' => 'Nota',
         ],
         'event' => [
@@ -235,6 +252,14 @@ return [
         'desc' => 'Descrição',
         'place' => 'Local',
         'date' => 'Data',
+        ],
+        'homework' => [
+        'student' => 'Nome do Aluno',
+        'subject' => 'Nome da Matéria',
+        'class' => 'Turma dos Alunos',
+        'hm' => 'Trabalho',
+        'deadline' => 'Prazo Final',
+        'arq' => 'Arquivo do Trabalho',
         ],
         'publish' => [
             'true' => 'Publicar imediatamente',
@@ -334,6 +359,18 @@ return [
                 'title' => 'Deletado com sucesso!',
                 'msg' => 'O evento foi deletado.',
             ],
+            'trsaved' => [
+                'title' => 'Salvado com sucesso!',
+                'msg' => 'O trabalho foi salvo.',
+            ],
+            'tredited' => [
+                'title' => 'Editado com sucesso!',
+                'msg' => 'O trabalho foi editado.',
+            ],
+            'trdeleted' => [
+                'title' => 'Deletado com sucesso!',
+                'msg' => 'O trabalho foi deletado.',
+            ],
             'saved' => [
                 'title' => 'Salvado com sucesso!',
                 'msg' => 'As configurações foram salvas.',
@@ -383,6 +420,7 @@ return [
     ],
     'helpblock' => [
         'arq' => 'Formatos aceitos jpeg, png, bmp, gif, e svg.',
+        'arq2' => 'Formatos aceitos docx, pptx, pdf, txt e doc.',
     ],
     'stl' => [
         'student' => 'Escolha um aluno...',
