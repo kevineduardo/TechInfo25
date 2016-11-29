@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 class Calendar extends Model
 {
-    protected $fillable = ['name', 'description', 'place', 'time', 'role', 'related_class', 'author_id'];
+    protected $fillable = ['name', 'description', 'place', 'role', 'related_class', 'author_id'];
 
     protected $dates = ['date', 'created_at', 'updated_at'];
 

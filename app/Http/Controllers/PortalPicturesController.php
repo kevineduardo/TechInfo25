@@ -54,7 +54,7 @@ class PortalPicturesController extends Controller
             return $this->handlepicture($request);
         }
         if((bool)$request->editpicture) {
-            if($request->deletar) {
+            if((bool)$request->deletar) {
                 return $this->handlepicture($request);
             }
             $this->validate($request, [
