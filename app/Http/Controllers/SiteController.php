@@ -22,7 +22,8 @@ class SiteController extends Controller
 
         $fotos = Picture::where('type', 0)->get();
         $calendario = Calendar::latest()->take(4)->get();
-        return view('inicio', ['calendario' => $calendario, 'fotos' => $fotos,]);
+        $not = News::latest()->take(5)->get();
+        return view('inicio', ['calendario' => $calendario, 'fotos' => $fotos, 'noticias' => $not]);
     }
 
     public function pagina($id) {

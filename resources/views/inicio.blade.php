@@ -5,8 +5,13 @@
 @section('styles')
   @parent
   <link type="text/css" rel="stylesheet" href="{{ URL::asset('widget/css/rcarousel.css') }}" />
-    <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/rhinoslider-1.05.css') }}" />
-    <link rel="stylesheet" href="{{ URL::asset('fancybox/source/jquery.fancybox.css?v=2.1.5') }}" type="text/css" media="screen" />
+  <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/rhinoslider-1.05.css') }}" />
+  <link rel="stylesheet" href="{{ URL::asset('fancybox/source/jquery.fancybox.css?v=2.1.5') }}" type="text/css" media="screen" />
+  <style>
+    .calendario {
+      cursor: pointer;
+    }
+  </style>
 @endsection
 
 @section('javascript')
@@ -64,11 +69,7 @@
       <tbody>
       <tr><th>
       <ul id="slider">
-        <li><img src="img/slider/01.jpg" alt="@lang('messages.alt.img')" /></li>
-        <li><img src="img/slider/02.jpg" alt="@lang('messages.alt.img')" /></li>
-        <li><img src="img/slider/03.jpg" alt="@lang('messages.alt.img')" /></li>
-        <li><img src="img/slider/04.jpg" alt="@lang('messages.alt.img')" /></li>
-        <li><img src="img/slider/05.jpg" alt="@lang('messages.alt.img')" /></li>
+        @each('partials.slider', $noticias, 'n')
       </ul>
       </th></tr>
       </tbody>

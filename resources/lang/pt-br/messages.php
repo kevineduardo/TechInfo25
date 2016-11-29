@@ -16,6 +16,7 @@ return [
     'teacher' => 'Professor',
     'student' => 'Aluno',
     'layout' => [
+        'name' => 'Escola Técnica Estadual 25 de Julho',
         'home' => 'Início',
         'tn' => 'Visualizar Navegação',
         'login' => 'Logar',

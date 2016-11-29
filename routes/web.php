@@ -28,6 +28,8 @@ Route::get('/fotos/{id}', 'PictureController@show')->name('foto');
 Route::get('/fotos', 'PictureController@index')->name('fotos');
 Route::post('/fotos', 'PictureController@ajax')->name('fotos_ajax');
 
+Route::get('/matérias', 'SubjectsController@index')->name('matérias');
+
 Route::get('/notícias/{id}', 'NewsController@show')->name('notícia');
 Route::get('/notícias', 'NewsController@index');
 
@@ -75,10 +77,12 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::get('/usuários/buscar', 'SearchController@newsSearch')->name('usuários.search');
 
 	// Rotas de calendario
+	/*
 	Route::get('/calendário', 'PortalCalendarController@index')->name('calendário.index');
 	Route::get('/calendário/{id}', 'PortalCalendarController@show');
 	Route::put('/calendário', 'PortalCalendarController@update')->name('calendário.update');
 	Route::post('/calendário', 'PortalCalendarController@store')->name('calendário.update');
+	*/
 
 	// Fotos
 	Route::get('/fotos','PortalPicturesController@index')->name('fotos.index');

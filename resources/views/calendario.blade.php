@@ -28,6 +28,13 @@
         }
       })
     }
+    if (window.location.hash) 
+    { 
+      var a = parseInt(window.location.hash.substr(1));
+      if ( a != NaN ) {
+        getData( "/calendário/" + a + "/" )
+      }
+    }
   </script>
 @endsection
 

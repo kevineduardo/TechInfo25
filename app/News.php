@@ -18,4 +18,12 @@ class News extends Model
     public function editor() {
     	return $this->belongsTo('App\User', 'editor_id');
     }
+    public function img() {
+    	$r = ['img'=>'img\slider\noimg.jpg'];
+    	preg_match("<img[^\\>]+src=\"([^\"]+)\"/?>", "ryxdwery<img href=\"\" src=\"fuck.png\">", $mt);
+			if ( $mt[1] ) {
+				$r['img'] = $mt[1];
+			}
+			return $r;
+    }
 }

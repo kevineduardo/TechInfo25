@@ -24,12 +24,6 @@
   @parent
     <script type="text/javascript" src="{{ URL::asset('js/jquery.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('js/mousewheel.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('js/easing.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('widget/lib/jquery.ui.core.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('widget/lib/jquery.ui.widget.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('widget/lib/jquery.ui.rcarousel.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('fancybox/source/jquery.fancybox.pack.js') }}?v=2.1.5"></script>
     <script type="text/javascript">
     $(document).ready(function() {
         $('.img').click(function(){
@@ -47,15 +41,11 @@
               id: id
             },
             success: function(data){
-              console.log(img.attr('src'));
               $('#img-modal').attr('src', img.attr('src'));
               $('#img-href').attr('href', '/fotos/' + id);
               $('#img-title').text(data['title']);
               $('#img-desc').text(data['description']);
               $('#picmodal').modal();
-            },
-            error: function() {
-              console.log('fuck');
             }
           });
         });
@@ -75,10 +65,10 @@
       <tr><th>
         @if(isset($path))
           @if(empty($ext_path))
-            <a class="fancybox" rel="group" href="{{ URL::asset($path) }}">
+            <a rel="group" href="{{ URL::asset($path) }}">
             <img class="imggl2" style="width:100%; margin-top: 10px; height: auto; border-radius: 5px;" src="{{ URL::asset($path) }}" />
           @else
-            <a class="fancybox" rel="group" href="{{ $ext_path }}">
+            <a rel="group" href="{{ $ext_path }}">
             <img class="imggl2" style="width:100%; margin-top: 10px; height: auto; border-radius: 5px;" src="{{ $ext_path }}" />
           @endif
           </a>
@@ -89,7 +79,7 @@
           <div>
             @foreach($pics as $pic)
               @if(empty($pic->ext_path))
-                <img class="imggl2 img" img="{{ $pic->id }}" src="{{ $pic->path }}"/>
+                <img class="imggl2 img" img="{{ $pic->id }}" src="{{ URL::asset($pic->path) }}"/>
               @else
                 <img class="imggl2 img" img="{{ $pic->id }}" src="{{ $pic->ext_path }}"/>
               @endif

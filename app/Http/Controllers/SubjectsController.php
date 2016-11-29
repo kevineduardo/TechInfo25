@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Picture;
 
-class PictureController extends Controller
+class SubjectsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,25 +15,7 @@ class PictureController extends Controller
      */
     public function index()
     {
-        $pics = Picture::with('authors')->where('type', 0)->paginate(24);
-        return view( 'foto', [ 'pics' => $pics ] );
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function ajax(Request $request)
-    {
-        if( !$request->ajax() ) {
-            return redirect()->route('fotos');
-        }
-        $id = $request->input('id');
-        $pic = Picture::with('authors')->where('type', 0)->find($id);
-        if(is_null($pic)) { return response()->json( [], 404 ); }
-        return response()->json( $pic, 200 );
+        //
     }
 
     /**
@@ -66,12 +47,7 @@ class PictureController extends Controller
      */
     public function show($id)
     {
-        $foto = Picture::with('authors')->where('type', 0)->find($id);
-
-        if(!$foto) {
-            return redirect()->route('inicio');
-        }
-        return view('foto', $foto);
+        //
     }
 
     /**

@@ -1,46 +1,19 @@
 @extends('layouts.site')
 
-@section('title', $settings['site_name'] . ' - ' . trans( 'messages.layout.map' ))
-
-@section('javascript')
-  @parent
-  <script>
-    var LatLng = {lat: {{ $lat }}, lng: {{ $lng }} };
-    // -28.3790677
-    // -53.9250415
-    function initMap() {
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: LatLng,
-        zoom: 18
-      });
-
-      var marker = new google.maps.Marker({
-        position: LatLng,
-        map: map,
-        title: '{{ trans('messages.layout.name') }}'
-      });
-
-      $('#map').css({
-        height: '500px', 
-        width: '100%',
-      });
-    }
-  </script>
-  <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ $key }}&callback=initMap"></script>
-@endsection
+@section('title', $settings['site_name'] . ' - ' . $title)
 
 @section('content')
 <div id="principal" class="table-responsive col-md-8">
     <table class="table">
       <thead>
       <tr>
-      <th><span class="vermelho">@lang('messages.layout.map')</span></th>
+      <th><span class="vermelho">{{ $title }}</span></th>
       </tr>
       </thead>
       <tbody class="normal">
       <tr><th>
-      <div class="nttexto col-md-12" style="height: 500px; width: 100%;">
-        <div id="map"></div>
+      <div class="nttexto">
+      
       </div>
       </th></tr>
       </tbody>
