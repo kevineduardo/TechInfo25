@@ -9,6 +9,8 @@ use Socialite;
 use App\User;
 use App\Picture;
 use App\Student;
+use App\NewStudent;
+use App\ClasseAttr;
 use Auth;
 
 class OAuthController extends Controller
@@ -39,6 +41,10 @@ class OAuthController extends Controller
             redirect()->route('portal_inicio');
         	}
         } else {
+            $alauth = NewStudent::where('email', $user->email)->first();
+            if(!$alauth) {
+                return view('semconvite');
+            }
 	        $cad = User::create([
 	            'name' => $user->getName(),
 	            'email' => $user->getEmail(),
@@ -57,8 +63,12 @@ class OAuthController extends Controller
             Student::create([
                 'user_id' => $cad->id,
                 ]);
+            ClasseAttr::create([
+                'student_id' => Student::where('user_id', $cad->id)->first()->id,
+                'class_id' => $alauth->class_id,
+                ]);
 	        if (Auth::login($cad, true)) {
-            // Autenticado
+            $alauth->delete();
             return redirect()->route('portal_inicio');
         	}
 	    }

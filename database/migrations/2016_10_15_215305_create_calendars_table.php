@@ -31,7 +31,7 @@ class CreateCalendarsTable extends Migration
             $table->integer('author_id')->unsigned();
             $table->foreign('author_id')
                     ->references('id')->on('users')
-                    ->onDelete('set null');
+                    ->onDelete('cascade');
             $table->timestamps();
         });
     }

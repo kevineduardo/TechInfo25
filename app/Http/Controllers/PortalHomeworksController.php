@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 use App\Http\Requests;
 use App\Homework;
@@ -28,7 +29,7 @@ class PortalHomeworksController extends Controller
             $turmas = TeacherAttr::distinct()->select('class_id')->where('teacher_id', $professor->id)->get();
         } else {
             // TEM Q ARRUMAR AQUI
-            $trabalhos = Homework::where('class_id', $user->student->id)->paginate(15);
+            $trabalhos = Homework::where('class_id', $user->student->classe->class_id)->paginate(15);
             $materias = null;
             $turmas = null;
         }
@@ -139,14 +140,14 @@ class PortalHomeworksController extends Controller
             $id = (int)$request->selected;
             $trab = Homework::find($id);
             if(!$trab) {
-                return redirect->route('portal_inicio');
+                return redirect()->route('portal_inicio');
             }
             if($request->deletar) {
                 $path = $trab->path;
                 $path = str_replace('storage', 'public', $path);
                 Storage::delete($path);
                 $trab->delete();
-                return $this->index(2);
+                return $this->index(false,2);
             }
             $trab->teacher_id = Auth::user()->teacher->id;
             $trab->subject_id = $request->subject_id;
@@ -155,9 +156,11 @@ class PortalHomeworksController extends Controller
             $path = $trab->path;
             $path = str_replace('storage', 'public', $path);
             Storage::delete($path);
-            $arq = $request->file('arquivo')->store('public');
-            $arq = str_replace('public', 'storage', $arq);
-            $trab->path = $arq;
+            if($request->file('arquivo')) {
+                $arq = $request->file('arquivo')->store('public');
+                $arq = str_replace('public', 'storage', $arq);
+                $trab->path = $arq;
+            }
             $trab->deadline = $data;
             $trab->save();
             return $this->index(false,1);

@@ -151,9 +151,11 @@ class PortalPicturesController extends Controller
             $path = $foto->path;
             $path = str_replace('storage', 'public', $path);
             Storage::delete($path);
-            $arq = $request->file('arquivo')->store('public');
-            $arq = str_replace('public', 'storage', $arq);
-            $foto->path = $arq;
+            if($request->file('arquivo')) {
+                $arq = $request->file('arquivo')->store('public');
+                $arq = str_replace('public', 'storage', $arq);
+                $foto->path = $arq;
+            }
             $foto->save();
             return $this->index(false,1);
         }

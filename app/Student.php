@@ -13,4 +13,8 @@ class Student extends Model
     public function user() {
     	return $this->belongsTo('App\User');
     }
+
+    public function classe() {
+    	return $this->hasOne('App\ClasseAttr');
+    }
 }
