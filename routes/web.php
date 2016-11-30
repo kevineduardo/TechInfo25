@@ -69,6 +69,7 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::put('/usuários-convite', 'PortalStudentUsersController@update')->name('usuários-alunos.update');
 	Route::post('/usuários-convite', 'PortalStudentUsersController@store')->name('usuários-alunos.store');
 	Route::resource('/configurações', 'PortalSettingsController');
+	Route::resource('/pgs', 'PortalPagesController');
 	Route::resource('/eventos', 'PortalCalendarController');
 	Route::resource('/professor', 'TeacherDashboardController');
 
@@ -87,6 +88,8 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::get('/ajax/evento/{id}', 'PortalCalendarController@evento');
 	Route::get('/ajax/trabalho', 'PortalHomeworksController@trabalho')->name('ajax.trabalho');
 	Route::get('/ajax/trabalho/{id}', 'PortalHomeworksController@trabalho');
+	Route::get('/ajax/cat', 'PortalPagesController@cat')->name('ajax.cat');
+	Route::get('/ajax/cat/{id}', 'PortalPagesController@cat');
 	// fim das gambiarras de leve
 	
 	//Route::resource('/notícias', 'PortalNewsController');

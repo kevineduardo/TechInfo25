@@ -71,6 +71,9 @@ return [
         'grades' => 'Notas',
         'events' => 'Eventos',
         'homeworks' => 'Trabalhos',
+        'pgs' => 'Páginas',
+        'cats' => 'Menus',
+        'editpg' => 'Páginas para Editar',
     ],
     'n' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
@@ -107,6 +110,9 @@ return [
     ],
     'f' => [
         'ne' => 'Não existe nenhuma foto.',
+    ],
+    'c' => [
+        'ne' => 'Não existe nenhuma categoria.',
     ],
     // Buttons, dude!
     'buttons' => [
@@ -149,6 +155,14 @@ return [
         'salvartrabalho' => 'Salvar',
         'deletartrabalho' => 'Deletar',
         'dltrabalho' => 'Baixar',
+        'novacategoria' => 'Novo Menu',
+        'editarcategoria' => 'Editar Menu',
+        'deletarcategoria' => 'Deletar',
+        'salvarcategoria' => 'Salvar',
+        'salvarpagina' => 'Salvar',
+        'deletarpagina' => 'Deletar',
+        'novapagina' => 'Nova Página',
+        'editarpagina' => 'Editar Página',
     ],
     // Placeholders
     'phs' => [
@@ -172,7 +186,13 @@ return [
         'eventname' => 'Lanche Coletivo',
         'eventdesc' => 'Em comemoração de...',
         'eventplace' => 'E.T.E 25 de Julho',
-        'homeworktitle' => 'Trabalho Placa-mãe',
+        'homeworktitle' => 'Trabalho Placa-Mãe',
+        'catname' => 'Ensino',
+        'caticon' => 'glyphicon-education',
+        'pgtitle' => 'Docentes',
+        'pgnavbar_icon' => 'glyphicon-briefcase',
+        'pgtext' => 'O curso conta com os seguintes docentes...',
+        'pgcustom_url' => 'docentes',
     ],
     // Colummns field's name
     'cm' => [
@@ -202,6 +222,7 @@ return [
         'date' => 'Data',
         'homework' => 'Trabalho',
         'deadline' => 'Prazo Final',
+        'cat' => 'Menu',
     ],
     // Basic stuff like yes or no
     'b' => [
@@ -233,6 +254,8 @@ return [
         'newhomework' => 'Novo Trabalho',
         'edithomework' => 'Editar Trabalho',
         'dlhomework' => 'Baixar Trabalho',
+        'newcat' => 'Novo Menu',
+        'editcat' => 'Editar Menu',
     ],
     // Form's labels
     'form' => [
@@ -287,6 +310,19 @@ return [
         'desc' => 'Descrição',
         'place' => 'Local',
         'date' => 'Data',
+        ],
+        'cat' => [
+        'name' => 'Nome do Menu',
+        'icon' => 'Ícone',
+        ],
+        'pg' => [
+        'title' => 'Nome da Página',
+        'text' => 'Texto',
+        'navbar_icon' => 'Ícone na Navbar',
+        'custom_url' => 'URL Customizada',
+        'tags' => 'Tags',
+        'cat' => 'Menu',
+        ''
         ],
         'homework' => [
         'student' => 'Nome do Aluno',
@@ -411,6 +447,18 @@ return [
                 'title' => 'Deletado com sucesso!',
                 'msg' => 'O trabalho foi deletado.',
             ],
+            'csaved' => [
+                'title' => 'Salvado com sucesso!',
+                'msg' => 'O menu foi salvo.',
+            ],
+            'cedited' => [
+                'title' => 'Editado com sucesso!',
+                'msg' => 'O menu foi editado.',
+            ],
+            'cdeleted' => [
+                'title' => 'Deletado com sucesso!',
+                'msg' => 'O menu foi deletado.',
+            ],
             'saved' => [
                 'title' => 'Salvado com sucesso!',
                 'msg' => 'As configurações foram salvas.',
@@ -442,6 +490,7 @@ return [
         'eventos' => 'Eventos',
         'users' => 'Usuários',
         'config' => 'Configurações',
+        'pgs' => 'Páginas do Site',
         'usersinvite' => 'Convite de Usuários',
         'teacherdashboard' => 'Painel do Professor',
     ],
@@ -462,6 +511,7 @@ return [
     'helpblock' => [
         'arq' => 'Formatos aceitos jpeg, png, bmp, gif, e svg.',
         'arq2' => 'Formatos aceitos docx, pptx, pdf, txt e doc.',
+        'custom_url' => 'Se uma URL Customizada for especificada, o texto será ignorado.',
     ],
     'stl' => [
         'student' => 'Escolha um aluno...',

@@ -12,8 +12,8 @@
       </thead>
       <tbody class="normal">
       <tr><th>
-      <div class="nttexto">
-      {{ $text }}
+      <div>
+      {!! $text !!}
       </div>
       </th></tr>
       </tbody>

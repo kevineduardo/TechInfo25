@@ -17,6 +17,6 @@ class Page extends Model
     }
 
     public function category() {
-    	$this->belongsToMany('App\Categorie', 'categories_pages', 'page_id', 'category_id');
+    	return $this->belongsToMany('App\Categorie', 'categories_pages', 'page_id', 'category_id');
     }
 }
