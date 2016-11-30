@@ -10,7 +10,6 @@
                   </div>
                   <div class="col col-sm-12 col-md-4 text-center" style="flex: 1;">
                   <div class="col-sm-6 col-md-12">
-                    <a href="#"><img src="//placehold.it/300x120/77CCDD/66BBCC" class="center-block img-responsive"></a>
                     <div class="text-muted"><small>{{ str_limit($news[1]->title, 50) }}</small></div>
                     <p>
                     <div class="nttexto">
@@ -19,7 +18,6 @@
                     </p>
                   </div>
                   <div class="col-sm-6 col-md-12">
-                    <a href="#"><img src="//placehold.it/300x120/77CCDD/66BBCC" class="center-block img-responsive"></a>
                     <div class="text-muted"><small>{{ str_limit($news[2]->title, 50) }}</small></div>
                     <p>
                     <div class="nttexto">
