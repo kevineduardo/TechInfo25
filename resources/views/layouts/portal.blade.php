@@ -74,6 +74,11 @@
                                 <i class="glyphicon glyphicon-th-list"></i>
                                 @lang('messages.menu.users') </a>
                             </li>
+                        <li class="@if(str_contains(Route::currentRouteName(), 'pgs')) active @endif teacher-only">
+                                <a href="{{ route('pgs.index') }}">
+                                <i class="glyphicon glyphicon-list-alt"></i>
+                                @lang('messages.menu.pgs') </a>
+                            </li>
                         <li class="@if(str_contains(Route::currentRouteName(), 'configurações')) active @endif teacher-only">
                             <a href="{{ route('configurações.index') }}">
                             <i class="glyphicon glyphicon-cog"></i>
