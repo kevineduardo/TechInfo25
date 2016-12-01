@@ -42,17 +42,41 @@ class PortalPagesController extends Controller
     public function store(Request $request)
     {
         if((bool)$request->newcat) {
-            // tem q fazer as validações aqui dps
+            $this->validate($request, [
+                'name' => 'required|string|min:5',
+                'icon' => 'required|string',
+
+            ]);
             return $this->handlecat($request);
         }
         if((bool)$request->editcat) {
+            $this->validate($request, [
+                'name' => 'required|string|min:5',
+                'icon' => 'required|string',
+
+            ]);
             return $this->handlecat($request);
         }
 
         if((bool)$request->newpg) {
+            $this->validate($request, [
+                'title' => 'required|string|min:5',
+                'text' => 'required|string',
+                'navbar_icon' => 'required|string',
+                'custom_url' => 'required|string',
+                'category_id' => 'required|numeric',
+
+            ]);
             return $this->handlepg($request);
         }
         if((bool)$request->editpg) {
+            $this->validate($request, [
+                'title' => 'required|string|min:5',
+                'text' => 'required|string',
+                'navbar_icon' => 'required|string',
+                'custom_url' => 'required|string',
+
+            ]);
             return $this->handlepg($request);
         }
     }

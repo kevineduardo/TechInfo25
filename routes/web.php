@@ -111,6 +111,9 @@ Route::group(['prefix' => 'portal'], function () {
 Route::get('auth/facebook', 'OAuthController@redirectToProvider')->name('facebook');
 Route::get('auth/facebook/callback', 'OAuthController@handleProviderCallback');
 Route::post('auth/facebook/callback', 'OAuthController@handleProviderCallback');
+Route::get('auth/google', 'GAuthController@redirectToProvider')->name('google');
+Route::get('auth/google/callback', 'GAuthController@handleProviderCallback');
+Route::post('auth/google/callback', 'GAuthController@handleProviderCallback');
 
 // Rotas para o site
 ////$url = route('profile', ['id' => 1]);

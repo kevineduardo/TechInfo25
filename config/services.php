@@ -40,5 +40,10 @@ return [
         'client_secret' => 'd2e07e70bb6d39ebbf4d28d5326ce557',
         'redirect'      => env('APP_URL', 'http://localhost') . '/auth/facebook/callback',
     ],
+    'google' => [
+        'client_id'     => '53674148852-ug4ut5o0e6uggrhv9scfa3u1q62us76n.apps.googleusercontent.com',
+        'client_secret' => 'WQnDLmNKkqcMtSOvhiZl-pt3',
+        'redirect'      => env('APP_URL', 'http://localhost') . '/auth/google/callback',
+    ],
 
 ];
