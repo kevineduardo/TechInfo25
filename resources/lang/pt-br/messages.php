@@ -35,6 +35,7 @@ return [
         'config' => 'Configurações',
         'social' => [
             'fb' => 'Entrar com o Facebook',
+            'g' => 'Entrar com o Google+',
         ],
         'alunoauth' => 'Sem autorização para registro.',
         'agenda' => 'Agenda do Técnico',

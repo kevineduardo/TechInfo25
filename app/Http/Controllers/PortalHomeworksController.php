@@ -55,9 +55,27 @@ class PortalHomeworksController extends Controller
     public function store(Request $request)
     {
         if((bool)$request->newhomework) {
+            $this->validate($request, [
+                'teacher_id' => 'required|numeric',
+                'subject_id' => 'required|numeric',
+                'class_id' => 'required|numeric',
+                'title' => 'required|max:30|string',
+                'arquivo' => 'required|file|mimes:docx,pptx,pdf,txt,doc',
+                'deadline' => 'required|date_format:"d/m/Y H:i"',
+
+            ]);
             return $this->handlehomework($request);
         }
         if((bool)$request->edithomework) {
+            $this->validate($request, [
+                'teacher_id' => 'required|numeric',
+                'subject_id' => 'required|numeric',
+                'class_id' => 'required|numeric',
+                'title' => 'required|max:30|string',
+                'arquivo' => 'file|mimes:docx,pptx,pdf,txt,doc',
+                'deadline' => 'required|date_format:"d/m/Y H:i"',
+
+            ]);
             return $this->handlehomework($request);
         }
     }
