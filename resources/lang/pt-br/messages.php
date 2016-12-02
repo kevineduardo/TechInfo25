@@ -239,7 +239,6 @@ return [
         'teachers' => 'Perfil do Educador',
         'editcal' => 'Editar Calendário',
         'newcal' => 'Nova Data'
-        'deleteinvite' => 'Deletar convite',
         'deleteinvite' => 'Deletar Convite',
         'newinvite' => 'Novo Convite',
         'newclass' => 'Nova Turma',
