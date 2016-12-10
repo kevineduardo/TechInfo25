@@ -22,8 +22,6 @@
 
 @section('javascript')
   @parent
-    <script type="text/javascript" src="{{ URL::asset('js/jquery.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
     <script type="text/javascript">
     $(document).ready(function() {
         $('.img').click(function(){

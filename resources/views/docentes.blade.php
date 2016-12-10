@@ -3,8 +3,6 @@
 @section('title', $settings['site_name'] . ' - ' . trans("messages.layout.teachers"))
 
 @section('javascript')
-  <script src="{{ URL::asset('js/jquery.js') }}"></script>
-  <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
   <script src="{{ URL::asset('tinymce/tinymce.min.js') }}"></script>
   <script>
     function getInfo(id) {
@@ -46,9 +44,6 @@
       box-shadow: 0px 0px 28px -5px rgba(0,0,0,1);
     }
     .teacherimg {
-      background: url('http://placehold.it/200x200'); 
-      background-position: center; 
-      background-repeat: no-repeat; 
       height: 200px; 
       width: 200px; 
       float:left;
@@ -103,8 +98,7 @@
         <hr>
         @foreach( $professores as $teacher )
           <li class="list-group-item teacher">
-              <div class="teacherimg">
-              </div>
+              <img class="teacherimg" src="{{ $teacher->user->avatar()->ext_path }}"/>
               <div class="imgdiv">
                 <div height="50px" style="padding-top: 5px;"><span style="font-size: 20px;" class="vermelho">{{ $teacher->user->name }}</span> </div>
                 <div style="height: 125px; display: table; width: 100%">
