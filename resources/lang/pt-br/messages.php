@@ -238,7 +238,7 @@ return [
         'edituser' => 'Editar usuário',
         'teachers' => 'Perfil do Educador',
         'editcal' => 'Editar Calendário',
-        'newcal' => 'Nova Data'
+        'newcal' => 'Nova Data',
         'deleteinvite' => 'Deletar Convite',
         'newinvite' => 'Novo Convite',
         'newclass' => 'Nova Turma',

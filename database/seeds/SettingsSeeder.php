@@ -39,5 +39,9 @@ class SettingsSeeder extends Seeder
             'name' => 'phone',
             'value' => '(55) 55 91234-5678',
         ]);
+        DB::table('settings')->insert([
+            'name' => 'gmaps_api_key',
+            'value' => 'AIzaSyDq39366l6pcisOZmHltpnKpfTg35eVS4A',
+        ]);
     }
 }

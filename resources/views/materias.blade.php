@@ -1,19 +1,37 @@
 @extends('layouts.site')
 
-@section('title', $settings['site_name'] . ' - ' . $title)
+@section('title', $settings['site_name'] . ' - ' . trans("messages.layout.subjects"))
+
+@section('styles')
+  @parent
+  <style>
+    .ml {
+      padding: 5px;
+      padding-top: 10px;
+      width: 100%;
+    }
+  </style>
+@endsection
 
 @section('content')
 <div id="principal" class="table-responsive col-md-8">
     <table class="table">
       <thead>
       <tr>
-      <th><span class="vermelho">{{ $title }}</span></th>
+      <th><span class="vermelho">{{ trans("messages.layout.subjects") }}</span></th>
       </tr>
       </thead>
       <tbody class="normal">
       <tr><th>
-      <div class="nttexto">
-      
+      <div class="nttexto" style="width: 100%;">
+        @if( count($materias) > 0 )
+        <ul class="ml list-group">
+          @each("partials.materia",$materias,"materia")
+        </ul>
+        @endif
+        <center>
+          {{ $materias->links() }}
+        </center>
       </div>
       </th></tr>
       </tbody>

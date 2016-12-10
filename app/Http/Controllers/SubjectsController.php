@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Subject;
 
 class SubjectsController extends Controller
 {
@@ -15,7 +16,8 @@ class SubjectsController extends Controller
      */
     public function index()
     {
-        //
+        $materias = Subject::paginate(20);
+        return view('materias', [ 'materias' => $materias ]);
     }
 
     /**

@@ -5,9 +5,7 @@
 @section('javascript')
   @parent
   <script>
-    var LatLng = {lat: {{ $lat }}, lng: {{ $lng }} };
-    // -28.3790677
-    // -53.9250415
+    var LatLng = {lat: -28.3790677, lng: -53.9250415 };
     function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
         center: LatLng,
