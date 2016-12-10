@@ -31,7 +31,7 @@ Route::post('/fotos', 'PictureController@ajax')->name('fotos_ajax');
 Route::get('/matérias', 'SubjectsController@index')->name('matérias');
 
 Route::get('/notícias/{id}', 'NewsController@show')->name('notícia');
-Route::get('/notícias', 'NewsController@index');
+Route::get('/notícias', 'NewsController@index')->name('noticias');
 
 Route::get('/docentes', 'TeachersController@index')->name('docentes');
 Route::get('/docentes/{id}', 'TeachersController@show');

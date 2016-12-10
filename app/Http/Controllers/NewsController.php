@@ -60,13 +60,13 @@ class NewsController extends Controller
         $nts = Cache::tags('notícias')->get('notícias');
         if ($nts != null) {
             $nt = $nts->find($id);
-            if(!$nt) { return redirect()->route('notícias'); }
+            if(!$nt) { return redirect()->route('noticias'); }
             $nts = Cache::tags('rnotícias')->get('rnotícias');
             return view('noticia', ['nt' => $nt, 'nts' => $nts,]);
         } 
         $nt = News::where('published', true)->find($id);
         $nts = News::where('published', true)->orderBy('published_at', 'desc')->take(8)->get();
-        if(!$nt) { return redirect()->route('notícias'); }
+        if(!$nt) { return redirect()->route('noticias'); }
         return view('noticia', ['nt' => $nt, 'nts' => $nts,]);
     }
 
