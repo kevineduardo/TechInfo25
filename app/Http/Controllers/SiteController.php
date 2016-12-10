@@ -31,8 +31,6 @@ class SiteController extends Controller
             preg_match_all( '$<img [^>]*src="([^"]+)"[^>]*>$', $nv->text, $m);
             if(count($m)>1&&count($m[1])>0) {
                 $not[] = [ 'noticia' => $nv, 'imagem' => $m[1][0] ];
-            } else {
-                $not[] = [ 'noticia' => $nv ];
             }
         }
         if (count($not)==0) {
