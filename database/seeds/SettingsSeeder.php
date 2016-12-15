@@ -31,5 +31,17 @@ class SettingsSeeder extends Seeder
             'name' => 'footer',
             'value' => 'ESCOLA TÉCNICA ESTADUAL 25 DE JULHO <br/>IJUÍ - RS',
         ]);
+        DB::table('settings')->insert([
+            'name' => 'email',
+            'value' => 'webmaster@ti25.com',
+        ]);
+        DB::table('settings')->insert([
+            'name' => 'phone',
+            'value' => '(55) 55 91234-5678',
+        ]);
+        DB::table('settings')->insert([
+            'name' => 'gmaps_api_key',
+            'value' => 'AIzaSyDq39366l6pcisOZmHltpnKpfTg35eVS4A',
+        ]);
     }
 }

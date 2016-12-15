@@ -78,6 +78,7 @@ Coordenadora: Profª. Luciana de Oliveira Ramos. ',
             'text' => '',
             'navbar_icon' => 'glyphicon-blackboard',
             'type' => 1,
+            'custom_url' => 'matérias',
             'author_id' => 1,
         ]);
         DB::table('pages')->insert([
@@ -86,6 +87,7 @@ Coordenadora: Profª. Luciana de Oliveira Ramos. ',
             'text' => '',
             'navbar_icon' => 'glyphicon-briefcase',
             'type' => 1,
+            'custom_url' => 'docentes',
             'author_id' => 1,
         ]);
         DB::table('pages')->insert([

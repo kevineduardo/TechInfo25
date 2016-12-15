@@ -26,7 +26,11 @@
 
 function is_allowed()
 {
-	return TRUE;
+    if (isset($_SESSION['laravel_session']) && !empty($_SESSION['laravel_session'])) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 ?>

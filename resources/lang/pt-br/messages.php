@@ -16,6 +16,7 @@ return [
     'teacher' => 'Professor (a)',
     'student' => 'Aluno (a)',
     'layout' => [
+        'name' => 'Escola Técnica Estadual 25 de Julho',
         'home' => 'Início',
         'tn' => 'Visualizar Navegação',
         'login' => 'Logar',
@@ -48,6 +49,19 @@ return [
         'noticia' => 'Notícia',
         'recents' => 'Recentes',
         'users' => 'Usuários',
+		'teachers' => 'Docentes',
+        'teacher' => 'Professores',
+        'coordinator' => 'Coordenadores',
+        'calendar' => 'Calendário',
+
+        'contact' => 'Contato',
+        'cname' => 'Nome Completo',
+        'cemail' => 'E-Mail',
+        'cmessage' => 'Mensagem',
+        'csubj' => 'Assunto',
+        'news' => 'Notícias',
+        'map' => 'Mapa',
+        'img' => 'Imagens',
         'usersinvite' => 'Convite de Usuários',
         'settings' => 'Configurações Gerais',
         'classes' => 'Gerenciar Turmas',
@@ -67,6 +81,9 @@ return [
         'ne' => 'Não existe nenhuma notícia.',
         'na' => 'Não existe nenhuma notícia esperando aprovação.',
         'np' => 'Você não possui nenhuma notícia.',
+    ],
+    'd' => [
+        'nd' => 'Não existe nenhuma data marcada.'
     ],
     'u' => [
         'nr' => 'Sua busca retornou nenhum resultado.',
@@ -102,6 +119,7 @@ return [
     'buttons' => [
         'palunos' => 'Postadas por Alunos',
         'novanoticia' => 'Nova notícia',
+        'novadata' => 'Nova Data',
         'buscar' => 'Buscar',
 		'voltar' => 'Voltar',
         'usersinvite' => 'Convite de Usuários',
@@ -112,6 +130,10 @@ return [
         'deletarnot' => 'Deletar',
         'salvaruser' => 'Salvar',
         'deletaruser' => 'Deletar',
+        'salvarcal' => 'Salvar',
+        'deletarcal' => 'Deletar',
+        'clear' => 'Limpar Campos',
+        'send' => 'Enviar',
         'novoconvite' => 'Novo Convite',
         'deletarconvite' => 'Deletar Convite',
         'novaturma' => 'Nova Turma',
@@ -187,6 +209,9 @@ return [
         'name' => 'Nome',
         'email' => 'E-mail',
         'registered' => 'Registrado',
+        'place' => 'Local',
+        'created' => 'Criado por',
+        'date' => 'Data',
         'class' => 'Turma',
         'inityear' => 'Data de Início',
         'resp' => 'Responsável',
@@ -207,10 +232,13 @@ return [
     ],
     // Titles
     'titles' => [
-        'newnews' => 'Nova Notícia',
-        'newuser' => 'Novo Usuário',
-        'editnews' => 'Editar Notícia',
-        'edituser' => 'Editar Usuário',
+        'newnews' => 'Nova notícia',
+        'newuser' => 'Novo usuário',
+        'editnews' => 'Editar notícia',
+        'edituser' => 'Editar usuário',
+        'teachers' => 'Perfil do Educador',
+        'editcal' => 'Editar Calendário',
+        'newcal' => 'Nova Data',
         'deleteinvite' => 'Deletar Convite',
         'newinvite' => 'Novo Convite',
         'newclass' => 'Nova Turma',
@@ -320,6 +348,11 @@ return [
         'errors' => [
             'post' => 'Falha ao postar!',
             'save' => 'Falha ao salvar!',
+        ],
+        'calendar' => [
+            'title' => 'Titulo',
+            'place' => 'Local',
+            'descr' => 'Descrição',
         ],
         'success' => [
             'post' => [

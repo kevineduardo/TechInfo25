@@ -279,7 +279,7 @@ p {
   max-width: 103.49% !important;
 }
 
-#slider> li> img {
+.notimg {
   height: 100% !important;
   width: 100% !important;
   max-width: 103.49% !important;

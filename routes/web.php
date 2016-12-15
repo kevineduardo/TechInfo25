@@ -24,15 +24,25 @@ Route::get('/página', function() {
 	return redirect()->route('inicio');
 });
 
-Route::get('/foto/{id}', 'SiteController@foto')->name('foto');
-Route::get('/foto', function() {
-	return redirect()->route('inicio');
-});
+Route::get('/fotos/{id}', 'PictureController@show')->name('foto');
+Route::get('/fotos', 'PictureController@index')->name('fotos');
+Route::post('/fotos', 'PictureController@ajax')->name('fotos_ajax');
 
-Route::get('/notícia/{id}', 'SiteController@noticia')->name('notícia');
-Route::get('/notícia', function() {
-	return redirect()->route('inicio');
-});
+Route::get('/matérias', 'SubjectsController@index')->name('matérias');
+
+Route::get('/notícias/{id}', 'NewsController@show')->name('notícia');
+Route::get('/notícias', 'NewsController@index')->name('noticias');
+
+Route::get('/docentes', 'TeachersController@index')->name('docentes');
+Route::get('/docentes/{id}', 'TeachersController@show');
+
+Route::get('/calendário', 'CalendarController@index')->name('calendário');
+Route::get('/calendário/{id}', 'CalendarController@show')->name('calendário.show');
+
+Route::get('/contato', 'ContactController@index')->name('contato');
+Route::post('/contato', 'ContactController@mail')->name('contato.send');
+
+Route::get('/localização', 'MapController@index')->name('contato');
 
 //Route::get('/portal', 'HomeController@index');
 
@@ -42,13 +52,17 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::get('/', function() {
 		return redirect()->route('portal_inicio');
 	});
+
 	Route::resource('/notas', 'PortalGradesController');
 	Route::resource('/trabalhos', 'PortalHomeworksController');
 	Route::resource('/fotos', 'PortalPicturesController');
+
 	//Route::resource('/usuários', 'PortalUsersController');
 	Route::get('/usuários/{id}', 'PortalUsersController@show')->name('usuários.show');
 	Route::get('/usuários', 'PortalUsersController@index')->name('usuários.index');
 	Route::put('/usuários', 'PortalUsersController@update')->name('usuários.update');
+	Route::resource('/configurações', 'PortalSettingsController@inicio');
+
 	//Route::resource('/usuários-alunos', 'PortalUsersController');
 	Route::get('/usuários-convite/{id}', 'PortalStudentUsersController@show')->name('usuários-alunos.show');
 	Route::get('/usuários-convite', 'PortalStudentUsersController@index')->name('usuários-alunos.index');
@@ -77,6 +91,7 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::get('/ajax/cat', 'PortalPagesController@cat')->name('ajax.cat');
 	Route::get('/ajax/cat/{id}', 'PortalPagesController@cat');
 	// fim das gambiarras de leve
+	
 	//Route::resource('/notícias', 'PortalNewsController');
 	Route::get('/notícias', 'PortalNewsController@index')->name('notícias.index');
 	Route::post('/notícias', 'PortalNewsController@store')->name('notícias.store');
@@ -90,10 +105,21 @@ Route::group(['prefix' => 'portal'], function () {
 	Route::post('/usuários/buscar', 'SearchController@usersSearch')->name('usuários.search');
 	Route::get('/usuários/buscar', 'SearchController@usersSearch')->name('usuários.search');
 
+	// Rotas de calendario
+	/*
+	Route::get('/calendário', 'PortalCalendarController@index')->name('calendário.index');
+	Route::get('/calendário/{id}', 'PortalCalendarController@show');
+	Route::put('/calendário', 'PortalCalendarController@update')->name('calendário.update');
+	Route::post('/calendário', 'PortalCalendarController@store')->name('calendário.update');
+	*/
+
+	// Fotos
+	Route::get('/fotos','PortalPicturesController@index')->name('fotos.index');
 
 	// Rotas Especiais - teachers only
 	//Route::resource('/notícias-alunos', 'PortalStudentNewsController');
 	Route::get('/notícias-alunos', 'PortalStudentNewsController@index')->name('notícias-alunos.index');
+
 	//Route::post('/notícias-alunos', 'PortalStudentNewsController@store')->name('notícias-alunos.store');
 	Route::get('/notícias-alunos/{id}', 'PortalStudentNewsController@show')->name('notícias-alunos.show');
 	Route::put('/notícias-alunos', 'PortalStudentNewsController@update')->name('notícias-alunos.update');
