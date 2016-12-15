@@ -58,12 +58,15 @@ class TeachersController extends Controller
         $teacher = Teacher::with('user')->where('user_id',$id)->first();
         if ( !$teacher ) { return response()->json( [], 406 ); }
 
+        $img = $teacher->user->avatar();
+        $img = $img ? $img->ext_path : '';
+
         $docente = [
 
             'name' => $teacher->user->name,
             'bio' => $teacher->bio,
             'academic_bg' => $teacher->academic_bg,
-            'img' => 'http://placehold.it/200x200',
+            'img' => $img,
 
         ];
 

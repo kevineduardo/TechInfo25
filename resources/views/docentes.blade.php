@@ -3,6 +3,7 @@
 @section('title', $settings['site_name'] . ' - ' . trans("messages.layout.teachers"))
 
 @section('javascript')
+  @parent
   <script src="{{ URL::asset('tinymce/tinymce.min.js') }}"></script>
   <script>
     function getInfo(id) {
@@ -74,8 +75,9 @@
         <hr>
         @foreach( $coordenadores as $coord )
           <li class="list-group-item teacher">
-              <div class="teacherimg">
-              </div>
+              @if( $img = $coord->user->avatar() )
+                <img draggable="false" class="teacherimg" src="{{ $img->ext_path }}"/>
+              @endif
               <div class="imgdiv">
                 <div height="50px" style="padding-top: 5px;"><span style="font-size: 20px;" class="vermelho">{{ $coord->user->name }}</span> </div>
                 <div style="height: 125px; display: table; width: 100%">
@@ -98,7 +100,9 @@
         <hr>
         @foreach( $professores as $teacher )
           <li class="list-group-item teacher">
-              <img class="teacherimg" src="{{ $teacher->user->avatar()->ext_path }}"/>
+              @if( $img = $teacher  ->user->avatar() )
+                <img draggable="false" class="teacherimg" src="{{ $img->ext_path }}"/>
+              @endif
               <div class="imgdiv">
                 <div height="50px" style="padding-top: 5px;"><span style="font-size: 20px;" class="vermelho">{{ $teacher->user->name }}</span> </div>
                 <div style="height: 125px; display: table; width: 100%">
@@ -142,7 +146,7 @@
         </div>
         <div class="modal-body" style="overflow: hidden;">
           <div class="col-md" style="display: inline-block; float: left;">
-            <img id="Dimg" src="http://placehold.it/200x200" width="200px" height="200px"/>
+            <img draggable="false" id="Dimg" src="http://placehold.it/200x200" width="200px" height="200px"/>
           </div>
           <div class="col-md" style="display: inline-block; float: right; width: calc( 100% - 220px ); padding-right: 10px;">
             <h3 style="margin-bottom:10px; margin-top: 10px;"><span style="color:#333" id="Dnome"></span></h3>
