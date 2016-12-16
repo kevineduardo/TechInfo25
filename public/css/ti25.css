@@ -227,10 +227,18 @@ p {
   margin-left: 20vh;
   margin-right: 20vh;
   margin-top: 5vh;
-  background-color: white;
+  background-color: #3366cc;
   border: 2px solid transparent;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+}
+
+#footer h5 {
+  color: white;
+}
+
+#footer h5 a {
+  color: #e3e7ec;
 }
 
 @media (max-width: 1000px) {
@@ -238,7 +246,7 @@ p {
     margin-left: 5vh;
     margin-right: 5vh;
     margin-top: 5vh;
-    background-color: white;
+    background-color: #3366cc;
     border: 2px solid transparent;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
