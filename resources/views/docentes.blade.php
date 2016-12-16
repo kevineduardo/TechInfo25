@@ -81,11 +81,7 @@
               <div class="imgdiv">
                 <div height="50px" style="padding-top: 5px;"><span style="font-size: 20px;" class="vermelho">{{ $coord->user->name }}</span> </div>
                 <div style="height: 125px; display: table; width: 100%">
-                  {{--
-                  <p class="nttexto" style="color:#333; display: table-cell; vertical-align: middle;">
-                    {{ ( strlen( $coord->bio ) > ( 150 ) ) ? ( substr( $coord->bio, 0, 150 ) . '...' ) : ( $coord->bio ) }}
-                  </p>
-                  --}}
+                  <p class="nttexto">{{ str_limit( $coord->bio, 100 ) . (strlen($coord->bio)>100?'...':'') }}</p>
                 </div>
                 <div height="50px">
                   <span style="float:right; color: #333;">
@@ -106,6 +102,7 @@
               <div class="imgdiv">
                 <div height="50px" style="padding-top: 5px;"><span style="font-size: 20px;" class="vermelho">{{ $teacher->user->name }}</span> </div>
                 <div style="height: 125px; display: table; width: 100%">
+                  <p class="nttexto">{{ str_limit( $teacher->bio, 100 ) . (strlen($teacher->bio)>100?'...':'') }}</p>
                 </div>
                 <div height="50px">
                   <span style="float:right; color: #333;">
