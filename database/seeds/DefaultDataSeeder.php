@@ -12,7 +12,16 @@ class DefaultDataSeeder extends Seeder
     public function run()
     {
         DB::table('pages')->insert([
-        	'id' => 1,
+            'id' => 1,
+            'title' => 'Início',
+            'text' => '',
+            'navbar_icon' => 'gglyphicon-hand-right',
+            'type' => 2,
+            'custom_url' => 'inicio',
+            'author_id' => 1,
+        ]);
+        DB::table('pages')->insert([
+        	'id' => 2,
             'title' => 'Notícias',
             'text' => '',
             'navbar_icon' => 'glyphicon-list-alt',
@@ -21,7 +30,7 @@ class DefaultDataSeeder extends Seeder
             'author_id' => 1,
         ]);
         DB::table('pages')->insert([
-        	'id' => 2,
+        	'id' => 3,
             'title' => 'Fotos',
             'text' => '',
             'navbar_icon' => 'glyphicon-picture',
@@ -30,7 +39,7 @@ class DefaultDataSeeder extends Seeder
             'author_id' => 1,
         ]);
         DB::table('pages')->insert([
-        	'id' => 3,
+        	'id' => 4,
             'title' => 'Histórico da Escola',
             'text' => 'Assim como todo ser humano tem sua história, a escola também tem a sua. História que é construída a cada momento pela comunidade escolar, através de ações e palavras. É uma história vivida, uma história de vida.
 Dessa forma, a escola Técnica Estadual 25 de julho de Ijuí – RS tem sua história iniciada em 17 de novembro de 1960, por meio do Decreto de Criação nº 11781, com a denominação de Escola de Ensino Técnico Industrial.
@@ -52,7 +61,7 @@ Vice-Diretora Noite: Profª. Solange Koltermann',
             'author_id' => 1,
         ]);
 		DB::table('pages')->insert([
-			'id' => 4,
+			'id' => 5,
             'title' => 'O Curso',
             'text' => 'Duração do Curso: 2 anos (4 semestres)
 Estágio: 1 semestre
@@ -64,7 +73,7 @@ Coordenadora: Profª. Luciana de Oliveira Ramos. ',
             'author_id' => 1,
         ]);
         DB::table('pages')->insert([
-        	'id' => 5,
+        	'id' => 6,
             'title' => 'Calendário Escolar',
             'text' => '',
             'navbar_icon' => 'glyphicon-calendar',
@@ -73,25 +82,24 @@ Coordenadora: Profª. Luciana de Oliveira Ramos. ',
             'author_id' => 1,
         ]);
         DB::table('pages')->insert([
-        	'id' => 6,
+        	'id' => 7,
             'title' => 'Organização Curricular',
             'text' => '',
             'navbar_icon' => 'glyphicon-blackboard',
             'type' => 1,
-            'custom_url' => 'matérias',
-            'author_id' => 1,
-        ]);
-        DB::table('pages')->insert([
-        	'id' => 7,
-            'title' => 'Docentes',
-            'text' => '',
-            'navbar_icon' => 'glyphicon-briefcase',
-            'type' => 1,
-            'custom_url' => 'docentes',
             'author_id' => 1,
         ]);
         DB::table('pages')->insert([
         	'id' => 8,
+            'title' => 'Docentes',
+            'text' => '',
+            'navbar_icon' => 'glyphicon-briefcase',
+            'type' => 2,
+            'custom_url' => 'docentes',
+            'author_id' => 1,
+        ]);
+        DB::table('pages')->insert([
+        	'id' => 9,
             'title' => 'Horários',
             'text' => 'A Escola Técnica Estadual 25 de Julho, funciona nos turnos da Manhã Tarde e Noite, de segunda a sexta-feira e em alguns sábabos préviamente definidos no calendário do ano letivo, nos seguintes horários:
 Manhã: 7h30min às 11h45min
@@ -102,7 +110,7 @@ Noite: 18h50min às 22h45min ',
             'author_id' => 1,
         ]);
         DB::table('pages')->insert([
-        	'id' => 9,
+        	'id' => 10,
             'title' => 'Matrículas',
             'text' => '',
             'navbar_icon' => 'glyphicon-send',
@@ -111,7 +119,7 @@ Noite: 18h50min às 22h45min ',
             'author_id' => 1,
         ]);
         DB::table('pages')->insert([
-        	'id' => 10,
+        	'id' => 11,
             'title' => 'Formulário',
             'text' => '',
             'navbar_icon' => 'glyphicon-envelope',
@@ -120,7 +128,7 @@ Noite: 18h50min às 22h45min ',
             'author_id' => 1,
         ]);
         DB::table('pages')->insert([
-        	'id' => 11,
+        	'id' => 12,
             'title' => 'Mapa de Localização da Escola',
             'text' => '',
             'navbar_icon' => 'glyphicon-map-marker',
@@ -158,7 +166,7 @@ Noite: 18h50min às 22h45min ',
         ]);
         DB::table('categories_pages')->insert([
             'page_id' => 3,
-            'category_id' => 2,
+            'category_id' => 1,
         ]);
         DB::table('categories_pages')->insert([
             'page_id' => 4,
@@ -170,7 +178,7 @@ Noite: 18h50min às 22h45min ',
         ]);
         DB::table('categories_pages')->insert([
             'page_id' => 6,
-            'category_id' => 3,
+            'category_id' => 2,
         ]);
         DB::table('categories_pages')->insert([
             'page_id' => 7,
@@ -186,10 +194,14 @@ Noite: 18h50min às 22h45min ',
         ]);
         DB::table('categories_pages')->insert([
             'page_id' => 10,
-            'category_id' => 4,
+            'category_id' => 3,
         ]);
         DB::table('categories_pages')->insert([
             'page_id' => 11,
+            'category_id' => 4,
+        ]);
+        DB::table('categories_pages')->insert([
+            'page_id' => 12,
             'category_id' => 4,
         ]);
     }
