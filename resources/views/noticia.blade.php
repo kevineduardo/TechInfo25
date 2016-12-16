@@ -33,7 +33,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th>@lang('messages.layout.noticia')</th>
+            <th class="vermelho">@lang('messages.layout.noticia')</th>
           </tr>
         </thead>
         <tbody>
@@ -42,7 +42,7 @@
               <p class="lead">
                 {{ $nt->title }}
               </p>
-              <div class="nttexto">
+              <div style="width:100%">
                 {!! $nt->text !!}
               </div>
             </th>
@@ -55,7 +55,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th>@lang('messages.layout.recents')</th>
+            <th class="vermelho">@lang('messages.layout.recents')</th>
           </tr>
         </thead>
         <tbody>
