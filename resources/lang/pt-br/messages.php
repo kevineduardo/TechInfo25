@@ -12,7 +12,7 @@ return [
     |
     */
     // Sem explicação
-    'portal' => 'Portal do Estudante',
+    'portal' => 'Portal do Técnico',
     'teacher' => 'Professor (a)',
     'student' => 'Aluno (a)',
     'layout' => [
@@ -286,7 +286,7 @@ return [
         'site_name' => 'Nome do Site',
         'mnt' => 'Manutenção',
         'fb' => 'URL da Página do Facebook',
-        'pa' => 'Portal do Estudante (para Alunos)',
+        'pa' => 'Portal do Técnico (para Alunos)',
         'footer' => 'Footer do Site',
         ],
         'teacherdashboard' => [
