@@ -3,7 +3,7 @@
                   <div class="col-sm-12 col-md-8" style="margin-bottom: 10px; border-right: 1px solid #ddd; flex: 2;">
                   <div class="nttexto">
                     <h2>{{ $news[0]->title }}</h2>
-                    {!! str_limit($news[0]->text, 120) !!}
+                    {!! str_limit($news[0]->subtitle, 120) !!}
                     <br><br>
                   </div>
                     <button class="btn btn-default center-block" onclick="window.location.href='{{ route('notícia', $news[0]->id) }}'">@lang('messages.layout.readmore')</button>
