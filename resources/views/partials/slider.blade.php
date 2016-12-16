@@ -1,4 +1,4 @@
-<li>
+<li style="background-color: #EEE; border-radius: 5px;">
 	@if( isset($n['empty']) )
 		<img class="notimg" src="{{ URL::asset( 'img\slider\empty.jpg' ) }}" alt="@lang('messages.alt.img')" />
 	@else
@@ -6,7 +6,7 @@
 		<center><p class="vermelho" style="margin-bottom: 2px;">
 			{{ $n['noticia']->title }}
 		</p></center>
-		<center><img class="notimg" src="{{ $n['imagem'] }}" alt="{{ $n['noticia']->titulo }}" title="{{ $n['noticia']->titulo }}" /></center>
+		<img class="notimg" src="{{ $n['imagem'] }}" alt="{{ $n['noticia']->titulo }}" title="{{ $n['noticia']->titulo }}" />
 	</a>
 	@endif
 </li>
