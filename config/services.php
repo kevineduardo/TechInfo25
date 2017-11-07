@@ -36,8 +36,8 @@ return [
     ],
     // Socialite
     'facebook' => [
-        'client_id'     => '1823682094526376',
-        'client_secret' => 'd2e07e70bb6d39ebbf4d28d5326ce557',
+        'client_id'     => '1980512158891128',
+        'client_secret' => '2629cd5b329e80934ee697f9050bab8d',
         'redirect'      => env('APP_URL', 'http://localhost') . '/auth/facebook/callback',
     ],
     'google' => [
