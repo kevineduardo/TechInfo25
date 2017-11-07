@@ -154,9 +154,9 @@
       @else
       <tr class="text-center">
         @if(str_contains(Route::currentRouteName(), 'search'))
-          <td colspan="4">@lang('messages.tr.nr')</td>
+          <td colspan="5">@lang('messages.tr.nr')</td>
           @else
-          <td colspan="4">@lang('messages.tr.ne')</td>
+          <td colspan="5">@lang('messages.tr.ne')</td>
           @endif
       </tr>
       @endif
