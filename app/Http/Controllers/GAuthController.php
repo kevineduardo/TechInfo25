@@ -51,7 +51,7 @@ class GAuthController extends Controller
 	            'password' => bcrypt($user->token),
 	            'oauth' => true,
 	            'oauth_id' => $user->id,
-	            'oauth_provider' => 'facebook',
+	            'oauth_provider' => 'google',
 	        ]);
 	        Picture::create([
 	        	'title' => 'User: ' . $user->id,
