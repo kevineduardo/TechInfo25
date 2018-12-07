@@ -18,7 +18,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //$nts = Cache::tags('notícias')->get('notícias');
+        $nts = null;
         if ($nts != null) {
             $nts = Cache::tags('rnotícias')->get('rnotícias');
             return view('noticia', ['nt' => $nt, 'nts' => $nts,]);
