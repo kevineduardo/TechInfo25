@@ -20,7 +20,7 @@ class NewsController extends Controller
     {
         $nts = null;
         if ($nts != null) {
-            $nts = Cache::tags('rnotícias')->get('rnotícias');
+            $nts = null;
             return view('noticia', ['nt' => $nt, 'nts' => $nts,]);
         } 
         $nts = News::where('published', true)->orderBy('published_at', 'desc')->paginate(14);
@@ -57,11 +57,11 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-        //$nts = Cache::tags('notícias')->get('notícias');
+        $nts = null;
         if ($nts != null) {
             $nt = $nts->find($id);
             if(!$nt) { return redirect()->route('noticias'); }
-            $nts = Cache::tags('rnotícias')->get('rnotícias');
+            $nts = null;
             return view('noticia', ['nt' => $nt, 'nts' => $nts,]);
         } 
         $nt = News::where('published', true)->find($id);
