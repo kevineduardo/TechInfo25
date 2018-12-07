@@ -10,7 +10,7 @@ use App\Categorie;
 class NavbarComposer 
 {
 	public function compose(View $view) {
-		$ctg = Cache::tags('navbar')->get('navbar');
+		$ctg = null;
         if ($ctg != null) {
             $view->with('categories', $ctg);
         } else {

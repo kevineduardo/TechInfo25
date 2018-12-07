@@ -10,7 +10,7 @@ class SettingComposer
 {
 	public function compose(View $view) {
 
-		$settings = Cache::tags('settings')->get('settings');
+		$settings = null;
         if ($settings != null) {
         	$site_name = $settings->where('name', 'site_name')->first();
 			$maintenance = $settings->where('name', 'maintenance')->first();

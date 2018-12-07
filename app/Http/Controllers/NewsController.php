@@ -18,7 +18,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $nts = Cache::tags('notícias')->get('notícias');
+        //$nts = Cache::tags('notícias')->get('notícias');
         if ($nts != null) {
             $nts = Cache::tags('rnotícias')->get('rnotícias');
             return view('noticia', ['nt' => $nt, 'nts' => $nts,]);
@@ -57,7 +57,7 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-        $nts = Cache::tags('notícias')->get('notícias');
+        //$nts = Cache::tags('notícias')->get('notícias');
         if ($nts != null) {
             $nt = $nts->find($id);
             if(!$nt) { return redirect()->route('noticias'); }

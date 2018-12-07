@@ -17,10 +17,10 @@ class SiteController extends Controller
 {
     public function inicio() {
 
-        $inicio = Cache::tags('início')->get('início');
-        if ($inicio != null) {
-            return $inicio;
-        }
+        //$inicio = Cache::tags('início')->get('início');
+        //if ($inicio != null) {
+        //    return $inicio;
+        //}
 
         $fotos = Picture::where('type', 0)->get();
         $calendario = Calendar::latest()->take(5)->get();
@@ -41,7 +41,7 @@ class SiteController extends Controller
 
     public function pagina($id) {
 
-        $pg = Cache::tags('páginas')->get('páginas:' . $id);
+        //$pg = Cache::tags('páginas')->get('páginas:' . $id);
         if ($pg != null) {
             return $pg;
         }
